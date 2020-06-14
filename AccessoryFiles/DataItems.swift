@@ -10,8 +10,16 @@ import Foundation
 
 class DataItems {
 
-    static var Shared = DataItems()
+    static var Shared: DataItems{
+        if DataItems.SharedPrivate == nil{
+            DataItems.SharedPrivate = DataItems()
+        }
+        return DataItems.SharedPrivate!
+    }
+    private static var SharedPrivate: DataItems? = nil
+
     var arrayItems = Array<Item>()
+
     private init(){
 
         guard let path = Bundle.main.path(forResource: "WorkVariant", ofType: "txt")
@@ -24,17 +32,18 @@ class DataItems {
         var i = 0
         for elementForItemOptional in arrayBeginNS{
             i += 1
-            if i == 40000{ return }
+            print("item - %i",i)
+            //if i == 10{ return }
             guard let elementForItem = elementForItemOptional as? Dictionary<String, Any> else { fatalError("dictionary dont uwriping")}
             let item: Item = Item.init(dictionarySource: elementForItem)
             self.arrayItems.append(item)
 
-            if ProcessInfo.processInfo.arguments.contains("PRINTDATA") {
+            //if ProcessInfo.processInfo.arguments.contains("PRINTDATA") {
                 //print(" \n \n ===================== SOURCE ======================  \n ")
                 //print(elementForItem)
-                print(" \n \n ++++++++++++++++++++++ ITEM +++++++++++++++++++++++  \n ")
-                item.printSelf()
-            }
+                //print(" \n \n ++++++++++++++++++++++ ITEM +++++++++++++++++++++++  \n ")
+                //item.printSelf()
+            //}
         }
     }
 }

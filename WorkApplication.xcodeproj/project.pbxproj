@@ -11,14 +11,37 @@
 		FD0A9B6124675227001FA785 /* WorkVariant.txt in Resources */ = {isa = PBXBuildFile; fileRef = FD0A9B6024675227001FA785 /* WorkVariant.txt */; };
 		FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EBE2464043B0090A002 /* AppDelegate.swift */; };
 		FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EC02464043B0090A002 /* SceneDelegate.swift */; };
-		FD174EC32464043B0090A002 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EC22464043B0090A002 /* ViewController.swift */; };
+		FD174EC32464043B0090A002 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EC22464043B0090A002 /* InitialViewController.swift */; };
 		FD174EC62464043B0090A002 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC42464043B0090A002 /* Main.storyboard */; };
 		FD174EC82464043D0090A002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC72464043D0090A002 /* Assets.xcassets */; };
 		FD174ECB2464043D0090A002 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC92464043D0090A002 /* LaunchScreen.storyboard */; };
 		FD174EE924641AE40090A002 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EE824641AE40090A002 /* Item.swift */; };
 		FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EEA24645A8F0090A002 /* DataItems.swift */; };
+		FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
+		FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
+		FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */; };
+		FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79E7902492D61300661CCF /* ModelRealmBase.swift */; };
+		FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
+		FD97B1F02495309000E0E28A /* UsersBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
+		FD97B1F22495653900E0E28A /* CoordinatorMakeNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F12495653900E0E28A /* CoordinatorMakeNewDictionary.swift */; };
+		FD97B1F42495664600E0E28A /* ModelViewMakeNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F32495664600E0E28A /* ModelViewMakeNewDictionary.swift */; };
+		FD97B1F6249566D800E0E28A /* MakeNewDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F5249566D800E0E28A /* MakeNewDictionaryViewController.swift */; };
 		FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9FBC42246868620058F9A8 /* WordObject.swift */; };
-		FD9FBC45246890F90058F9A8 /* ModelRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9FBC44246890F90058F9A8 /* ModelRealm.swift */; };
+		FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */; };
+		FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */; };
+		FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C34246FD491008569B5 /* DictionaryObject.swift */; };
+		FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C36246FD850008569B5 /* UserObject.swift */; };
+		FDAC4C39246FECBF008569B5 /* ModelRealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C38246FECBF008569B5 /* ModelRealmUser.swift */; };
+		FDAC4C3B246FF8EE008569B5 /* BeginLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3A246FF8EE008569B5 /* BeginLaunchViewController.swift */; };
+		FDAC4C3D247010A3008569B5 /* ModelViewBeginLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3C247010A3008569B5 /* ModelViewBeginLaunch.swift */; };
+		FDAC4C3F24701DE9008569B5 /* DataSoursesBeginLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3E24701DE9008569B5 /* DataSoursesBeginLaunch.swift */; };
+		FDAC4C4324707B7E008569B5 /* TableViewCellBeginLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4224707B7E008569B5 /* TableViewCellBeginLaunch.swift */; };
+		FDE60AF4246D95A500D0A0BB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AF3246D95A500D0A0BB /* Protocols.swift */; };
+		FDE60AF6246D962100D0A0BB /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AF5246D962100D0A0BB /* AppCoordinator.swift */; };
+		FDE60AF8246D965C00D0A0BB /* CoordinatorLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AF7246D965C00D0A0BB /* CoordinatorLogIn.swift */; };
+		FDE60AFC246D969E00D0A0BB /* CoordinatorBeginLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AFB246D969E00D0A0BB /* CoordinatorBeginLaunch.swift */; };
+		FDE60B00246D998E00D0A0BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AFF246D998E00D0A0BB /* Extensions.swift */; };
+		FDE60B02246DA27D00D0A0BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60B01246DA27D00D0A0BB /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,15 +52,36 @@
 		FD174EBB2464043B0090A002 /* WorkApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD174EBE2464043B0090A002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD174EC02464043B0090A002 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FD174EC22464043B0090A002 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FD174EC22464043B0090A002 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		FD174EC52464043B0090A002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD174EC72464043D0090A002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD174ECA2464043D0090A002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD174ECC2464043D0090A002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD174EE824641AE40090A002 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FD174EEA24645A8F0090A002 /* DataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItems.swift; sourceTree = "<group>"; };
+		FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewLogIn.swift; sourceTree = "<group>"; };
+		FD79E7902492D61300661CCF /* ModelRealmBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmBase.swift; sourceTree = "<group>"; };
+		FD97B1ED24952DE400E0E28A /* UsersBase.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = UsersBase.realm; sourceTree = "<group>"; };
+		FD97B1F12495653900E0E28A /* CoordinatorMakeNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMakeNewDictionary.swift; sourceTree = "<group>"; };
+		FD97B1F32495664600E0E28A /* ModelViewMakeNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewMakeNewDictionary.swift; sourceTree = "<group>"; };
+		FD97B1F5249566D800E0E28A /* MakeNewDictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewDictionaryViewController.swift; sourceTree = "<group>"; };
 		FD9FBC42246868620058F9A8 /* WordObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordObject.swift; sourceTree = "<group>"; };
-		FD9FBC44246890F90058F9A8 /* ModelRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealm.swift; sourceTree = "<group>"; };
+		FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RusMeaningObject.swift; sourceTree = "<group>"; };
+		FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleForRusMeaningObject.swift; sourceTree = "<group>"; };
+		FDAC4C34246FD491008569B5 /* DictionaryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryObject.swift; sourceTree = "<group>"; };
+		FDAC4C36246FD850008569B5 /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
+		FDAC4C38246FECBF008569B5 /* ModelRealmUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmUser.swift; sourceTree = "<group>"; };
+		FDAC4C3A246FF8EE008569B5 /* BeginLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginLaunchViewController.swift; sourceTree = "<group>"; };
+		FDAC4C3C247010A3008569B5 /* ModelViewBeginLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewBeginLaunch.swift; sourceTree = "<group>"; };
+		FDAC4C3E24701DE9008569B5 /* DataSoursesBeginLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSoursesBeginLaunch.swift; sourceTree = "<group>"; };
+		FDAC4C4224707B7E008569B5 /* TableViewCellBeginLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellBeginLaunch.swift; sourceTree = "<group>"; };
+		FDAC4C4624708885008569B5 /* MainBase.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = MainBase.realm; sourceTree = "<group>"; };
+		FDE60AF3246D95A500D0A0BB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		FDE60AF5246D962100D0A0BB /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FDE60AF7246D965C00D0A0BB /* CoordinatorLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorLogIn.swift; sourceTree = "<group>"; };
+		FDE60AFB246D969E00D0A0BB /* CoordinatorBeginLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBeginLaunch.swift; sourceTree = "<group>"; };
+		FDE60AFF246D998E00D0A0BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FDE60B01246DA27D00D0A0BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +118,9 @@
 			children = (
 				FD174ECC2464043D0090A002 /* Info.plist */,
 				FD174EBD2464043B0090A002 /* WorkApplication */,
+				FD174EDA24640D6C0090A002 /* Protocols */,
+				FD174ED6246404F80090A002 /* Extensions */,
+				FDE60AF2246D944600D0A0BB /* AccessoryFiles */,
 				FD174EBC2464043B0090A002 /* Products */,
 				83F944185498E5C2321E57BB /* Pods */,
 				644EAD86BB79C34659C8F783 /* Frameworks */,
@@ -91,13 +138,13 @@
 		FD174EBD2464043B0090A002 /* WorkApplication */ = {
 			isa = PBXGroup;
 			children = (
+				FDAC4C4624708885008569B5 /* MainBase.realm */,
+				FD97B1ED24952DE400E0E28A /* UsersBase.realm */,
 				FD174ED72464050C0090A002 /* SoursesFiles */,
 				FD174EDB24640D7D0090A002 /* Coordinator */,
-				FD174EDA24640D6C0090A002 /* Protocols */,
-				FD174ED6246404F80090A002 /* Extensions */,
 				FD174ED2246404690090A002 /* MV */,
-				FD174ED3246404A30090A002 /* V */,
-				FD174ED5246404B80090A002 /* M */,
+				FD174ED3246404A30090A002 /* Views */,
+				FD174ED5246404B80090A002 /* Models */,
 			);
 			path = WorkApplication;
 			sourceTree = "<group>";
@@ -105,34 +152,40 @@
 		FD174ED2246404690090A002 /* MV */ = {
 			isa = PBXGroup;
 			children = (
+				FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */,
+				FDAC4C3C247010A3008569B5 /* ModelViewBeginLaunch.swift */,
+				FD97B1F32495664600E0E28A /* ModelViewMakeNewDictionary.swift */,
 			);
 			path = MV;
 			sourceTree = "<group>";
 		};
-		FD174ED3246404A30090A002 /* V */ = {
+		FD174ED3246404A30090A002 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FD174EC22464043B0090A002 /* InitialViewController.swift */,
+				FDE60B01246DA27D00D0A0BB /* LoginViewController.swift */,
+				FDAC4C3A246FF8EE008569B5 /* BeginLaunchViewController.swift */,
+				FD97B1F5249566D800E0E28A /* MakeNewDictionaryViewController.swift */,
+				FDAC4C4224707B7E008569B5 /* TableViewCellBeginLaunch.swift */,
 			);
-			path = V;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		FD174ED5246404B80090A002 /* M */ = {
+		FD174ED5246404B80090A002 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				FD174EE32464102A0090A002 /* ModelDataRxSwift */,
-				FD174EE2246410170090A002 /* ModelDataRealm */,
+				FDAC4C2F246FD2DB008569B5 /* ModelDataRealmUser */,
+				FD174EE2246410170090A002 /* ModelDataRealmShared */,
 				FD174EDD24640E630090A002 /* DataSourceYandex */,
-				FD174EDC24640E5E0090A002 /* DataOut */,
-				FD174EE824641AE40090A002 /* Item.swift */,
-				FD174EEA24645A8F0090A002 /* DataItems.swift */,
-				FD0A9B6024675227001FA785 /* WorkVariant.txt */,
 			);
-			path = M;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FD174ED6246404F80090A002 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FDE60AFF246D998E00D0A0BB /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -140,7 +193,6 @@
 		FD174ED72464050C0090A002 /* SoursesFiles */ = {
 			isa = PBXGroup;
 			children = (
-				FD174EC22464043B0090A002 /* ViewController.swift */,
 				FD174EC02464043B0090A002 /* SceneDelegate.swift */,
 				FD174EBE2464043B0090A002 /* AppDelegate.swift */,
 				FD174EC72464043D0090A002 /* Assets.xcassets */,
@@ -153,6 +205,7 @@
 		FD174EDA24640D6C0090A002 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				FDE60AF3246D95A500D0A0BB /* Protocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -160,15 +213,12 @@
 		FD174EDB24640D7D0090A002 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FDE60AF5246D962100D0A0BB /* AppCoordinator.swift */,
+				FDE60AF7246D965C00D0A0BB /* CoordinatorLogIn.swift */,
+				FDE60AFB246D969E00D0A0BB /* CoordinatorBeginLaunch.swift */,
+				FD97B1F12495653900E0E28A /* CoordinatorMakeNewDictionary.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		FD174EDC24640E5E0090A002 /* DataOut */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataOut;
 			sourceTree = "<group>";
 		};
 		FD174EDD24640E630090A002 /* DataSourceYandex */ = {
@@ -178,20 +228,43 @@
 			path = DataSourceYandex;
 			sourceTree = "<group>";
 		};
-		FD174EE2246410170090A002 /* ModelDataRealm */ = {
+		FD174EE2246410170090A002 /* ModelDataRealmShared */ = {
 			isa = PBXGroup;
 			children = (
+				FD79E7902492D61300661CCF /* ModelRealmBase.swift */,
 				FD9FBC42246868620058F9A8 /* WordObject.swift */,
-				FD9FBC44246890F90058F9A8 /* ModelRealm.swift */,
+				FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */,
+				FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */,
 			);
-			path = ModelDataRealm;
+			path = ModelDataRealmShared;
 			sourceTree = "<group>";
 		};
 		FD174EE32464102A0090A002 /* ModelDataRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				FDAC4C3E24701DE9008569B5 /* DataSoursesBeginLaunch.swift */,
 			);
 			path = ModelDataRxSwift;
+			sourceTree = "<group>";
+		};
+		FDAC4C2F246FD2DB008569B5 /* ModelDataRealmUser */ = {
+			isa = PBXGroup;
+			children = (
+				FDAC4C38246FECBF008569B5 /* ModelRealmUser.swift */,
+				FDAC4C34246FD491008569B5 /* DictionaryObject.swift */,
+				FDAC4C36246FD850008569B5 /* UserObject.swift */,
+			);
+			path = ModelDataRealmUser;
+			sourceTree = "<group>";
+		};
+		FDE60AF2246D944600D0A0BB /* AccessoryFiles */ = {
+			isa = PBXGroup;
+			children = (
+				FD0A9B6024675227001FA785 /* WorkVariant.txt */,
+				FD174EEA24645A8F0090A002 /* DataItems.swift */,
+				FD174EE824641AE40090A002 /* Item.swift */,
+			);
+			path = AccessoryFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +327,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */,
+				FD97B1F02495309000E0E28A /* UsersBase.realm in Resources */,
 				FD174ECB2464043D0090A002 /* LaunchScreen.storyboard in Resources */,
 				FD174EC82464043D0090A002 /* Assets.xcassets in Resources */,
 				FD174EC62464043B0090A002 /* Main.storyboard in Resources */,
@@ -310,13 +385,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */,
+				FD97B1F42495664600E0E28A /* ModelViewMakeNewDictionary.swift in Sources */,
+				FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */,
 				FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */,
-				FD9FBC45246890F90058F9A8 /* ModelRealm.swift in Sources */,
+				FDAC4C3B246FF8EE008569B5 /* BeginLaunchViewController.swift in Sources */,
+				FD97B1F6249566D800E0E28A /* MakeNewDictionaryViewController.swift in Sources */,
+				FDE60B00246D998E00D0A0BB /* Extensions.swift in Sources */,
+				FD97B1F22495653900E0E28A /* CoordinatorMakeNewDictionary.swift in Sources */,
+				FDE60B02246DA27D00D0A0BB /* LoginViewController.swift in Sources */,
+				FDAC4C4324707B7E008569B5 /* TableViewCellBeginLaunch.swift in Sources */,
+				FDE60AFC246D969E00D0A0BB /* CoordinatorBeginLaunch.swift in Sources */,
+				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,
+				FDE60AF8246D965C00D0A0BB /* CoordinatorLogIn.swift in Sources */,
+				FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */,
+				FDAC4C39246FECBF008569B5 /* ModelRealmUser.swift in Sources */,
+				FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */,
 				FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */,
 				FD174EE924641AE40090A002 /* Item.swift in Sources */,
-				FD174EC32464043B0090A002 /* ViewController.swift in Sources */,
+				FD174EC32464043B0090A002 /* InitialViewController.swift in Sources */,
 				FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */,
+				FDE60AF6246D962100D0A0BB /* AppCoordinator.swift in Sources */,
+				FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */,
+				FDAC4C3D247010A3008569B5 /* ModelViewBeginLaunch.swift in Sources */,
+				FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */,
 				FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */,
+				FDAC4C3F24701DE9008569B5 /* DataSoursesBeginLaunch.swift in Sources */,
+				FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */,
+				FDE60AF4246D95A500D0A0BB /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +558,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_ASSET_PATHS = WorkApplication/MainBase.realm;
 				DEVELOPMENT_TEAM = 92NKZ7998L;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,7 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_ASSET_PATHS = WorkApplication/MainBase.realm;
 				DEVELOPMENT_TEAM = 92NKZ7998L;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
