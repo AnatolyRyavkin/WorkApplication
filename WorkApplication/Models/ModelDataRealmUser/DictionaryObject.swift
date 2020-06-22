@@ -36,6 +36,11 @@ class DictionaryObject: Object{
         if let arrayID =  listWordObjectsByID{
             self.listWordObjectsByID.append(objectsIn: arrayID)
         }
+        print("init dictionaryObject",self)
+    }
+
+    deinit {
+        print("deinit dictionaryObject",self)
     }
 
     func printSelf(){

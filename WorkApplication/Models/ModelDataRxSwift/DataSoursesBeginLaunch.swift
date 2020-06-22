@@ -44,11 +44,11 @@ class DataSourceBeginLaunch {
 //        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
         self.behaviorSubject = BehaviorSubject.init(value: self.getDictionaryForUser()) //Array<DictionaryObject>(resultDictionaries.filter(predicate)))
         DataSourceBeginLaunch.dataSourceBeginLaunchForUser = self
-        print("init DataSourceBeginLaunch")
+        print("init DataSourceBeginLaunch",self)
     }
 
     deinit {
-        print("deinit DataSourceBeginLaunch")
+        print("deinit DataSourceBeginLaunch",self)
     }
     
     func appendDictionary(title: String, type: DictionaryObject.EnumDictionaryType) throws {
@@ -59,22 +59,17 @@ class DataSourceBeginLaunch {
         }
         self.behaviorSubject.onNext(self.getDictionaryForUser())
 
-
-//        let dictionaryTest = DictionaryObject.init(name: title, typeDictionary: type.rawValue)
-//        let user = UserObject.init(userName: "AnatolyRyavkin", dictionaryObject: dictionaryTest)
-//
-//        try realmUser.write { () -> Void in
-//            realmUser.add(user)
-//        }
-//
-//        let result = self.realmUser.objects(DictionaryObject.self)
-//
-//        self.behaviorSubject.onNext(Array<DictionaryObject>(result))
-
     }
 
-    func deleteDictionary(){
-
+    func deleteDictionary(numberDictionary: Int) {
+        do{
+            try self.realmUser.write {
+                self.userObject.listDictionary.remove(at: numberDictionary)
+                self.behaviorSubject.onNext(self.getDictionaryForUser())
+            }
+        }catch{
+            print("remove dictionary failed")
+        }
     }
 
     func changeTypeDictionary(){
@@ -84,7 +79,9 @@ class DataSourceBeginLaunch {
     func getDictionaryForUser()-> Array<DictionaryObject>{
         let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObject.self)
         let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
-        return Array<DictionaryObject>(resultDictionaries.filter(predicate))
+        var result: Array<DictionaryObject> = Array<DictionaryObject>(resultDictionaries.filter(predicate))
+        result.insert(DictionaryObject.init(name: "-", typeDictionary: "-"), at: 0)
+        return result
     }
 
 }

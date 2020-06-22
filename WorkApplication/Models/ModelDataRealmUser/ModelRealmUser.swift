@@ -42,11 +42,11 @@ class ModelRealmUser{
             print("error = ", error)
             return
         }
-        print("init ModelRealmUser")
+        print("init ModelRealmUser",self)
     }
 
     deinit {
-        print("deinit ModelRealmUser")
+        print("deinit ModelRealmUser",self)
     }
     
 }

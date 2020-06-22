@@ -16,7 +16,7 @@ class ModelRealmBase{
     static let shared = ModelRealmBase()
 
     private init() {
-        print("init ModelRealmBase")
+        print("init ModelRealmBase",self)
         let urlMainBase = Bundle.main.url(forResource: "MainBase", withExtension: "realm")
         let config = Realm.Configuration.init(fileURL: urlMainBase,
                                               readOnly: false,
@@ -31,7 +31,7 @@ class ModelRealmBase{
     }
 
     deinit {
-        print("deinit ModelRealmBase")
+        print("deinit ModelRealmBase",self)
     }
 }
 

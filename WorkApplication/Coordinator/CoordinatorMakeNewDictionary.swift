@@ -15,15 +15,16 @@ class CoordinatorMakeNewDictionary: CoordinatorProtocol{
 
     var userName: String
     var vcMakeNewDictionary: MakeNewDictionaryViewController
-    var nc: UINavigationController!
+    lazy var nc: UINavigationController! = vcMakeNewDictionary.navigationController
     var modelViewMakeNewDictionary: ModelViewMakeNewDictionary!
 
     init?(userName: String) throws{
         self.userName = userName
 
+        
         guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcMakeNewDictionary") as? MakeNewDictionaryViewController
             else{
-                print("")
+                print("error init MakeNewDictionaryViewController")
                 return nil
         }
         self.vcMakeNewDictionary = vc
@@ -34,6 +35,7 @@ class CoordinatorMakeNewDictionary: CoordinatorProtocol{
     }
 
     deinit{
+        self.modelViewMakeNewDictionary = nil
         print("deinit CoordinatorMakeNewDictionary")
     }
 

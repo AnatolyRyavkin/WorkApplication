@@ -23,9 +23,12 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
     var dateSourseBeginLaunch: DataSourceBeginLaunch!
     var behaviorSubjectData: BehaviorSubject<[DictionaryObject]>!
 
+    weak var coordinatorBeginLaunch: CoordinatorBeginLaunch?
+
     var firstVCBeginLaunchDidAppear = true
 
-    init(userName: String){
+    init(userName: String, coordinator: CoordinatorBeginLaunch){
+        self.coordinatorBeginLaunch = coordinator
         self.userName = userName
         print("init ModelViewBeginLaunch")
     }
@@ -47,49 +50,156 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
 
         (self.vcBeginLaunch as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
 
-            if !self.firstVCBeginLaunchDidAppear {
+            if self.firstVCBeginLaunchDidAppear == false {
                 return
             }
             self.firstVCBeginLaunchDidAppear = false
             
             self.tableView = self.vcBeginLaunch.tableView
+            
             self.dateSourseBeginLaunch = DataSourceBeginLaunch.init(userName: self.userName)
             
             self.behaviorSubjectData = self.dateSourseBeginLaunch.behaviorSubject
 
             _ = self.behaviorSubjectData.bind(to: self.tableView.rx.items(cellIdentifier: "cellBeginLaunch", cellType: TableViewCellBeginLaunch.self)){row, dictionary, cell in
+                switch row{
+                case 0:
+                    let myShadow = NSShadow()
+                    myShadow.shadowBlurRadius = 2
+                    myShadow.shadowOffset = CGSize(width: 2, height: 2)
+                    myShadow.shadowColor = UIColor.gray
 
-                cell.labelCountItem.text = "\(dictionary.listWordObjectsByID.count)"
-                cell.labelNameDictionary.text = dictionary.name
-                cell.labelTypeDictionary.text = (dictionary.typeDictionary == "typeDictionaryEngRus") ? "eng-rus" : "rus-eng"
+                    let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCTextTitle ,
+                                      NSAttributedString.Key.font: UIFont(name: "Futura", size: 25.0)!,
+                                      NSAttributedString.Key.shadow: myShadow,
+                    ]
+                    
+                    var string: String = "Count"
+                    var attributeString = NSAttributedString(string: string, attributes: attribute)
+                    cell.labelCountItem.attributedText = attributeString
+                    cell.labelCountItem.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+
+                    string = "Name"
+                    attributeString = NSAttributedString(string: string, attributes: attribute)
+                    cell.labelNameDictionary.attributedText = attributeString
+                    cell.labelNameDictionary.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+
+                    string = "Type"
+                    attributeString = NSAttributedString(string: string, attributes: attribute)
+                    cell.labelTypeDictionary.attributedText = attributeString
+                    cell.labelTypeDictionary.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+
+                    cell.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+
+                default:
+
+                    let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCText ,
+                                      NSAttributedString.Key.font: UIFont(name: "Futura", size: 20.0)!,
+
+                    ]
+
+                    var string: String = "\(dictionary.listWordObjectsByID.count)"
+                    var attributeString = NSAttributedString(string: string, attributes: attribute)
+                    cell.labelCountItem.attributedText = attributeString
+
+                    string = dictionary.name
+                    attributeString = NSAttributedString(string: string, attributes: attribute)
+                    cell.labelNameDictionary.attributedText = attributeString
+
+                    string = (dictionary.typeDictionary == "typeDictionaryEngRus") ? "eng-rus" : "rus-eng"
+                    attributeString = NSAttributedString(string: string, attributes: attribute)
+                    cell.labelTypeDictionary.attributedText = attributeString
+
+                    cell.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+
+                }
 
             }
 
             self.vcBeginLaunch.barButtonAddDictionary.rx.tap
                 .subscribe(onNext: {
-
-                    Observable.from(AppCoordinator.arrayCoordinators)
-                        .filter { (coor) -> Bool in
-                            coor is CoordinatorBeginLaunch
-                    }
-                    .subscribe(onNext: { (coor) in
-                        let coordinatorBeginLaunch = coor as! CoordinatorBeginLaunch
-                        _ = coordinatorBeginLaunch.launchCoordinatorMakeNewDictionary(userName: self.userName)
-                    }).disposed(by: self.disposeBag)
-
-//                    do{
-//                        try self.dateSourseBeginLaunch.appendDictionary()
-//                    }catch let error{
-//                        print(error.localizedDescription)
-//                    }
+                    _ = self.coordinatorBeginLaunch!.launchCoordinatorMakeNewDictionary(userName: self.userName)
             }).disposed(by: self.disposeBag)
+
+            self.vcBeginLaunch.barButtonEdit.rx.tap
+                .subscribe(onNext: {
+                    self.tableView.setEditing(!self.tableView.isEditing, animated: true)
+                }).disposed(by: self.disposeBag)
+
+            self.tableView.rx.itemDeleted.asDriver().drive(onNext: { indexPath in
+                if indexPath.row != 0 {
+                    self.dateSourseBeginLaunch.deleteDictionary(numberDictionary: indexPath.row - 1)
+                }
+            }).disposed(by: self.disposeBag)
+
+            self.tableView.rx.itemSelected.asDriver()
+                .do(onNext: { indexPath in
+                    self.tableView.deselectRow(at: indexPath, animated: false)
+                })
+                .filter({ indexPath -> Bool in
+                    indexPath.row != 0
+                })
+                .do(onNext: { indexPath in
+                    self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCCellSelected
+                })
+                .drive(onNext: { indexPath in
+                    UIView.animate(withDuration: 0.5) {
+                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+                    }
+                }).disposed(by: self.disposeBag)
+
+            self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
+
+
 
         }).disposed(by: self.disposeBag)
 
-
     }
 
-    
+    //MARK- tableViewDelegate
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        switch indexPath.row {
+        case 0:
+            return UITableViewCell.EditingStyle.none
+        default:
+            return UITableViewCell.EditingStyle.delete
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//        let closeAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { ac, view, success in
+//            ac.backgroundColor = UIColor.blue
+//            success(true)
+//         })
+//         return UISwipeActionsConfiguration(actions: [closeAction])
+//    }
+//
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let closeAction = UIContextualAction(style: .normal, title:  "Del", handler: { ac, view, success in
+//            success(true)
+//         })
+//         closeAction.backgroundColor = .purple
+//         return nil
+//
+
+
+
+
+
+
+
+
 
 //            tableView.rx.setDelegate(self).disposed(by: disposeBag)
 //
@@ -149,4 +259,4 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
 
 
 
-}
+

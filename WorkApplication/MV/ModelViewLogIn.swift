@@ -58,7 +58,7 @@ class ModelViewLogIn {
 
             self.vcLogIn.textFieldUsername.rx.observe(String.self, "text").asObservable().map { (string) -> Bool in
                 self.loginFromTextField = string!
-                self.vcLogIn.buttonNext.backgroundColor = UIColor.init(red: 102, green: 102, blue: 255)
+                self.vcLogIn.buttonNext.backgroundColor = ColorScheme.Shared.colorLVCButtonNextActive
                 return true
             }
             .bind(to: self.vcLogIn.buttonNext.rx.isEnabled)
@@ -68,10 +68,10 @@ class ModelViewLogIn {
                 .map { (string) -> Bool in
                     let isThreeCharts = !(string?.count ?? 0 < 3)
                     if isThreeCharts{
-                        self.vcLogIn.buttonNext.backgroundColor = UIColor.init(red: 102, green: 102, blue: 255)
+                        self.vcLogIn.buttonNext.backgroundColor = ColorScheme.Shared.colorLVCButtonNextActive
                         self.loginFromTextField = string
                     }else{
-                        self.vcLogIn.buttonNext.backgroundColor = UIColor.init(red: 119, green: 136, blue: 153).withAlphaComponent(1)
+                        self.vcLogIn.buttonNext.backgroundColor = ColorScheme.Shared.colorLVCButtonNextDontActive
                     }
                     return isThreeCharts
             }
@@ -99,10 +99,11 @@ class ModelViewLogIn {
                 }
 
                 if coordinatorBeginLaunch != nil {
-                    let nc = self.vcLogIn.navigationController
-                    nc?.viewControllers.removeAll{
-                        $0 === coordinatorBeginLaunch!.vcBeginLaunch
-                    }
+//                    let nc = self.vcLogIn.navigationController
+                    // dont ->
+//                    nc?.viewControllers.removeAll{
+//                        $0 === coordinatorBeginLaunch!.vcBeginLaunch
+//                    }
                     AppCoordinator.arrayCoordinators.removeAll{
                         $0 is CoordinatorBeginLaunch
                     }
@@ -125,8 +126,12 @@ class ModelViewLogIn {
                 .map { !self.vcLogIn.pickerProfiles.isHidden }
                 .do(onNext: { isDontHidden in
                     switch isDontHidden{
-                    case false : self.vcLogIn.textFieldUsername.text = self.arrayUserName[0]
+                    case false :
+                        self.vcLogIn.textFieldUsername.text = self.arrayUserName[self.vcLogIn.pickerProfiles.selectedRow(inComponent: 0)]
                     case true :  self.vcLogIn.textFieldUsername.text = ""
+                        self.vcLogIn.textFieldUsername.becomeFirstResponder()
+                        self.vcLogIn.buttonNext.backgroundColor = ColorScheme.Shared.colorLVCButtonNextDontActive
+                        self.vcLogIn.buttonNext.isEnabled = isDontHidden
                     }
                 })
                 .bind(to: self.vcLogIn.pickerProfiles.rx.isHidden)

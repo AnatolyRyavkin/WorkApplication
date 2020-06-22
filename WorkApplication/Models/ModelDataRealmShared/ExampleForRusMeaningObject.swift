@@ -24,7 +24,13 @@ class ExampleObjectForRusMeaning: Object {
         if let accessory = exampleSource.accessory{
             self.accessoryExample = accessory
         }
+        print("init exampleForRusMeaningObject",self.description)
     }
+
+    deinit {
+        print("deinit exampleForRusMeaningObject",self.description)
+    }
+
 
 
     func printSelf(){

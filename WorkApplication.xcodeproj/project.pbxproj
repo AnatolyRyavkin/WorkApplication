@@ -20,6 +20,10 @@
 		FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */; };
+		FD67A96B249B42F900FF210A /* HeaderForTableViewMyDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A96A249B42F900FF210A /* HeaderForTableViewMyDictionary.swift */; };
+		FD67A96D249DFA4C00FF210A /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A96C249DFA4C00FF210A /* ColorScheme.swift */; };
+		FD67A96F24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A96E24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift */; };
+		FD67A97124A078EB00FF210A /* ModelViewChangeTitleDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97024A078EB00FF210A /* ModelViewChangeTitleDictionary.swift */; };
 		FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79E7902492D61300661CCF /* ModelRealmBase.swift */; };
 		FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
 		FD97B1F02495309000E0E28A /* UsersBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
@@ -60,6 +64,10 @@
 		FD174EE824641AE40090A002 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FD174EEA24645A8F0090A002 /* DataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItems.swift; sourceTree = "<group>"; };
 		FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewLogIn.swift; sourceTree = "<group>"; };
+		FD67A96A249B42F900FF210A /* HeaderForTableViewMyDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderForTableViewMyDictionary.swift; sourceTree = "<group>"; };
+		FD67A96C249DFA4C00FF210A /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
+		FD67A96E24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorChangeTitleDictionary.swift; sourceTree = "<group>"; };
+		FD67A97024A078EB00FF210A /* ModelViewChangeTitleDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewChangeTitleDictionary.swift; sourceTree = "<group>"; };
 		FD79E7902492D61300661CCF /* ModelRealmBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmBase.swift; sourceTree = "<group>"; };
 		FD97B1ED24952DE400E0E28A /* UsersBase.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = UsersBase.realm; sourceTree = "<group>"; };
 		FD97B1F12495653900E0E28A /* CoordinatorMakeNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMakeNewDictionary.swift; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */,
+				FD67A97024A078EB00FF210A /* ModelViewChangeTitleDictionary.swift */,
 				FDAC4C3C247010A3008569B5 /* ModelViewBeginLaunch.swift */,
 				FD97B1F32495664600E0E28A /* ModelViewMakeNewDictionary.swift */,
 			);
@@ -167,6 +176,8 @@
 				FDAC4C3A246FF8EE008569B5 /* BeginLaunchViewController.swift */,
 				FD97B1F5249566D800E0E28A /* MakeNewDictionaryViewController.swift */,
 				FDAC4C4224707B7E008569B5 /* TableViewCellBeginLaunch.swift */,
+				FD67A96A249B42F900FF210A /* HeaderForTableViewMyDictionary.swift */,
+				FD67A96C249DFA4C00FF210A /* ColorScheme.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,6 +228,7 @@
 				FDE60AF7246D965C00D0A0BB /* CoordinatorLogIn.swift */,
 				FDE60AFB246D969E00D0A0BB /* CoordinatorBeginLaunch.swift */,
 				FD97B1F12495653900E0E28A /* CoordinatorMakeNewDictionary.swift */,
+				FD67A96E24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -385,10 +397,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD67A96B249B42F900FF210A /* HeaderForTableViewMyDictionary.swift in Sources */,
 				FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */,
 				FD97B1F42495664600E0E28A /* ModelViewMakeNewDictionary.swift in Sources */,
 				FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */,
 				FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */,
+				FD67A96D249DFA4C00FF210A /* ColorScheme.swift in Sources */,
 				FDAC4C3B246FF8EE008569B5 /* BeginLaunchViewController.swift in Sources */,
 				FD97B1F6249566D800E0E28A /* MakeNewDictionaryViewController.swift in Sources */,
 				FDE60B00246D998E00D0A0BB /* Extensions.swift in Sources */,
@@ -398,6 +412,7 @@
 				FDE60AFC246D969E00D0A0BB /* CoordinatorBeginLaunch.swift in Sources */,
 				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,
 				FDE60AF8246D965C00D0A0BB /* CoordinatorLogIn.swift in Sources */,
+				FD67A96F24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift in Sources */,
 				FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */,
 				FDAC4C39246FECBF008569B5 /* ModelRealmUser.swift in Sources */,
 				FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */,
@@ -407,6 +422,7 @@
 				FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */,
 				FDE60AF6246D962100D0A0BB /* AppCoordinator.swift in Sources */,
 				FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */,
+				FD67A97124A078EB00FF210A /* ModelViewChangeTitleDictionary.swift in Sources */,
 				FDAC4C3D247010A3008569B5 /* ModelViewBeginLaunch.swift in Sources */,
 				FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */,
 				FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */,
@@ -561,6 +577,7 @@
 				DEVELOPMENT_ASSET_PATHS = WorkApplication/MainBase.realm;
 				DEVELOPMENT_TEAM = 92NKZ7998L;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -582,6 +599,7 @@
 				DEVELOPMENT_ASSET_PATHS = WorkApplication/MainBase.realm;
 				DEVELOPMENT_TEAM = 92NKZ7998L;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

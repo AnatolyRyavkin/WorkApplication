@@ -27,7 +27,7 @@ class CoordinatorBeginLaunch: CoordinatorProtocol{
         CoordinatorBeginLaunch.numberSelf += 1
         self.userName = userName
         self.vcBeginLaunch = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcBeginLaunch") as? BeginLaunchViewController
-        self.modelViewBeginLaunch = ModelViewBeginLaunch.init(userName: userName)
+        self.modelViewBeginLaunch = ModelViewBeginLaunch.init(userName: userName, coordinator: self)
         self.modelViewBeginLaunch.vcBeginLaunch = self.vcBeginLaunch
         AppCoordinator.addCoordinatorToArray(coor: self)
         print("init CoordinatorBeginLaunch  - ",num)
@@ -56,7 +56,14 @@ class CoordinatorBeginLaunch: CoordinatorProtocol{
 
     func launchCoordinatorMakeNewDictionary(userName: String) -> Observable<Void> {
         do{
-            let coordinatorMakeNewDictionary = try CoordinatorMakeNewDictionary.init(userName: self.userName)!
+            var coordinatorMakeNewDictionary: CoordinatorMakeNewDictionary
+            let result = AppCoordinator.arrayCoordinators.filter{ $0 is CoordinatorMakeNewDictionary}
+            if let coor = (result.first as? CoordinatorMakeNewDictionary), coor.userName == userName {
+                coordinatorMakeNewDictionary = coor
+            }else{
+                AppCoordinator.arrayCoordinators.removeAll{$0 is CoordinatorMakeNewDictionary}
+                coordinatorMakeNewDictionary = try CoordinatorMakeNewDictionary.init(userName: self.userName)!
+            }
             _ = self.coordinate(to: coordinatorMakeNewDictionary, from: self.nc)
         }catch{
             print("error init vcMakeNewDictionary")

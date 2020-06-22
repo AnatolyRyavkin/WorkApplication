@@ -36,8 +36,12 @@ class RusMeaningObject: Object {
                 self.listExampleForMeaning.append(ExampleObjectForRusMeaning.init(exampleSource: example))
             }
         }
+        print("init rusMeaningObject",self)
     }
 
+    deinit {
+        print("deinit rusMeaningObject",self)
+    }
 
     func printSelf(){
         for meaningRusString in self.listRusMeaning{
