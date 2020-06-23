@@ -25,6 +25,7 @@ protocol ProtocolExistTableView {
     associatedtype ElementForObservableStart = Observable<Void>
     associatedtype ElementForObservableCoordinate = Observable<Void>
 
+
     func start(from nc: UINavigationController) -> ElementForObservableStart
     func coordinate< Coordinator: CoordinatorProtocol>(to coordinator: Coordinator, from nc: UINavigationController)  -> ElementForObservableCoordinate
 }

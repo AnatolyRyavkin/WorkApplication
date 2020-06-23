@@ -34,16 +34,8 @@ class CoordinatorBeginLaunch: CoordinatorProtocol{
     }
     
     deinit {
+        modelViewBeginLaunch.disposeBag = nil
         print("deinit CoordinatorBeginLaunch - ",num)
-    }
-
-    func cleanProperties() {
-
-        disposeBag = nil
-        nc = nil
-        userName = nil
-        vcBeginLaunch = nil
-        modelViewBeginLaunch = nil
     }
 
     func start(from nc: UINavigationController) -> Observable<Void> {
@@ -68,6 +60,12 @@ class CoordinatorBeginLaunch: CoordinatorProtocol{
         }catch{
             print("error init vcMakeNewDictionary")
         }
+        return Observable.empty()
+    }
+
+    func launchCoordinatorChangeTitleDictionary(dictionaryObjectChangeTitle: DictionaryObject, userName: String) -> Observable<Void> {
+        let coordinatorChangeTitleDictionary = CoordinatorChangeTitleDictionary.init(dictionaryChange: dictionaryObjectChangeTitle, userName: userName)!
+        _ = self.coordinate(to: coordinatorChangeTitleDictionary, from: self.nc)
         return Observable.empty()
     }
 

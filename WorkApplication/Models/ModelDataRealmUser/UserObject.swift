@@ -21,11 +21,11 @@ class UserObject: Object{
             self.listDictionary.append(dictObj)
         }
         self.userName = userName
-        print("init userObject",self)
+        //print("init userObject",self)
     }
 
     deinit {
-        print("deinit userObject",self)
+        //print("deinit userObject",self)
     }
     
 }

@@ -24,6 +24,7 @@
 		FD67A96D249DFA4C00FF210A /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A96C249DFA4C00FF210A /* ColorScheme.swift */; };
 		FD67A96F24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A96E24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift */; };
 		FD67A97124A078EB00FF210A /* ModelViewChangeTitleDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97024A078EB00FF210A /* ModelViewChangeTitleDictionary.swift */; };
+		FD67A97324A0899500FF210A /* ChangeTitleDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97224A0899500FF210A /* ChangeTitleDictionaryViewController.swift */; };
 		FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79E7902492D61300661CCF /* ModelRealmBase.swift */; };
 		FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
 		FD97B1F02495309000E0E28A /* UsersBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
@@ -68,6 +69,7 @@
 		FD67A96C249DFA4C00FF210A /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		FD67A96E24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorChangeTitleDictionary.swift; sourceTree = "<group>"; };
 		FD67A97024A078EB00FF210A /* ModelViewChangeTitleDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewChangeTitleDictionary.swift; sourceTree = "<group>"; };
+		FD67A97224A0899500FF210A /* ChangeTitleDictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTitleDictionaryViewController.swift; sourceTree = "<group>"; };
 		FD79E7902492D61300661CCF /* ModelRealmBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmBase.swift; sourceTree = "<group>"; };
 		FD97B1ED24952DE400E0E28A /* UsersBase.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = UsersBase.realm; sourceTree = "<group>"; };
 		FD97B1F12495653900E0E28A /* CoordinatorMakeNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMakeNewDictionary.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				FD174EC22464043B0090A002 /* InitialViewController.swift */,
+				FD67A97224A0899500FF210A /* ChangeTitleDictionaryViewController.swift */,
 				FDE60B01246DA27D00D0A0BB /* LoginViewController.swift */,
 				FDAC4C3A246FF8EE008569B5 /* BeginLaunchViewController.swift */,
 				FD97B1F5249566D800E0E28A /* MakeNewDictionaryViewController.swift */,
@@ -413,6 +416,7 @@
 				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,
 				FDE60AF8246D965C00D0A0BB /* CoordinatorLogIn.swift in Sources */,
 				FD67A96F24A0769800FF210A /* CoordinatorChangeTitleDictionary.swift in Sources */,
+				FD67A97324A0899500FF210A /* ChangeTitleDictionaryViewController.swift in Sources */,
 				FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */,
 				FDAC4C39246FECBF008569B5 /* ModelRealmUser.swift in Sources */,
 				FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */,

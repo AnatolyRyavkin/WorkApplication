@@ -16,12 +16,22 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
 
     let cellBeginLaunch = "cellBeginLaunch"
 
-    private var disposeBag: DisposeBag! = DisposeBag()
-    var vcBeginLaunch: BeginLaunchViewController!
+    var disposeBag: DisposeBag! = DisposeBag()
+    weak var vcBeginLaunch: BeginLaunchViewController!
     var userName: String!
-    var tableView: UITableView!
-    var dateSourseBeginLaunch: DataSourceBeginLaunch!
-    var behaviorSubjectData: BehaviorSubject<[DictionaryObject]>!
+    weak var tableView: UITableView!
+
+    //var dateSourseBeginLaunch: DataSourceBeginLaunch!
+    var dateSourseBeginLaunch: DataSourceBeginLaunch{
+        if let dataSource = DataSourceBeginLaunch.dataSourceBeginLaunchForUser,
+            dataSource.userName == self.userName{
+            return dataSource
+        }else{
+            return DataSourceBeginLaunch.init(userName: self.userName)
+        }
+    }
+
+    weak var behaviorSubjectData: BehaviorSubject<[DictionaryObject]>!
 
     weak var coordinatorBeginLaunch: CoordinatorBeginLaunch?
 
@@ -37,14 +47,14 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
         print("deinit ModelViewBeginLaunch")
     }
 
-    func cleanProperties() {
-        disposeBag = nil
-        vcBeginLaunch = nil
-        userName = nil
-        tableView = nil
-        dateSourseBeginLaunch = nil
-        behaviorSubjectData = nil
-    }
+//    func cleanProperties() {
+//        //disposeBag = nil
+//        //vcBeginLaunch = nil
+//        //userName = nil
+//        //tableView = nil
+//        //dateSourseBeginLaunch = nil
+//        //behaviorSubjectData = nil
+//    }
 
     func binding(){
 
@@ -57,7 +67,7 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
             
             self.tableView = self.vcBeginLaunch.tableView
             
-            self.dateSourseBeginLaunch = DataSourceBeginLaunch.init(userName: self.userName)
+            //self.dateSourseBeginLaunch = DataSourceBeginLaunch.init(userName: self.userName)
             
             self.behaviorSubjectData = self.dateSourseBeginLaunch.behaviorSubject
 
@@ -141,6 +151,7 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
                 })
                 .do(onNext: { indexPath in
                     self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCCellSelected
+                    _ = self.coordinatorBeginLaunch?.launchCoordinatorChangeTitleDictionary(dictionaryObjectChangeTitle: self.dateSourseBeginLaunch.getDictionariesForUserWithInsertFirstEmpty()[indexPath.row], userName: self.userName)
                 })
                 .drive(onNext: { indexPath in
                     UIView.animate(withDuration: 0.5) {

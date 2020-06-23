@@ -11,11 +11,24 @@ import RxSwift
 import RxCocoa
 import UIKit
 
+//MARK- RX
+
+extension Reactive where Base == UITextField {
+    public var bindText: Binder<String> {
+        return Binder.init(self.base) { (textFieldSelf, string) in
+            textFieldSelf.text = string
+        }
+    }
+}
 
 extension Reactive where Base == UIViewController{
 
     private func controlEvent(for selector: Selector) -> ControlEvent<Void> {
         return ControlEvent(events: sentMessage(selector).map{ _ in})
+    }
+
+    public var viewDidLoad: ControlEvent<Void>{
+        return controlEvent(for: #selector(UIViewController.viewDidLoad))
     }
 
     public var viewWillAppear: ControlEvent<Void>{

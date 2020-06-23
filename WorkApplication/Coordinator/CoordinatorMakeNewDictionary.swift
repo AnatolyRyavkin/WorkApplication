@@ -35,7 +35,7 @@ class CoordinatorMakeNewDictionary: CoordinatorProtocol{
     }
 
     deinit{
-        self.modelViewMakeNewDictionary = nil
+        modelViewMakeNewDictionary.disposeBag = nil
         print("deinit CoordinatorMakeNewDictionary")
     }
 

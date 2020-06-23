@@ -16,7 +16,6 @@ class CoordinatorLogIn: CoordinatorProtocol{
     let modelViewLogIn = ModelViewLogIn.Shared
     private let disposeBag = DisposeBag()
     var nc: UINavigationController!
-    var coordinatorBeginLaunch: CoordinatorBeginLaunch!
     var observerOldUser: AnyObserver<String>!
     var observerNewUser: AnyObserver<String>!
     var vcLogIn: LoginViewController
@@ -38,14 +37,14 @@ class CoordinatorLogIn: CoordinatorProtocol{
     func start(from nc: UINavigationController) -> Observable<Void>{
 
         self.nc = nc
-        self.modelViewLogIn.linking()
+        self.modelViewLogIn.binding()
 
         self.observerOldUser = AnyObserver<String>.init{ event in
             switch event{
             case .next:
                 guard let string = event.element else{ return }
-                self.coordinatorBeginLaunch = CoordinatorBeginLaunch.init(userName: string)
-            _ = self.coordinate(to: self.coordinatorBeginLaunch, from: self.nc)
+                let coordinatorBeginLaunch = CoordinatorBeginLaunch.init(userName: string)
+            _ = self.coordinate(to: coordinatorBeginLaunch, from: self.nc)
             case .error(_):
                 print(event.error!)
             case .completed:

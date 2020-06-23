@@ -29,7 +29,7 @@ struct ColorScheme{
     let cD0D0FF = UIColor.init(hexString: "D0D0FF") // фиолетовый +
     let cD3D3D3 = UIColor.init(hexString: "D3D3D3") // серый ++
     let c000000 = UIColor.init(hexString: "000000") // черный
-    let c00007F = UIColor.init(hexString: "00007F") //синий
+    let c00007F = UIColor.init(hexString: "00007F") // синий
     let cFFE69C = UIColor.init(hexString: "FFE69C") // оранжево-коричневый
 
 

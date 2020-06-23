@@ -14,7 +14,7 @@ class ModelViewLogIn {
 
     private let disposeBag = DisposeBag()
     var loginFromTextField: String!
-    var vcLogIn: LoginViewController!
+    weak var vcLogIn: LoginViewController!
     var arrayUserName: [String]
     var behaviorSubjectForPicker: BehaviorSubject<Array<String>>
     var publishSubjectUserLaunchOld = PublishSubject<String>()
@@ -35,7 +35,7 @@ class ModelViewLogIn {
         print("deinit ModelViewLogIn")
     }
 
-    func linking(){
+    func binding(){
 
         guard let vcLog = self.vcLogIn else {
             print("self.vcLogin = nil")
@@ -99,18 +99,9 @@ class ModelViewLogIn {
                 }
 
                 if coordinatorBeginLaunch != nil {
-//                    let nc = self.vcLogIn.navigationController
-                    // dont ->
-//                    nc?.viewControllers.removeAll{
-//                        $0 === coordinatorBeginLaunch!.vcBeginLaunch
-//                    }
                     AppCoordinator.arrayCoordinators.removeAll{
                         $0 is CoordinatorBeginLaunch
                     }
-                    coordinatorBeginLaunch!.modelViewBeginLaunch.cleanProperties()
-                    coordinatorBeginLaunch!.cleanProperties()
-                    AppCoordinator.Shared.coordinatorBeginLaunch = nil
-                    CoordinatorLogIn.Shared.coordinatorBeginLaunch = nil
                 }
 
                 if userName != nil {

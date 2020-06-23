@@ -39,10 +39,8 @@ class DataSourceBeginLaunch {
         }else{
             self.userObject = resultUsers.first!
         }
-        
-//        let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObject.self)
-//        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
-        self.behaviorSubject = BehaviorSubject.init(value: self.getDictionaryForUser()) //Array<DictionaryObject>(resultDictionaries.filter(predicate)))
+
+        self.behaviorSubject = BehaviorSubject.init(value: self.getDictionariesForUserWithInsertFirstEmpty())
         DataSourceBeginLaunch.dataSourceBeginLaunchForUser = self
         print("init DataSourceBeginLaunch",self)
     }
@@ -52,35 +50,48 @@ class DataSourceBeginLaunch {
     }
     
     func appendDictionary(title: String, type: DictionaryObject.EnumDictionaryType) throws {
-
         let newDictionary = DictionaryObject.init(name: title, typeDictionary: type.rawValue)
         try self.realmUser.write {
             self.userObject.listDictionary.append(newDictionary)
         }
-        self.behaviorSubject.onNext(self.getDictionaryForUser())
-
+        self.behaviorSubject.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
     }
 
     func deleteDictionary(numberDictionary: Int) {
         do{
             try self.realmUser.write {
                 self.userObject.listDictionary.remove(at: numberDictionary)
-                self.behaviorSubject.onNext(self.getDictionaryForUser())
+                self.behaviorSubject.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
             }
         }catch{
             print("remove dictionary failed")
         }
     }
 
-    func changeTypeDictionary(){
+    func changeNameDictionary(dictionaryObject: DictionaryObject, newName: String) throws{
+        do{
+            try self.realmUser.write {
+                dictionaryObject.name = newName
+                self.behaviorSubject.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
+            }
+        }catch{
+            print("remove dictionary failed")
+        }
 
     }
 
-    func getDictionaryForUser()-> Array<DictionaryObject>{
+    func getDictionariesForUserWithInsertFirstEmpty()-> Array<DictionaryObject>{
         let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObject.self)
         let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
         var result: Array<DictionaryObject> = Array<DictionaryObject>(resultDictionaries.filter(predicate))
-        result.insert(DictionaryObject.init(name: "-", typeDictionary: "-"), at: 0)
+        result.insert(DictionaryObject.init(name: "-", typeDictionary: "-"), at: 0) // filling first line
+        return result
+    }
+
+    func getDictionariesForUser()-> Array<DictionaryObject>{
+        let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObject.self)
+        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
+        let result: Array<DictionaryObject> = Array<DictionaryObject>(resultDictionaries.filter(predicate))
         return result
     }
 

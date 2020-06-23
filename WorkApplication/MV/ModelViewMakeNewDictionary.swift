@@ -12,10 +12,9 @@ import RxCocoa
 
 class ModelViewMakeNewDictionary{
     
-    private var disposeBag: DisposeBag! = DisposeBag()
+    var disposeBag: DisposeBag! = DisposeBag()
     weak var vcMakeNewDictionary: MakeNewDictionaryViewController!
     var userName: String!
-    var behaviorSubjectData: BehaviorSubject<[DictionaryObject]>!
     var textTitleInput: String!
     var typeDictionary: DictionaryObject.EnumDictionaryType!
 
@@ -42,15 +41,14 @@ class ModelViewMakeNewDictionary{
     deinit {
         print("deinit ModelViewMakeNewDictionary")
     }
-
-    func cleanProperties() {
-        disposeBag = nil
-        vcMakeNewDictionary = nil
-        userName = nil
-        behaviorSubjectData = nil
-    }
     
     func binding(){
+
+        (self.vcMakeNewDictionary as UIViewController).rx.viewWillDisappear.asDriver().drive(onNext: { _ in
+            AppCoordinator.arrayCoordinators.removeAll {
+                $0 is CoordinatorMakeNewDictionary
+            }
+        }).disposed(by: self.disposeBag)
 
 
         (self.vcMakeNewDictionary as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
@@ -67,14 +65,14 @@ class ModelViewMakeNewDictionary{
             .map { (string) -> Bool in
                 let isStringDontEmpty = string?.count ?? 0 < 1 || string?.filter{$0 == Character(" ")}.count == string?.count
                 if !isStringDontEmpty{
-                    self.vcMakeNewDictionary.buttonContinue.backgroundColor = ColorScheme.Shared.colorNDButtonContinueActive
+                    self.vcMakeNewDictionary.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueActive
                     self.textTitleInput = string
                 }else{
-                    self.vcMakeNewDictionary.buttonContinue.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive 
+                    self.vcMakeNewDictionary.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive 
                 }
                 return !isStringDontEmpty
             }
-            .bind(to: self.vcMakeNewDictionary.buttonContinue.rx.isEnabled)
+            .bind(to: self.vcMakeNewDictionary.buttonSaveBack.rx.isEnabled)
             .disposed(by: self.disposeBag)
 
 
@@ -86,7 +84,7 @@ class ModelViewMakeNewDictionary{
                 self.typeDictionary = typeDictionary
             }).disposed(by: self.disposeBag)
 
-            self.vcMakeNewDictionary.buttonContinue.rx.tap.asDriver()
+            self.vcMakeNewDictionary.buttonSaveBack.rx.tap.asDriver()
             .drive(onNext: {
 
                 try! self.dateSourseBeginLaunch.appendDictionary(title: self.textTitleInput, type: self.typeDictionary)
@@ -94,14 +92,12 @@ class ModelViewMakeNewDictionary{
                 if let arrayVC = self.nc?.viewControllers{
                     let vc = arrayVC.filter { $0 is BeginLaunchViewController }.first
                     if vc != nil{
-                        self.nc?.popToViewController(vc!, animated: true)
+                        self.nc?.popViewController(animated: true)
                     }else{print("error - vc = nil")}
                 }else{print("error - arrayNC = nil")}
 
             }).disposed(by: self.disposeBag)
-
-
-
+            
         }).disposed(by: self.disposeBag)
 
     }
