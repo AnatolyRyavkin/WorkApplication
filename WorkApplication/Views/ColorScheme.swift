@@ -39,7 +39,7 @@ struct ColorScheme{
     var navigationBarBackgroundGray: UIColor{ isDark ? c778899 : cFFE69C}
     var navigationBarText: UIColor{ isDark ? cFFE69C : c0000FF}
 
-    //MARK- LoginViewController
+    //MARK- ViewControllerLogin
 
     var colorLVCButtonNextActive: UIColor { isDark ? c6666FF : c6666FF}
     var colorLVCButtonNextDontActive: UIColor { isDark ? c778899 : c778899}

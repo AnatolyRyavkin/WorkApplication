@@ -1,5 +1,5 @@
 //
-//  TableViewCellBeginLaunch.swift
+//  TableViewCellListDictionary.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 16.05.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCellBeginLaunch: UITableViewCell {
+class TableViewCellListDictionary: UITableViewCell {
 
     @IBOutlet weak var labelNameDictionary: UILabel!
     @IBOutlet weak var labelTypeDictionary: UILabel!

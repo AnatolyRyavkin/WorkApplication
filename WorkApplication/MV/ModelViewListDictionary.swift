@@ -1,5 +1,5 @@
 //
-//  ModelViewBeginLaunch.swift
+//  ModelViewListDictionary.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 16.05.2020.
@@ -12,66 +12,58 @@ import RxCocoa
 import RxDataSources
 
 
-class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
+class ModelViewListDictionary : NSObject, UITableViewDelegate{
 
-    let cellBeginLaunch = "cellBeginLaunch"
+    weak var coordinatorListDictionary: CoordinatorListDictionary?
+
+    let cellListDictionary = "cellListDictionary"
+
+    var dictionaryObject: DictionaryObject!
 
     var disposeBag: DisposeBag! = DisposeBag()
-    weak var vcBeginLaunch: BeginLaunchViewController!
+    weak var vcListDictionary: ViewControllerListDictionary!
     var userName: String!
     weak var tableView: UITableView!
 
-    //var dateSourseBeginLaunch: DataSourceBeginLaunch!
-    var dateSourseBeginLaunch: DataSourceBeginLaunch{
-        if let dataSource = DataSourceBeginLaunch.dataSourceBeginLaunchForUser,
+    var dateSourseDictionaryForUser: DataSourceDictionariesForUser{
+        if let dataSource = DataSourceDictionariesForUser.dataSourceDictionariesForUser,
             dataSource.userName == self.userName{
             return dataSource
         }else{
-            return DataSourceBeginLaunch.init(userName: self.userName)
+            return DataSourceDictionariesForUser.init(userName: self.userName)
         }
     }
 
-    weak var behaviorSubjectData: BehaviorSubject<[DictionaryObject]>!
+    var firstvcListDictionaryDidAppear = true
 
-    weak var coordinatorBeginLaunch: CoordinatorBeginLaunch?
-
-    var firstVCBeginLaunchDidAppear = true
-
-    init(userName: String, coordinator: CoordinatorBeginLaunch){
-        self.coordinatorBeginLaunch = coordinator
+    init(userName: String, coordinatorListDictionary: CoordinatorListDictionary){
+        self.coordinatorListDictionary = coordinatorListDictionary
         self.userName = userName
-        print("init ModelViewBeginLaunch")
+        print("init ModelViewListDictionary")
     }
 
     deinit {
-        print("deinit ModelViewBeginLaunch")
+        print("deinit ModelViewListDictionary")
     }
-
-//    func cleanProperties() {
-//        //disposeBag = nil
-//        //vcBeginLaunch = nil
-//        //userName = nil
-//        //tableView = nil
-//        //dateSourseBeginLaunch = nil
-//        //behaviorSubjectData = nil
-//    }
 
     func binding(){
 
-        (self.vcBeginLaunch as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
+        (self.vcListDictionary as UIViewController).rx.viewWillAppear.asDriver().drive(onNext: { _ in
+            self.vcListDictionary.tableView.isEditing = false
+            
+        }).disposed(by: self.disposeBag)
 
-            if self.firstVCBeginLaunchDidAppear == false {
+
+        (self.vcListDictionary as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
+
+            if self.firstvcListDictionaryDidAppear == false {
                 return
             }
-            self.firstVCBeginLaunchDidAppear = false
+            self.firstvcListDictionaryDidAppear = false
             
-            self.tableView = self.vcBeginLaunch.tableView
-            
-            //self.dateSourseBeginLaunch = DataSourceBeginLaunch.init(userName: self.userName)
-            
-            self.behaviorSubjectData = self.dateSourseBeginLaunch.behaviorSubject
+            self.tableView = self.vcListDictionary.tableView
 
-            _ = self.behaviorSubjectData.bind(to: self.tableView.rx.items(cellIdentifier: "cellBeginLaunch", cellType: TableViewCellBeginLaunch.self)){row, dictionary, cell in
+            _ = self.dateSourseDictionaryForUser.behaviorSubject.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
                 switch row{
                 case 0:
                     let myShadow = NSShadow()
@@ -126,19 +118,20 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
 
             }
 
-            self.vcBeginLaunch.barButtonAddDictionary.rx.tap
+            self.vcListDictionary.barButtonAddDictionary.rx.tap
                 .subscribe(onNext: {
-                    _ = self.coordinatorBeginLaunch!.launchCoordinatorMakeNewDictionary(userName: self.userName)
+                    _ = self.coordinatorListDictionary!.launchCoordinatorMakeNewDictionary(userName: self.userName)
             }).disposed(by: self.disposeBag)
 
-            self.vcBeginLaunch.barButtonEdit.rx.tap
+            self.vcListDictionary.barButtonEdit.rx.tap
                 .subscribe(onNext: {
                     self.tableView.setEditing(!self.tableView.isEditing, animated: true)
+                    //if self.tableView.isEditing {self.tableView}
                 }).disposed(by: self.disposeBag)
 
             self.tableView.rx.itemDeleted.asDriver().drive(onNext: { indexPath in
                 if indexPath.row != 0 {
-                    self.dateSourseBeginLaunch.deleteDictionary(numberDictionary: indexPath.row - 1)
+                    self.dateSourseDictionaryForUser.deleteDictionary(numberDictionary: indexPath.row - 1)
                 }
             }).disposed(by: self.disposeBag)
 
@@ -151,7 +144,12 @@ class ModelViewBeginLaunch : NSObject, ModelView, UITableViewDelegate{
                 })
                 .do(onNext: { indexPath in
                     self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCCellSelected
-                    _ = self.coordinatorBeginLaunch?.launchCoordinatorChangeTitleDictionary(dictionaryObjectChangeTitle: self.dateSourseBeginLaunch.getDictionariesForUserWithInsertFirstEmpty()[indexPath.row], userName: self.userName)
+                    self.dictionaryObject = self.dateSourseDictionaryForUser.getDictionariesForUserWithInsertFirstEmpty()[indexPath.row]
+                    switch self.tableView.isEditing{
+                    case true:  _ = self.coordinatorListDictionary?.launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: self.dictionaryObject, userName: self.userName)
+                    case false: self.coordinatorListDictionary!.openDictionary(dictionaryObject: self.dictionaryObject)
+                    }
+
                 })
                 .drive(onNext: { indexPath in
                     UIView.animate(withDuration: 0.5) {

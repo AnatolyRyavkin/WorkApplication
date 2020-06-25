@@ -10,17 +10,19 @@ import Foundation
 import RxSwift
 
 
-class ModelViewLogIn {
+class ModelViewLogIn{
+
+    weak var coordinatorLogIn: CoordinatorLogIn!
 
     private let disposeBag = DisposeBag()
     var loginFromTextField: String!
-    weak var vcLogIn: LoginViewController!
+    weak var vcLogIn: ViewControllerLogin!
     var arrayUserName: [String]
     var behaviorSubjectForPicker: BehaviorSubject<Array<String>>
-    var publishSubjectUserLaunchOld = PublishSubject<String>()
-    var publishSubjectUserLaunchNew = PublishSubject<String>()
+    var publishSubjectLaunchUserOld = PublishSubject<String>()
+    var publishSubjectLaunchUserNew = PublishSubject<String>()
 
-    var firstVCLogInDidAppear = true
+    var firstLaunchVCLogInDidAppear = true
 
     public static let Shared = ModelViewLogIn()
 
@@ -45,10 +47,10 @@ class ModelViewLogIn {
 
         (vcLog as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
 
-            if !self.firstVCLogInDidAppear {
+            if !self.firstLaunchVCLogInDidAppear {
                 return
             }
-            self.firstVCLogInDidAppear = false
+            self.firstLaunchVCLogInDidAppear = false
 
             //MARK- Enable Button Next
 
@@ -66,7 +68,7 @@ class ModelViewLogIn {
 
             self.vcLogIn.textFieldUsername.rx.text
                 .map { (string) -> Bool in
-                    let isThreeCharts = !(string?.count ?? 0 < 3)
+                    let isThreeCharts = !(string?.count ?? 0 < 1)
                     if isThreeCharts{
                         self.vcLogIn.buttonNext.backgroundColor = ColorScheme.Shared.colorLVCButtonNextActive
                         self.loginFromTextField = string
@@ -83,31 +85,30 @@ class ModelViewLogIn {
 
             self.vcLogIn.buttonNext.rx.tap.asDriver().drive(onNext: { _ in
                 let userName = UserDefaults.standard.readLogged(forKey: self.loginFromTextField)
-                var coordinatorBeginLaunch: CoordinatorBeginLaunch? = nil
-                Observable.from(AppCoordinator.arrayCoordinators).subscribe(onNext: {coordinator in
-                    if coordinator is CoordinatorBeginLaunch {
-                        coordinatorBeginLaunch = coordinator as? CoordinatorBeginLaunch
+                var coordinatorListDictionary: CoordinatorListDictionary? = nil
+                Observable.from(CoordinatorApp.arrayCoordinators).subscribe(onNext: {coordinator in
+                    if coordinator is CoordinatorListDictionary {
+                        coordinatorListDictionary = coordinator as? CoordinatorListDictionary
                     }
                 }).disposed(by: self.disposeBag)
 
-                if coordinatorBeginLaunch?.userName == userName && userName != nil{
+                if coordinatorListDictionary?.userName == userName && userName != nil{
                     guard let nc = self.vcLogIn.navigationController else {
                         return
                     }
-                    nc.pushViewController(coordinatorBeginLaunch!.vcBeginLaunch, animated: true)
+                    nc.pushViewController(coordinatorListDictionary!.vcListDictionary, animated: true)
                     return
                 }
 
-                if coordinatorBeginLaunch != nil {
-                    AppCoordinator.arrayCoordinators.removeAll{
-                        $0 is CoordinatorBeginLaunch
+                if coordinatorListDictionary != nil {
+                    CoordinatorApp.arrayCoordinators.removeAll{
+                        $0 is CoordinatorListDictionary
                     }
                 }
-
                 if userName != nil {
-                    self.publishSubjectUserLaunchOld.onNext(userName!)
+                    self.publishSubjectLaunchUserOld.onNext(userName!)
                 }else{
-                    self.publishSubjectUserLaunchNew.onNext(self.loginFromTextField)
+                    self.publishSubjectLaunchUserNew.onNext(self.loginFromTextField)
                 }
             }).disposed(by: self.disposeBag)
 
@@ -150,7 +151,7 @@ class ModelViewLogIn {
             UserDefaults.standard.setLoggedIn(userName: newUser)
             self.arrayUserName.append(newUser)
             self.behaviorSubjectForPicker.onNext(self.arrayUserName)
-            self.publishSubjectUserLaunchOld.onNext(newUser)
+            self.publishSubjectLaunchUserOld.onNext(newUser)
         }))
         alert.addAction(UIAlertAction(title: "Назад", style: UIAlertAction.Style.cancel, handler: nil))
         self.vcLogIn.present(alert, animated: true, completion: nil)

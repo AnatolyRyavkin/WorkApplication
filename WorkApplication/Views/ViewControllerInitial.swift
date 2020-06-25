@@ -10,15 +10,15 @@ import UIKit
 import Foundation
 
 
-class InitialViewController: UIViewController {
+class ViewControllerInitial: UIViewController {
 
     deinit {
-        print("deinit InitialViewController")
+        print("deinit ViewControllerInitial")
     }
 
     convenience init() {
         self.init(nibName:nil, bundle:nil)
-        print("init InitialViewController")
+        print("init ViewControllerInitial")
     }
 
     override func viewDidLoad() {
@@ -35,22 +35,4 @@ class InitialViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
 }
-
-//class ViewController: UIViewController {
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        let sourceDataItems = DataItems.Shared.arrayItems
-//
-//        let modelRealm = RealmModel()
-//        do{
-//            try modelRealm.getBaseShared()
-//        }catch{
-//            print(error.localizedDescription)
-//            return
-//        }
-//
-//    }
-//}
 

@@ -8,21 +8,22 @@
 
 import UIKit
 
-class ChangeTitleDictionaryViewController: UIViewController {
+class ViewControllerRename: UIViewController {
 
+    @IBOutlet weak var buttonSaveBack: UIButton!
     @IBOutlet weak var textFieldOldName: UITextField!
     @IBOutlet weak var textFieldNewName: UITextField!
-    @IBOutlet weak var buttonSave: UIButton!
+    @IBOutlet weak var buttonSaveNext: UIButton!
     @IBOutlet weak var labelEditNameDictionary: UILabel!
     @IBOutlet weak var labelOldName: UILabel!
     @IBOutlet weak var ladelNewLabel: UILabel!
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        print("init ChangeTitleDictionaryViewController",self)
+        print("init ViewControllerRename",self)
     }
     deinit {
-        print("deinit ChangeTitleDictionaryViewController",self)
+        print("deinit ViewControllerRename",self)
     }
 
     override func viewDidLoad() {
@@ -40,9 +41,13 @@ class ChangeTitleDictionaryViewController: UIViewController {
         self.textFieldNewName.backgroundColor = ColorScheme.Shared.colorNDBackgroundInputTitle
         self.textFieldNewName.textColor = ColorScheme.Shared.colorNDBInputTitle
 
-        self.buttonSave.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
-        self.buttonSave.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
-        self.buttonSave.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
+        self.buttonSaveNext.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
+        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
+        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
+
+        self.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
+        self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
+        self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
 
     }
 

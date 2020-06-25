@@ -18,15 +18,16 @@ class CoordinatorLogIn: CoordinatorProtocol{
     var nc: UINavigationController!
     var observerOldUser: AnyObserver<String>!
     var observerNewUser: AnyObserver<String>!
-    var vcLogIn: LoginViewController
+    var vcLogIn: ViewControllerLogin
 
 
     public static let Shared = CoordinatorLogIn()
 
     private init(){
-        self.vcLogIn = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcLogIn") as! LoginViewController
+        self.vcLogIn = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcLogIn") as! ViewControllerLogin
         self.modelViewLogIn.vcLogIn = self.vcLogIn
-        AppCoordinator.addCoordinatorToArray(coor: self)
+        self.modelViewLogIn.coordinatorLogIn = self
+        CoordinatorApp.addCoordinatorToArray(coor: self)
         print("init CoordinatorLogIn")
     }
 
@@ -43,8 +44,8 @@ class CoordinatorLogIn: CoordinatorProtocol{
             switch event{
             case .next:
                 guard let string = event.element else{ return }
-                let coordinatorBeginLaunch = CoordinatorBeginLaunch.init(userName: string)
-            _ = self.coordinate(to: coordinatorBeginLaunch, from: self.nc)
+                let coordinatorListDictionary = CoordinatorListDictionary.init(userName: string)
+            _ = self.coordinate(to: coordinatorListDictionary, from: self.nc)
             case .error(_):
                 print(event.error!)
             case .completed:
@@ -64,8 +65,8 @@ class CoordinatorLogIn: CoordinatorProtocol{
             }
         }
 
-        self.modelViewLogIn.publishSubjectUserLaunchOld.subscribe(self.observerOldUser).disposed(by: self.disposeBag)
-        self.modelViewLogIn.publishSubjectUserLaunchNew.subscribe(self.observerNewUser).disposed(by: self.disposeBag)
+        self.modelViewLogIn.publishSubjectLaunchUserOld.subscribe(self.observerOldUser).disposed(by: self.disposeBag)
+        self.modelViewLogIn.publishSubjectLaunchUserNew.subscribe(self.observerNewUser).disposed(by: self.disposeBag)
         
         nc.pushViewController(self.vcLogIn, animated: true)
         return Observable.empty()

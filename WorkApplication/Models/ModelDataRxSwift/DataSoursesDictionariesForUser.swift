@@ -1,5 +1,5 @@
 //
-//  DataSoursesBeginLaunch.swift
+//  DataSourceDictionariesForUser.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 16.05.2020.
@@ -12,9 +12,9 @@ import RxCocoa
 import RxSwift
 import RealmSwift
 
-class DataSourceBeginLaunch {
+class DataSourceDictionariesForUser {
 
-    static var dataSourceBeginLaunchForUser: DataSourceBeginLaunch?
+    static var dataSourceDictionariesForUser: DataSourceDictionariesForUser?
 
     var modelRealmMainBase: ModelRealmBase = ModelRealmBase.shared
     var modelRealmUser: ModelRealmUser = ModelRealmUser.shared
@@ -41,12 +41,12 @@ class DataSourceBeginLaunch {
         }
 
         self.behaviorSubject = BehaviorSubject.init(value: self.getDictionariesForUserWithInsertFirstEmpty())
-        DataSourceBeginLaunch.dataSourceBeginLaunchForUser = self
-        print("init DataSourceBeginLaunch",self)
+        DataSourceDictionariesForUser.dataSourceDictionariesForUser = self
+        print("init DataSourceDictionariesForUser",self)
     }
 
     deinit {
-        print("deinit DataSourceBeginLaunch",self)
+        print("deinit DataSourceDictionariesForUser",self)
     }
     
     func appendDictionary(title: String, type: DictionaryObject.EnumDictionaryType) throws {
@@ -93,6 +93,10 @@ class DataSourceBeginLaunch {
         let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
         let result: Array<DictionaryObject> = Array<DictionaryObject>(resultDictionaries.filter(predicate))
         return result
+    }
+
+    func getLastDictionaryForUser() -> DictionaryObject? {
+        return (self.modelRealmUser.realmUser.objects(DictionaryObject.self)).last
     }
 
 }

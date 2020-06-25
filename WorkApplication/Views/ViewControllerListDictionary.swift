@@ -1,5 +1,5 @@
 //
-//  BeginLaunchViewController.swift
+//  ViewControllerListDictionary.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 16.05.2020.
@@ -8,21 +8,21 @@
 
 import UIKit
 
-class BeginLaunchViewController: UIViewController {
+class ViewControllerListDictionary: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
     var barButtonAddDictionary: UIBarButtonItem!
-    var barButtonCancel: UIBarButtonItem!
+    //var barButtonCancel: UIBarButtonItem!
     var barButtonEdit: UIBarButtonItem!
     //var barButtonBackSistem: UIBarButtonItem!
 
    required init?(coder: NSCoder) {
         super.init(coder: coder)
-        print("init BeginLaunchViewController")
+        print("init ViewControllerListDictionary")
     }
     deinit {
-        print("deinit BeginLaunchViewController")
+        print("deinit ViewControllerListDictionary")
     }
 
     override func viewDidLoad() {
@@ -31,6 +31,7 @@ class BeginLaunchViewController: UIViewController {
         self.view.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
 
         self.tableView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+        self.tableView.allowsSelectionDuringEditing = true
 
         if self.navigationController != nil {
 
@@ -42,7 +43,7 @@ class BeginLaunchViewController: UIViewController {
             self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
             
         }
-        let headerLabel = HeaderForTableViewMyDictionary.init(frame: CGRect.zero)
+        let headerLabel = HeaderForTableViewListDictionaries.init(frame: CGRect.zero)
         headerLabel.configure(text: "My Dictionaries", sizeForFont: 20, color: ColorScheme.Shared.colorBLCTextTitle)
         self.tableView.tableHeaderView = headerLabel
         self.tableView.tableHeaderView?.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable

@@ -10,8 +10,7 @@ import UIKit
 
 class ViewControllerNewDictionary: UIViewController {
 
-
-    @IBOutlet weak var textFieldImputTitle: UITextField!
+    @IBOutlet weak var textFieldImputNameDictionary: UITextField!
     @IBOutlet weak var segmentTypeDictionary: UISegmentedControl!
     @IBOutlet weak var buttonSaveBack: UIButton!
     @IBOutlet weak var buttonSaveNext: UIButton!
@@ -36,8 +35,12 @@ class ViewControllerNewDictionary: UIViewController {
         self.ladelType.textColor = ColorScheme.Shared.colorNDTitlesText
         self.labelYourNewDictionary.textColor = ColorScheme.Shared.colorNDTitlesText
 
-        self.textFieldImputTitle.backgroundColor = ColorScheme.Shared.colorNDBackgroundInputTitle
-        self.textFieldImputTitle.textColor = ColorScheme.Shared.colorNDBInputTitle
+        self.textFieldImputNameDictionary.backgroundColor = ColorScheme.Shared.colorNDBackgroundInputTitle
+        self.textFieldImputNameDictionary.textColor = ColorScheme.Shared.colorNDBInputTitle
+
+        self.buttonSaveNext.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
+        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
+        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
 
         self.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
         self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)

@@ -12,7 +12,7 @@ import RxSwift
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var coordinatorApp = AppCoordinator.Shared
+    var coordinatorApp = CoordinatorApp.Shared
     private let disposeBag = DisposeBag()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow.init()
         window?.windowScene = windowScene
         window?.backgroundColor = UIColor.white
-        let vc = InitialViewController.init()
+        let vc = ViewControllerInitial.init()
         let nc = UINavigationController.init(rootViewController: vc)
         window?.rootViewController = nc
         coordinatorApp.start(from: nc).subscribe({ _ in

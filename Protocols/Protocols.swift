@@ -11,9 +11,11 @@ import Foundation
 import UIKit
 import RxSwift
 
-protocol ModelView {
-    func binding()
-}
+//protocol ModelViewProtocol {
+//    associatedtype T: CoordinatorProtocol
+//    var coordinatorSelf: T? { get set }
+//    func binding()
+//}
 
 protocol ProtocolExistTableView {
     var tableView: UITableView! { get set }

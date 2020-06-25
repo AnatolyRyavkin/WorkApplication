@@ -1,5 +1,5 @@
 //
-//  AppCoordinator.swift
+//  CoordinatorApp.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 14.05.2020.
@@ -10,10 +10,10 @@ import Foundation
 import RxSwift
 import UIKit
 
-class AppCoordinator: CoordinatorProtocol {
+class CoordinatorApp: CoordinatorProtocol {
 
     static var arrayCoordinators: Array<AnyObject> = Array<AnyObject>()
-    public static let Shared = AppCoordinator()
+    public static let Shared = CoordinatorApp()
     private let disposeBag = DisposeBag()
     var nc: UINavigationController!
 
@@ -26,14 +26,14 @@ class AppCoordinator: CoordinatorProtocol {
     }
 
     static func addCoordinatorToArray(coor: AnyObject){
-        AppCoordinator.arrayCoordinators.append(coor)
+        CoordinatorApp.arrayCoordinators.append(coor)
     }
 
     func start(from nc: UINavigationController) -> Observable<Void> {
         self.nc = nc
         if let userLast = UserDefaults.standard.getLastLoggedIn() {
-            let coordinatorBeginLaunch = CoordinatorBeginLaunch.init(userName: userLast)
-            self.coordinate(to: coordinatorBeginLaunch, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)
+            let coordinatorListDictionary = CoordinatorListDictionary.init(userName: userLast)
+            self.coordinate(to: coordinatorListDictionary, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)
         }else{
             let coordinatorLogIn = CoordinatorLogIn.Shared
             self.coordinate(to: coordinatorLogIn, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)
