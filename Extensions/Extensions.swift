@@ -46,8 +46,15 @@ extension Reactive where Base == UIViewController{
     var viewDidDisappear: ControlEvent<Void> {
         return controlEvent(for: #selector(UIViewController.viewDidDisappear))
     }
+}
 
-
+extension Reactive where Base == UITableView{
+    public var isEdit: ControlEvent<Bool>{
+        return ControlEvent.init(events: sentMessage(#selector(UITableView.setEditing))
+            .map{arrayAnyNewMeaningAndOldMeaning in
+                let arrayIntNewMeaningAndOldMeaning = arrayAnyNewMeaningAndOldMeaning as! Array<Int>
+                return (arrayIntNewMeaningAndOldMeaning[0] == 0) ? false : true })
+    }
 }
 
 extension Reactive where Base == UITableView{
@@ -79,7 +86,19 @@ extension UIView{
     }
 }
 
+//MARK- UserDefaults
+
 extension UserDefaults{
+
+    func setKeyAPIYandexDictionary(key: String) {
+        if key != "" {
+            set(key, forKey: key)
+        }
+    }
+
+    func getKeyAPIYandexDictionary() -> (String?) {
+        return string(forKey: "key")
+    }
 
     func setLoggedIn(userName: String) {
         if(userName != ""){
@@ -154,6 +173,18 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 
+}
+
+//MARK- HTTPURLResponse
+
+public extension HTTPURLResponse {
+    func valueForHeaderField(_ headerField: String) -> String? {
+        if #available(iOS 13.0, *) {
+            return value(forHTTPHeaderField: headerField)
+        } else {
+            return (allHeaderFields as NSDictionary)[headerField] as? String
+        }
+    }
 }
 
 

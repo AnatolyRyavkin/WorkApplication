@@ -88,8 +88,13 @@ class ModelViewRenameDictionary{
             self.vcRenameDictionary.buttonSaveNext.rx.tap.asDriver()
             .drive(onNext: {
                 try! self.dateSourseDictionaryForUser.changeNameDictionary(dictionaryObject: self.dictionaryObjectRename, newName: self.textNameDictionaryInput)
-                self.nc?.popViewController(animated: true)
                 self.coordinatorRenameDictionary!.openDictionary(dictionaryObject: self.dictionaryObjectRename)
+                CoordinatorApp.arrayCoordinators.removeAll{
+                    $0 is CoordinatorRenameDictionary
+                }
+                self.nc?.viewControllers.removeAll{
+                    $0 is ViewControllerRename
+                }
             }).disposed(by: self.disposeBag)
 
         }).disposed(by: self.disposeBag)

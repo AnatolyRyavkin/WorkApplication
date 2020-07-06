@@ -107,8 +107,17 @@ class ModelViewNewDictionary{
             self.vcNewDictionary.buttonSaveNext.rx.tap.asDriver()
             .drive(onNext: {
                 try! self.dateSourseDictionaryForUser.appendDictionary(title: self.textNameDictionaryInput, type: self.typeDictionary)
-                self.nc?.popViewController(animated: true)
-                self.coordinatorNewDictionary!.openDictionary(dictionaryObject: self.dateSourseDictionaryForUser.getLastDictionaryForUser()!)
+                guard let dictionary = self.dateSourseDictionaryForUser.getLastDictionaryForUser() else {
+                    print("dictionary = nil")
+                    return
+                }
+                self.coordinatorNewDictionary!.openDictionary(dictionaryObject: dictionary)
+                CoordinatorApp.arrayCoordinators.removeAll{
+                    $0 is CoordinatorNewDictionary
+                }
+                self.nc?.viewControllers.removeAll{
+                    $0 is ViewControllerNewDictionary
+                }
             }).disposed(by: self.disposeBag)
             
         }).disposed(by: self.disposeBag)

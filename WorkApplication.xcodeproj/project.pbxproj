@@ -11,12 +11,13 @@
 		FD0A9B6124675227001FA785 /* WorkVariant.txt in Resources */ = {isa = PBXBuildFile; fileRef = FD0A9B6024675227001FA785 /* WorkVariant.txt */; };
 		FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EBE2464043B0090A002 /* AppDelegate.swift */; };
 		FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EC02464043B0090A002 /* SceneDelegate.swift */; };
-		FD174EC32464043B0090A002 /* ViewControllerInitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EC22464043B0090A002 /* ViewControllerInitial.swift */; };
 		FD174EC62464043B0090A002 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC42464043B0090A002 /* Main.storyboard */; };
 		FD174EC82464043D0090A002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC72464043D0090A002 /* Assets.xcassets */; };
 		FD174ECB2464043D0090A002 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC92464043D0090A002 /* LaunchScreen.storyboard */; };
 		FD174EE924641AE40090A002 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EE824641AE40090A002 /* Item.swift */; };
 		FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EEA24645A8F0090A002 /* DataItems.swift */; };
+		FD2B5CBF24B38E76001099CF /* ResponseWithToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2B5CBE24B38E76001099CF /* ResponseWithToken.swift */; };
+		FD54A76E24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54A76D24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift */; };
 		FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */; };
@@ -24,6 +25,12 @@
 		FD67A96F24A0769800FF210A /* CoordinatorRenameDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A96E24A0769800FF210A /* CoordinatorRenameDictionary.swift */; };
 		FD67A97124A078EB00FF210A /* ModelViewRenameDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97024A078EB00FF210A /* ModelViewRenameDictionary.swift */; };
 		FD67A97324A0899500FF210A /* ViewControllerRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97224A0899500FF210A /* ViewControllerRename.swift */; };
+		FD6E9CF424A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E9CF324A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift */; };
+		FD6E9CF624A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */; };
+		FD72713424AB3FA7007917BD /* ParsingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713324AB3FA7007917BD /* ParsingResponse.swift */; };
+		FD72713624AB4171007917BD /* CheckKeyAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713524AB4171007917BD /* CheckKeyAPIYandex.swift */; };
+		FD72713C24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713B24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift */; };
+		FD72713E24AD2FEE007917BD /* GetKeyAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713D24AD2FEE007917BD /* GetKeyAPIYandex.swift */; };
 		FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79E7902492D61300661CCF /* ModelRealmBase.swift */; };
 		FD7B9A1424A2043E00B421DA /* ViewControllerDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */; };
 		FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */; };
@@ -33,6 +40,8 @@
 		FD97B1F42495664600E0E28A /* ModelViewNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */; };
 		FD97B1F6249566D800E0E28A /* ViewControllerNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */; };
 		FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9FBC42246868620058F9A8 /* WordObject.swift */; };
+		FDA4C9D924A7248D00815726 /* ModelSectionDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */; };
+		FDA4C9DB24A7AE7700815726 /* DataSourceWordsForDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4C9DA24A7AE7700815726 /* DataSourceWordsForDictionary.swift */; };
 		FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */; };
 		FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */; };
 		FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C34246FD491008569B5 /* DictionaryObject.swift */; };
@@ -60,18 +69,25 @@
 		FD174EBB2464043B0090A002 /* WorkApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD174EBE2464043B0090A002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD174EC02464043B0090A002 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FD174EC22464043B0090A002 /* ViewControllerInitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerInitial.swift; sourceTree = "<group>"; };
 		FD174EC52464043B0090A002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD174EC72464043D0090A002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD174ECA2464043D0090A002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD174ECC2464043D0090A002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD174EE824641AE40090A002 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FD174EEA24645A8F0090A002 /* DataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItems.swift; sourceTree = "<group>"; };
+		FD2B5CBE24B38E76001099CF /* ResponseWithToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseWithToken.swift; sourceTree = "<group>"; };
+		FD54A76D24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorOAuthAPIYandex.swift; sourceTree = "<group>"; };
 		FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewLogIn.swift; sourceTree = "<group>"; };
 		FD67A96C249DFA4C00FF210A /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		FD67A96E24A0769800FF210A /* CoordinatorRenameDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorRenameDictionary.swift; sourceTree = "<group>"; };
 		FD67A97024A078EB00FF210A /* ModelViewRenameDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewRenameDictionary.swift; sourceTree = "<group>"; };
 		FD67A97224A0899500FF210A /* ViewControllerRename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerRename.swift; sourceTree = "<group>"; };
+		FD6E9CF324A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewAuthAPIYandexDictionary.swift; sourceTree = "<group>"; };
+		FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsAPIYandexDictionary.swift; sourceTree = "<group>"; };
+		FD72713324AB3FA7007917BD /* ParsingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingResponse.swift; sourceTree = "<group>"; };
+		FD72713524AB4171007917BD /* CheckKeyAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckKeyAPIYandex.swift; sourceTree = "<group>"; };
+		FD72713B24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCheckAuthAPIYandexDictionary.swift; sourceTree = "<group>"; };
+		FD72713D24AD2FEE007917BD /* GetKeyAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKeyAPIYandex.swift; sourceTree = "<group>"; };
 		FD79E7902492D61300661CCF /* ModelRealmBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmBase.swift; sourceTree = "<group>"; };
 		FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDictionary.swift; sourceTree = "<group>"; };
 		FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderForTableViewListDictionaries.swift; sourceTree = "<group>"; };
@@ -80,6 +96,8 @@
 		FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewNewDictionary.swift; sourceTree = "<group>"; };
 		FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerNewDictionary.swift; sourceTree = "<group>"; };
 		FD9FBC42246868620058F9A8 /* WordObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordObject.swift; sourceTree = "<group>"; };
+		FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSectionDictionary.swift; sourceTree = "<group>"; };
+		FDA4C9DA24A7AE7700815726 /* DataSourceWordsForDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceWordsForDictionary.swift; sourceTree = "<group>"; };
 		FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RusMeaningObject.swift; sourceTree = "<group>"; };
 		FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleForRusMeaningObject.swift; sourceTree = "<group>"; };
 		FDAC4C34246FD491008569B5 /* DictionaryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryObject.swift; sourceTree = "<group>"; };
@@ -168,6 +186,7 @@
 		FD174ED2246404690090A002 /* MV */ = {
 			isa = PBXGroup;
 			children = (
+				FD6E9CF324A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift */,
 				FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */,
 				FD67A97024A078EB00FF210A /* ModelViewRenameDictionary.swift */,
 				FDAC4C3C247010A3008569B5 /* ModelViewListDictionary.swift */,
@@ -180,7 +199,7 @@
 		FD174ED3246404A30090A002 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FD174EC22464043B0090A002 /* ViewControllerInitial.swift */,
+				FD72713B24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift */,
 				FD67A97224A0899500FF210A /* ViewControllerRename.swift */,
 				FDE60B01246DA27D00D0A0BB /* ViewControllerLogin.swift */,
 				FDAC4C3A246FF8EE008569B5 /* ViewControllerListDictionary.swift */,
@@ -196,10 +215,10 @@
 		FD174ED5246404B80090A002 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FD174EE32464102A0090A002 /* ModelDataRxSwift */,
+				FD72713224AB3DE4007917BD /* ModelForAPIYandexDictionary */,
+				FD174EE32464102A0090A002 /* ModelDataDictionariesForUser */,
 				FDAC4C2F246FD2DB008569B5 /* ModelDataRealmUser */,
 				FD174EE2246410170090A002 /* ModelDataRealmShared */,
-				FD174EDD24640E630090A002 /* DataSourceYandex */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				FDE60AF5246D962100D0A0BB /* CoordinatorApp.swift */,
+				FD54A76D24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift */,
 				FDE60AF7246D965C00D0A0BB /* CoordinatorLogIn.swift */,
 				FDE60AFB246D969E00D0A0BB /* CoordinatorListDictionary.swift */,
 				FD97B1F12495653900E0E28A /* CoordinatorNewDictionary.swift */,
@@ -243,13 +263,6 @@
 				FDBAB72824A53EDB008748D0 /* CoordinatorDictionary.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		FD174EDD24640E630090A002 /* DataSourceYandex */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataSourceYandex;
 			sourceTree = "<group>";
 		};
 		FD174EE2246410170090A002 /* ModelDataRealmShared */ = {
@@ -263,12 +276,34 @@
 			path = ModelDataRealmShared;
 			sourceTree = "<group>";
 		};
-		FD174EE32464102A0090A002 /* ModelDataRxSwift */ = {
+		FD174EE32464102A0090A002 /* ModelDataDictionariesForUser */ = {
 			isa = PBXGroup;
 			children = (
 				FDAC4C3E24701DE9008569B5 /* DataSoursesDictionariesForUser.swift */,
+				FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */,
+				FDA4C9DA24A7AE7700815726 /* DataSourceWordsForDictionary.swift */,
 			);
-			path = ModelDataRxSwift;
+			path = ModelDataDictionariesForUser;
+			sourceTree = "<group>";
+		};
+		FD6E9CF224A9E045006183F1 /* NetworkingForKey */ = {
+			isa = PBXGroup;
+			children = (
+				FD72713524AB4171007917BD /* CheckKeyAPIYandex.swift */,
+				FD72713D24AD2FEE007917BD /* GetKeyAPIYandex.swift */,
+			);
+			path = NetworkingForKey;
+			sourceTree = "<group>";
+		};
+		FD72713224AB3DE4007917BD /* ModelForAPIYandexDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				FD72713324AB3FA7007917BD /* ParsingResponse.swift */,
+				FD2B5CBE24B38E76001099CF /* ResponseWithToken.swift */,
+				FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */,
+				FD6E9CF224A9E045006183F1 /* NetworkingForKey */,
+			);
+			path = ModelForAPIYandexDictionary;
 			sourceTree = "<group>";
 		};
 		FDAC4C2F246FD2DB008569B5 /* ModelDataRealmUser */ = {
@@ -411,6 +446,8 @@
 			files = (
 				FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */,
 				FD97B1F42495664600E0E28A /* ModelViewNewDictionary.swift in Sources */,
+				FDA4C9DB24A7AE7700815726 /* DataSourceWordsForDictionary.swift in Sources */,
+				FD72713624AB4171007917BD /* CheckKeyAPIYandex.swift in Sources */,
 				FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */,
 				FD7B9A1424A2043E00B421DA /* ViewControllerDictionary.swift in Sources */,
 				FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */,
@@ -418,14 +455,17 @@
 				FDAC4C3B246FF8EE008569B5 /* ViewControllerListDictionary.swift in Sources */,
 				FD97B1F6249566D800E0E28A /* ViewControllerNewDictionary.swift in Sources */,
 				FDE60B00246D998E00D0A0BB /* Extensions.swift in Sources */,
+				FD72713C24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift in Sources */,
 				FD97B1F22495653900E0E28A /* CoordinatorNewDictionary.swift in Sources */,
 				FDE60B02246DA27D00D0A0BB /* ViewControllerLogin.swift in Sources */,
 				FDAC4C4324707B7E008569B5 /* TableViewCellListDictionary.swift in Sources */,
 				FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */,
+				FD72713E24AD2FEE007917BD /* GetKeyAPIYandex.swift in Sources */,
 				FDE60AFC246D969E00D0A0BB /* CoordinatorListDictionary.swift in Sources */,
 				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,
 				FDE60AF8246D965C00D0A0BB /* CoordinatorLogIn.swift in Sources */,
 				FD67A96F24A0769800FF210A /* CoordinatorRenameDictionary.swift in Sources */,
+				FD54A76E24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift in Sources */,
 				FD67A97324A0899500FF210A /* ViewControllerRename.swift in Sources */,
 				FDBAB72B24A53FE0008748D0 /* ModelViewDictionary.swift in Sources */,
 				FDBAB72924A53EDB008748D0 /* CoordinatorDictionary.swift in Sources */,
@@ -434,7 +474,7 @@
 				FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */,
 				FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */,
 				FD174EE924641AE40090A002 /* Item.swift in Sources */,
-				FD174EC32464043B0090A002 /* ViewControllerInitial.swift in Sources */,
+				FD6E9CF624A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift in Sources */,
 				FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */,
 				FDE60AF6246D962100D0A0BB /* CoordinatorApp.swift in Sources */,
 				FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */,
@@ -442,7 +482,11 @@
 				FDAC4C3D247010A3008569B5 /* ModelViewListDictionary.swift in Sources */,
 				FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */,
 				FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */,
+				FD2B5CBF24B38E76001099CF /* ResponseWithToken.swift in Sources */,
+				FD6E9CF424A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift in Sources */,
+				FDA4C9D924A7248D00815726 /* ModelSectionDictionary.swift in Sources */,
 				FDAC4C3F24701DE9008569B5 /* DataSoursesDictionariesForUser.swift in Sources */,
+				FD72713424AB3FA7007917BD /* ParsingResponse.swift in Sources */,
 				FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */,
 				FDE60AF4246D95A500D0A0BB /* Protocols.swift in Sources */,
 			);
@@ -598,7 +642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AnatatolyRyavkin.WorkApplication;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.toryavkin.WorkApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUGPPRINT";
 				SWIFT_VERSION = 5.0;
@@ -620,7 +664,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AnatatolyRyavkin.WorkApplication;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.toryavkin.WorkApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

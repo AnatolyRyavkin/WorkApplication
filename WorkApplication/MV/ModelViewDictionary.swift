@@ -44,11 +44,14 @@ class ModelViewDictionary {
     }
 
     func binding(){
-
+        
         (self.vcDictionary as UIViewController).rx.viewWillDisappear.asDriver().drive(onNext: { _ in
-//            CoordinatorApp.arrayCoordinators.removeAll {
-//                $0 is CoordinatorRenameDictionary
-//            }
+            self.nc?.viewControllers.removeAll{
+                $0 is ViewControllerDictionary
+            }
+            CoordinatorApp.arrayCoordinators.removeAll{
+                $0 is CoordinatorDictionary
+            }
         }).disposed(by: self.disposeBag)
 
         (self.vcDictionary as UIViewController).rx.viewDidLoad.asDriver().drive(onNext: { _ in
@@ -57,8 +60,5 @@ class ModelViewDictionary {
 
         (self.vcDictionary as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
         }).disposed(by: self.disposeBag)
-
     }
-
-    
 }

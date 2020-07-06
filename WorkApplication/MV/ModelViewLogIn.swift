@@ -27,8 +27,11 @@ class ModelViewLogIn{
     public static let Shared = ModelViewLogIn()
 
     private init(){
+
+        
         self.arrayUserName = UserDefaults.standard.object(forKey: "allUsers") as? [String] ?? ["Default profile"]
         print(self.arrayUserName)
+
         self.behaviorSubjectForPicker = BehaviorSubject.init(value: self.arrayUserName)
         print("init ModelViewLogIn")
     }

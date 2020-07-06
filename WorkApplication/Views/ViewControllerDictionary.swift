@@ -10,6 +10,8 @@ import UIKit
 
 class ViewControllerDictionary: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print("init ViewControllerDictionary",self)
@@ -20,7 +22,10 @@ class ViewControllerDictionary: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
     }
 }

@@ -63,6 +63,10 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
             
             self.tableView = self.vcListDictionary.tableView
 
+            self.tableView.rx.isEdit.subscribe(onNext: { isEdit in
+                self.vcListDictionary.barButtonEdit.tintColor = (isEdit) ? UIColor.red : ColorScheme.Shared.cFFE69C
+            }).disposed(by: self.disposeBag)
+
             _ = self.dateSourseDictionaryForUser.behaviorSubject.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
                 switch row{
                 case 0:
