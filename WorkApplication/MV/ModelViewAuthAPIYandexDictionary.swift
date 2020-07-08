@@ -10,24 +10,27 @@ import Foundation
 import UIKit
 import RxSwift
 
+let keyAPIYandexDictionary = "dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb"
+
 class ModelViewAuthAPIYandexDictionary { //}: NSObject, WKNavigationDelegate{
 
-    var keyAPIYandexDictionary: String?
-    var validKeyAPIYandexBehaviorSubject: BehaviorSubject<StatusKey>!
+    var tokenAPIYandexDictionary: String?
+    var validTokenAPIYandexBehaviorSubject: BehaviorSubject<StatusToken>!
     let disposeBag = DisposeBag.init()
-    var responseWithKeyPublishSubject = PublishSubject<HTTPURLResponse>()
     weak var vcCheckAuthAPIYandex: ViewControllerCheckAuthAPIYandexDictionary!
     weak var coordinatorOAuthAPIYandex: CoordinatorOAuthAPIYandex!
-    var getKeyAPIYandex: GetKeyAPIYandex!
+    var getTokenAPIYandex: GetTokenAPIYandex!
 
     convenience init(vcCheckAuthAPIYandex: ViewControllerCheckAuthAPIYandexDictionary, coordinatorOAuthAPIYandex: CoordinatorOAuthAPIYandex) {
         self.init()
         self.vcCheckAuthAPIYandex = vcCheckAuthAPIYandex
         self.coordinatorOAuthAPIYandex = coordinatorOAuthAPIYandex
-        self.keyAPIYandexDictionary = UserDefaults.standard.getKeyAPIYandexDictionary()
-        self.validKeyAPIYandexBehaviorSubject = BehaviorSubject.init(value: CheckKeyAPIYandex.Shared.check(key: self.keyAPIYandexDictionary))
-        self.validKeyAPIYandexBehaviorSubject.subscribe(onNext: { (valid) in
-            self.transitionAtValidationKey(statusKey: valid)
+        self.tokenAPIYandexDictionary = UserDefaults.standard.getToken()
+        self.validTokenAPIYandexBehaviorSubject = BehaviorSubject.init(value: CheckTokenAPIYandex.Shared.check(token: self.tokenAPIYandexDictionary))
+        self.validTokenAPIYandexBehaviorSubject
+            .observeOn(MainScheduler.init())
+            .subscribe(onNext: { (valid) in
+                self.transitionAtValidationToken(statusToken: valid)
         }).self.disposed(by: self.disposeBag)
         print(self.vcCheckAuthAPIYandex.view.subviews)
         print("init ModelViewAuthAPIYandexDictionary")
@@ -37,30 +40,28 @@ class ModelViewAuthAPIYandexDictionary { //}: NSObject, WKNavigationDelegate{
         print("deinit ModelViewAuthAPIYandexDictionary")
     }
     
-    func transitionAtValidationKey(statusKey: StatusKey) {
+    func transitionAtValidationToken(statusToken: StatusToken) {
         var title: String
         var message: String
         var actionAlertFirst: UIAlertAction
         var actionAlertSecond: UIAlertAction
 
-        switch statusKey {
-        case .StatusKeyValid:
+        switch statusToken {
+        case .StatusTokenValid:
             self.coordinatorOAuthAPIYandex.gotoCoordinatorLogin()
-            return
-        case .StatusKeyEmpty:
+            return 
+        case .StatusTokenEmpty:
             title = "Please!"
-            message = "For work with a servis Yandex.Dictionary need the key to OAuth!!!"
+            message = "For work with a servis Yandex.Dictionary need the token to OAuth!!!"
             actionAlertFirst = UIAlertAction(title: "Authorization", style: .default, handler: { action in
-                self.getKeyAPIYandex = GetKeyAPIYandex.init(s: nil)
-                self.getKeyAPIYandex.getKey(login: nil, vc: self.vcCheckAuthAPIYandex)
-                    .subscribe(
-                    onNext: { key in
-                        print("key = ", key)
-                        self.validKeyAPIYandexBehaviorSubject.onNext(CheckKeyAPIYandex.Shared.check(key:key))
-                        print(self.vcCheckAuthAPIYandex.view.debugDescription)
+                self.getTokenAPIYandex = GetTokenAPIYandex.init(s: nil)
+                self.getTokenAPIYandex.getToken(login: nil, vc: self.vcCheckAuthAPIYandex)
+                    .subscribe(onNext: { token in
+                        print("token = ", token)
+                        self.validTokenAPIYandexBehaviorSubject.onNext(CheckTokenAPIYandex.Shared.check(token:token))
                 },
                     onError: { error in
-                    print("case .StatusKeyEmpty:", error)
+                    print("case .StatusTokenEmpty:", error)
                 }).disposed(by: self.disposeBag)
             })
 
@@ -68,7 +69,7 @@ class ModelViewAuthAPIYandexDictionary { //}: NSObject, WKNavigationDelegate{
                 self.coordinatorOAuthAPIYandex.gotoCoordinatorLogin()
             })
 
-        case .StatusKeyDontValid(let error):
+        case .StatusTokenDontValid(let error):
 
             //variants error
 
@@ -80,7 +81,7 @@ class ModelViewAuthAPIYandexDictionary { //}: NSObject, WKNavigationDelegate{
             actionAlertSecond = UIAlertAction(title: "Try again", style: .default, handler: { _ in
                 // reload
             })
-        case .StatusKeyUnknowInternetFails:
+        case .StatusTokenUnknowInternetFails:
             title = "No Internet"
             message = "no connection to the server"
             actionAlertFirst = UIAlertAction(title: "Work without service Yandex.Dictionary", style: .default, handler: { action in
@@ -95,8 +96,11 @@ class ModelViewAuthAPIYandexDictionary { //}: NSObject, WKNavigationDelegate{
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(actionAlertFirst)
         alert.addAction(actionAlertSecond)
+        print(Thread.current)
         self.vcCheckAuthAPIYandex.present(alert, animated: true, completion: nil)
 
     }
 
 }
+
+

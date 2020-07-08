@@ -90,14 +90,15 @@ extension UIView{
 
 extension UserDefaults{
 
-    func setKeyAPIYandexDictionary(key: String) {
-        if key != "" {
-            set(key, forKey: key)
-        }
+
+//MARK- token
+
+    func setToken(token: String?) {
+        set(token, forKey: "token")
     }
 
-    func getKeyAPIYandexDictionary() -> (String?) {
-        return string(forKey: "key")
+    func getToken() -> String?{
+        return string(forKey: "token")
     }
 
     func setLoggedIn(userName: String) {
@@ -187,4 +188,26 @@ public extension HTTPURLResponse {
     }
 }
 
+//MARK- URLSession
+
+
+public enum Result<Success, Failure> where Failure : Error {
+    case success(Success)
+    case failure(Failure)
+}
+
+extension URLSession {
+
+    public func dataTaskMy(with requestMy: URLRequest, completionHandlerMy: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void) -> URLSessionDataTask {
+        
+        return dataTask(with: requestMy, completionHandler: { (data, urlResponse, error) in
+            if let error = error {
+                completionHandlerMy(.failure(error))
+            } else if let data = data, let urlResponse = urlResponse as? HTTPURLResponse {
+                completionHandlerMy(.success((data, urlResponse)))
+            }
+        })
+    }
+
+}
 

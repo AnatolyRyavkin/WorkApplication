@@ -16,7 +16,6 @@
 		FD174ECB2464043D0090A002 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD174EC92464043D0090A002 /* LaunchScreen.storyboard */; };
 		FD174EE924641AE40090A002 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EE824641AE40090A002 /* Item.swift */; };
 		FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EEA24645A8F0090A002 /* DataItems.swift */; };
-		FD2B5CBF24B38E76001099CF /* ResponseWithToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2B5CBE24B38E76001099CF /* ResponseWithToken.swift */; };
 		FD54A76E24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54A76D24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift */; };
 		FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
@@ -28,9 +27,9 @@
 		FD6E9CF424A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E9CF324A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift */; };
 		FD6E9CF624A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */; };
 		FD72713424AB3FA7007917BD /* ParsingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713324AB3FA7007917BD /* ParsingResponse.swift */; };
-		FD72713624AB4171007917BD /* CheckKeyAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713524AB4171007917BD /* CheckKeyAPIYandex.swift */; };
+		FD72713624AB4171007917BD /* CheckTokenAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713524AB4171007917BD /* CheckTokenAPIYandex.swift */; };
 		FD72713C24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713B24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift */; };
-		FD72713E24AD2FEE007917BD /* GetKeyAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713D24AD2FEE007917BD /* GetKeyAPIYandex.swift */; };
+		FD72713E24AD2FEE007917BD /* GetTokenAPIYandex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713D24AD2FEE007917BD /* GetTokenAPIYandex.swift */; };
 		FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79E7902492D61300661CCF /* ModelRealmBase.swift */; };
 		FD7B9A1424A2043E00B421DA /* ViewControllerDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */; };
 		FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */; };
@@ -75,7 +74,6 @@
 		FD174ECC2464043D0090A002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD174EE824641AE40090A002 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FD174EEA24645A8F0090A002 /* DataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItems.swift; sourceTree = "<group>"; };
-		FD2B5CBE24B38E76001099CF /* ResponseWithToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseWithToken.swift; sourceTree = "<group>"; };
 		FD54A76D24A9AC7C00D08BF9 /* CoordinatorOAuthAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorOAuthAPIYandex.swift; sourceTree = "<group>"; };
 		FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewLogIn.swift; sourceTree = "<group>"; };
 		FD67A96C249DFA4C00FF210A /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
@@ -85,9 +83,9 @@
 		FD6E9CF324A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewAuthAPIYandexDictionary.swift; sourceTree = "<group>"; };
 		FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsAPIYandexDictionary.swift; sourceTree = "<group>"; };
 		FD72713324AB3FA7007917BD /* ParsingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingResponse.swift; sourceTree = "<group>"; };
-		FD72713524AB4171007917BD /* CheckKeyAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckKeyAPIYandex.swift; sourceTree = "<group>"; };
+		FD72713524AB4171007917BD /* CheckTokenAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTokenAPIYandex.swift; sourceTree = "<group>"; };
 		FD72713B24AB8567007917BD /* ViewControllerCheckAuthAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCheckAuthAPIYandexDictionary.swift; sourceTree = "<group>"; };
-		FD72713D24AD2FEE007917BD /* GetKeyAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKeyAPIYandex.swift; sourceTree = "<group>"; };
+		FD72713D24AD2FEE007917BD /* GetTokenAPIYandex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenAPIYandex.swift; sourceTree = "<group>"; };
 		FD79E7902492D61300661CCF /* ModelRealmBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmBase.swift; sourceTree = "<group>"; };
 		FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDictionary.swift; sourceTree = "<group>"; };
 		FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderForTableViewListDictionaries.swift; sourceTree = "<group>"; };
@@ -289,8 +287,8 @@
 		FD6E9CF224A9E045006183F1 /* NetworkingForKey */ = {
 			isa = PBXGroup;
 			children = (
-				FD72713524AB4171007917BD /* CheckKeyAPIYandex.swift */,
-				FD72713D24AD2FEE007917BD /* GetKeyAPIYandex.swift */,
+				FD72713524AB4171007917BD /* CheckTokenAPIYandex.swift */,
+				FD72713D24AD2FEE007917BD /* GetTokenAPIYandex.swift */,
 			);
 			path = NetworkingForKey;
 			sourceTree = "<group>";
@@ -299,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				FD72713324AB3FA7007917BD /* ParsingResponse.swift */,
-				FD2B5CBE24B38E76001099CF /* ResponseWithToken.swift */,
 				FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */,
 				FD6E9CF224A9E045006183F1 /* NetworkingForKey */,
 			);
@@ -447,7 +444,7 @@
 				FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */,
 				FD97B1F42495664600E0E28A /* ModelViewNewDictionary.swift in Sources */,
 				FDA4C9DB24A7AE7700815726 /* DataSourceWordsForDictionary.swift in Sources */,
-				FD72713624AB4171007917BD /* CheckKeyAPIYandex.swift in Sources */,
+				FD72713624AB4171007917BD /* CheckTokenAPIYandex.swift in Sources */,
 				FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */,
 				FD7B9A1424A2043E00B421DA /* ViewControllerDictionary.swift in Sources */,
 				FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */,
@@ -460,7 +457,7 @@
 				FDE60B02246DA27D00D0A0BB /* ViewControllerLogin.swift in Sources */,
 				FDAC4C4324707B7E008569B5 /* TableViewCellListDictionary.swift in Sources */,
 				FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */,
-				FD72713E24AD2FEE007917BD /* GetKeyAPIYandex.swift in Sources */,
+				FD72713E24AD2FEE007917BD /* GetTokenAPIYandex.swift in Sources */,
 				FDE60AFC246D969E00D0A0BB /* CoordinatorListDictionary.swift in Sources */,
 				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,
 				FDE60AF8246D965C00D0A0BB /* CoordinatorLogIn.swift in Sources */,
@@ -482,7 +479,6 @@
 				FDAC4C3D247010A3008569B5 /* ModelViewListDictionary.swift in Sources */,
 				FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */,
 				FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */,
-				FD2B5CBF24B38E76001099CF /* ResponseWithToken.swift in Sources */,
 				FD6E9CF424A9E0FF006183F1 /* ModelViewAuthAPIYandexDictionary.swift in Sources */,
 				FDA4C9D924A7248D00815726 /* ModelSectionDictionary.swift in Sources */,
 				FDAC4C3F24701DE9008569B5 /* DataSoursesDictionariesForUser.swift in Sources */,

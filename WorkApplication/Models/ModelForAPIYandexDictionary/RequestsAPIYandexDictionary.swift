@@ -35,7 +35,6 @@ enum StatusErrorForGetRequestAPIYandex{
 class RequestsAPIYandexDictionary {
 
     typealias MyJSONString = String
-
     static let Shared = RequestsAPIYandexDictionary()
 
     private init(){
@@ -46,8 +45,26 @@ class RequestsAPIYandexDictionary {
         print("deinit RequestAPIYandexDictionary")
     }
 
-    func getRequest(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil) -> URLRequest {
-        let urlComp = NSURLComponents(string: urlString)!
+//MARK- getRequestFull
+
+    func getRequestFull(urlStringComponent: (sheme: String, host: String, path: String)? = nil ,preferensURLConvertabele urlConvertabele : URLConvertible? = nil, params: [String:String]? = nil, metodString: String, paramsForHeader: [String : String]? = nil, body: Data? = nil) -> URLRequest? {
+
+        var urlComponents: URLComponents
+
+        if let url = try? urlConvertabele?.asURL() {
+            urlComponents = URLComponents.init(url: url, resolvingAgainstBaseURL: false)!
+        }
+        else{
+            guard let urlStrComp = urlStringComponent else{
+                print("error URLComponentString")
+                return nil
+            }
+            urlComponents = URLComponents.init()
+            urlComponents.scheme = urlStrComp.sheme
+            urlComponents.host = urlStrComp.host
+            urlComponents.path = urlStrComp.path
+        }
+
         var items = [URLQueryItem]()
         if let params = params {
             for (key,value) in params {
@@ -56,15 +73,41 @@ class RequestsAPIYandexDictionary {
         }
         items = items.filter{!$0.name.isEmpty}
         if !items.isEmpty {
-            urlComp.queryItems = items
+            urlComponents.queryItems = items
         }
-        var urlRequest = URLRequest(url: urlComp.url!)
+
+        var urlRequest = URLRequest(url: urlComponents.url!)
         urlRequest.httpMethod = metodString
+        if let httpBody = body{
+            urlRequest.httpBody = httpBody
+        }
+
+
+
+        if let paramsForHeader = paramsForHeader {
+            for (key, value) in paramsForHeader {
+                let valueHeader:String = (key == "Content-Length") ? "\(urlRequest.httpBody?.count ?? 0)" : value
+                urlRequest.addValue(valueHeader, forHTTPHeaderField: key)
+            }
+        }
         return urlRequest
     }
 
+
+//MARK- getRequestShort
+
+    func getRequestShort(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil) -> URLRequest? {
+        return getRequestFull(urlStringComponent: nil, preferensURLConvertabele: urlString, params: params, metodString: metodString, paramsForHeader: nil, body: nil)
+    }
+
+
     func getResponseAtRequest(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil) -> (responseAnswer: URLResponse?, dataAnswer: Data?, errorAnswer: Error?) {
-        var urlRequest = self.getRequest(urlString: urlString, params: params, metodString: metodString)
+
+        guard var urlRequest = self.getRequestShort(urlString: urlString, params: params, metodString: metodString)
+            else {print("return (nil,nil,nil)")
+                return (nil,nil,nil)
+        }
+
         if let parametrsHeader = paramsForHeader {
             for (value,headerField) in parametrsHeader {
                 urlRequest.setValue(value, forHTTPHeaderField: headerField)
@@ -87,252 +130,17 @@ class RequestsAPIYandexDictionary {
         return (responseAnswer, dataAnswer, errorAnswer)
     }
 
+
     func getJSONStringAtRequest(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil ) -> MyJSONString? {
-        let response: (responseAnswer: URLResponse?, dataAnswer: Data?, errorAnswer: Error?) = self.getResponseAtRequest(urlString: urlString, params: params, metodString: metodString, paramsForHeader: paramsForHeader)
-        switch response  {
-        case _ where response.dataAnswer != nil :
-            if let jsonString = String(data: response.dataAnswer!, encoding: .utf8) {
-                print(jsonString)
-                return jsonString
+        let response = getResponseAtRequest(urlString: urlString, params: params, metodString: metodString, paramsForHeader: paramsForHeader)
+        if let data = response.dataAnswer {
+            guard let jsonString = String(data: data, encoding: .utf8) else {
+                return nil
             }
-            return nil
-        case _ where response.errorAnswer != nil :
-            print(response.errorAnswer!)
-        case _ where response.responseAnswer != nil :
-            print(response.responseAnswer!)
-        default:
-            print("default")
+            print(jsonString)
+            return jsonString
         }
         return nil
     }
 
-
-
-//    func fetchAllRooms(completion: ([RemoteRoom]?) -> Void) {
-//      Alamofire.request(
-//        .GET,
-//        "http://localhost:5984/rooms/_all_docs",
-//        parameters: ["include_docs": "true"],
-//        encoding: .URL)
-//        .validate()
-//        .responseJSON { (response) -> Void in
-//          guard response.result.isSuccess else {
-//            print("Error while fetching remote rooms: \(response.result.error)")
-//            completion(nil)
-//            return
-//          }
-//
-//          guard let value = response.result.value as? [String: AnyObject],
-//            rows = value["rows"] as? [[String: AnyObject]] else {
-//              print("Malformed data received from fetchAllRooms service")
-//               completion(nil)
-//               return
-//          }
-//
-//          var rooms = [RemoteRoom]()
-//          for roomDict in rows {
-//            rooms.append(RemoteRoom(jsonData: roomDict))
-//          }
-//
-//          completion(rooms)
-//      }
-//    }
-
 }
-
-
-
-
-
-
-
-//
-//    var webView: WKWebView!
-//
-//    override init() {
-//        let webConfiguration = WKWebViewConfiguration()
-//        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-//        webView.uiDelegate = self
-//        webView.navigationDelegate = self
-//    }
-//
-//    func requestCodeForAuthUser(login: String) -> Observable<String?> {
-//        return Observable<String?>.create{str in
-//            return Disposables.create()
-//        }
-//    }
-//
-//    func requestKeyAtCode(){
-//
-//    }
-//
-//    private func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-//        if let response = navigationResponse.response as? HTTPURLResponse {
-//            print(response.debugDescription)
-//            //4110844
-//        }
-//        decisionHandler(.allow)
-//    }
-//
-//    private func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        webView.evaluateJavaScript("document.getElementById(\"my-id\").innerHTML", completionHandler: { (jsonRaw: Any?, error: Error?) in
-//            guard let jsonString = jsonRaw as? String else { return }
-//            _ = JSONSerialization.isValidJSONObject(String.self) //JSON(parseJSON: jsonString)
-//            // do stuff
-//        })
-//    }
-//
-////    func getRequestToGetCodeForUser(login: String) -> URLRequest {
-////            let urlComp = NSURLComponents(string: urlString)!
-////            var items = [URLQueryItem]()
-////            for (key,value) in params {
-////                items.append(URLQueryItem(name: key, value: value))
-////            }
-////            items = items.filter{!$0.name.isEmpty}
-////            if !items.isEmpty {
-////              urlComp.queryItems = items
-////            }
-////            var urlRequest = URLRequest(url: urlComp.url!)
-////            urlRequest.httpMethod = "GET"
-////
-////            return urlRequest
-//
-//    //        let config = URLSessionConfiguration.default
-//    //        let session = URLSession(configuration: config)
-//    //        let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
-//    //        })
-//    //        task.resume()
-//        }
-//
-////        func requestToGetCodeForUserfvber(urlString: String, params: [String:String], metodString: String ) -> URLRequest {
-////
-////            let myURL = "https://oauth.yandex.ru/authorize?"
-////            let parameters = ["response_type" : "code",
-////                              "client_id" : "2926153b3efa42aaa2cccaba713f38ca",
-////                              "device_id" : "2BEB4031-8EE2-41EC-8B63-9D4F3EFBAAF4",
-////                              "device_name" : UIDevice.current.name,
-////                              "redirect_uri" : "https://oauth.yandex.ru/verification_code",
-////                              "login_hint" : "toryavkin",
-////                              //"scope" : "Доступкдатерождения",
-////                              //"optional_scope" : "запрашиваемые опциональные права",
-////                              "force_confirm" : "yes",
-////                              "state" : "0"
-////            ]
-////            let myRequest = self.getRequest(urlString: myURL, params: parameters, metodString: "GET")
-////            let urlComp = NSURLComponents(string: urlString)!
-////            var items = [URLQueryItem]()
-////            for (key,value) in params {
-////                items.append(URLQueryItem(name: key, value: value))
-////            }
-////            items = items.filter{!$0.name.isEmpty}
-////            if !items.isEmpty {
-////              urlComp.queryItems = items
-////            }
-////            var urlRequest = URLRequest(url: urlComp.url!)
-////            urlRequest.httpMethod = "GET"
-////
-////            return urlRequest
-////
-////    //        let config = URLSessionConfiguration.default
-////    //        let session = URLSession(configuration: config)
-////    //        let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
-////    //        })
-////    //        task.resume()
-////        }
-////
-////        func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-////            if let response = navigationResponse.response as? HTTPURLResponse {
-////                print(response.debugDescription)
-////                //4110844
-////            }
-////            decisionHandler(.allow)
-////        }
-////
-////        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-////            webView.evaluateJavaScript("document.getElementById(\"my-id\").innerHTML", completionHandler: { (jsonRaw: Any?, error: Error?) in
-////                guard let jsonString = jsonRaw as? String else { return }
-////                _ = JSONSerialization.isValidJSONObject(String.self) //JSON(parseJSON: jsonString)
-////                // do stuff
-////            })
-////        }
-////
-////    //    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
-////    //        if challenge.protectionSpace.host == "https://vplan.bielefeld-marienschule.logoip.de/subst_002.htm" {
-////    //            let userStr = "********"
-////    //            let passwordStr = "********"
-////    //            let credential = URLCredential(user: userStr, password: passwordStr, persistence: URLCredential.Persistence.forSession)
-////    //            challenge.sender?.use(credential, for: challenge)
-////    //            completionHandler(.useCredential, credential)
-////    //        }
-////    //    }
-////
-////        override func viewDidLoad() {
-////            super.viewDidLoad()
-////
-////    //        let dirPathNoScheme = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-////    //        print(dirPathNoScheme)
-////
-////            print(UIDevice.current.name)
-////            print(UIDevice.current.systemName)
-////            print(UIDevice.current.systemVersion)
-////            print(UIDevice.current.model)
-////            print(UIDevice.current.localizedModel)
-////            print(UIDevice.current.userInterfaceIdiom)
-////            print(UIDevice.current.identifierForVendor)
-////            print(UIDevice.current.batteryLevel)
-////
-////
-////
-////            let myURL = "https://oauth.yandex.ru/authorize?"
-////            let parameters = ["response_type" : "code",
-////                              "client_id" : "2926153b3efa42aaa2cccaba713f38ca",
-////                              "device_id" : "2BEB4031-8EE2-41EC-8B63-9D4F3EFBAAF4",
-////                              "device_name" : UIDevice.current.name,
-////                              "redirect_uri" : "https://oauth.yandex.ru/verification_code",
-////                              "login_hint" : "toryavkin",
-////                              //"scope" : "Доступкдатерождения",
-////                              //"optional_scope" : "запрашиваемые опциональные права",
-////                              "force_confirm" : "yes",
-////                              "state" : "0"
-////            ]
-////            let myRequest = self.getRequest(urlString: myURL, params: parameters, metodString: "GET")
-////            let wkNavigation = webView.load(myRequest)
-////            print(wkNavigation.debugDescription)
-////
-////            //UUID DBBD5345-9B3C-4495-B2FB-9F0A036F0225
-////
-////            ///Users/ryavkinto/Library/Developer/CoreSimulator/Devices/AD5B226C-D42F-4082-8F38-08DDBAB2C86F/data/Containers/Data/Application/9489FEFC-D20E-467E-90FB-F4D51BFB2D3E/Documents
-////
-////            ///Users/ryavkinto/Library/Developer/CoreSimulator/Devices/AD5B226C-D42F-4082-8F38-08DDBAB2C86F/data/Containers/Data/Application/A06E865C-8830-46ED-BDBF-0603CB4C4ED0/Documents
-////
-////            //5A919FFB-FD53-4423-B3EA-FB21D3BE3C67
-////
-////    //        AF.request("https://oauth.yandex.ru/authorize?",
-////    //                   method: .get,
-////    //                   parameters: ["response_type" : "code",
-////    //                                "client_id" : "2926153b3efa42aaa2cccaba713f38ca",
-////    //                                "device_id" : "идентификатор устройства",
-////    //                                "device_name" : "имя устройства",
-////    //                                "redirect_uri" : "адрес перенаправления",
-////    //                                "login_hint" : "имя пользователя или электронный адрес",
-////    //                                "scope" : "запрашиваемые необходимые права",
-////    //                                "optional_scope" : "запрашиваемые опциональные права",
-////    //                                "force_confirm" : "yes",
-////    //                                "state" : "произвольная строка"
-////    //            ]).response { response in
-////    //            debugPrint(response)
-////    //        }
-////
-////    //        GetKeyForYandexDictionaries().requstFirst()
-////        }
-////
-////        override func viewDidAppear(_ animated: Bool) {
-////            super.viewDidAppear(animated)
-////        }
-////
-////        override func viewWillAppear(_ animated: Bool) {
-////            super.viewWillAppear(animated)
-////            self.navigationController?.isNavigationBarHidden = true
-////        }
-////
-////}
