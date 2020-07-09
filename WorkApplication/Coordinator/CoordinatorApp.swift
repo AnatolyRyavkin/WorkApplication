@@ -31,8 +31,13 @@ class CoordinatorApp: CoordinatorProtocol {
 
     func start(from nc: UINavigationController) -> Observable<Void> {
         self.nc = nc
-        let coordinatorOAuthAPIYandex = CoordinatorOAuthAPIYandex()
-        self.coordinate(to: coordinatorOAuthAPIYandex, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)
+        if let userLast = UserDefaults.standard.getLastLoggedIn() {
+            let coordinatorListDictionary = CoordinatorListDictionary.init(userName: userLast)
+            self.coordinate(to: coordinatorListDictionary, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)
+        }else{
+            let coordinatorLogIn = CoordinatorLogIn.Shared
+            self.coordinate(to: coordinatorLogIn, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)
+        }
         return  Observable<Void>.empty()
     }
 

@@ -1,5 +1,5 @@
 //
-//  ViewControllerCheckAuthAPIYandexDictionary.swift
+//  ViewControllerLaunchApp.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 30.06.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ViewControllerCheckAuthAPIYandexDictionary: UIViewController {
+class ViewControllerLaunchApp: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

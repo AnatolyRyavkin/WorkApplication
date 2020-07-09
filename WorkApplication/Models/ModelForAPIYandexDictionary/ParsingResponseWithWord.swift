@@ -1,5 +1,5 @@
 //
-//  ParsingResponse.swift
+//  ParsingResponseWithWord.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 30.06.2020.
@@ -9,8 +9,12 @@
 import Foundation
 import WebKit
 import RxSwift
+import RealmSwift
 
-   let ExampleJSON = """
+
+// structure of the api Yandex.Dictionary response
+/*
+
 
 
 {
@@ -232,38 +236,137 @@ import RxSwift
         }
        ]
 }
-"""
+
+
+Элемент                Описание
+
+head                      Заголовок результата (не используется).
+def                       Массив словарных статей. В атрибуте ts может указываться транскрипция искомого слова.
+tr                        Массив переводов.
+syn                       Массив синонимов.
+mean                      Массив значений.
+ex                        Массив примеров.
+
+Атрибуты, используемые в элементах def, tr, syn, mean и ex
+
+Атрибут                      Описание
+
+text                       Текст статьи, перевода или синонима (обязательный).
+num                        Число (для имен существительных). Возможные значения:
+
+            pl - указывается для существительных во множественном числе.
+            pos    Часть речи (может отсутствовать).
+            gen    Род существительного для тех языков, где это актуально (может отсутствовать).
+
+*/
+
+//MARK- Codable
+
+
+//MARK- Realm
 
 
 
-class ParsingResponse{
 
-    static let Shared = ParsingResponse.init()
+class ModelRealmWordCodable{
 
-    private init(){
-        print("init ParsingResponse")
+    var realmWordYAPI: Realm!
+
+    static let Shared = ModelRealmWordCodable()
+
+    private init() {
+        var url: URL! = nil
+        #if DEBUG
+            url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyApplication/WorkApplication/WorkApplication/BaseWordCodable.realm")
+        #else
+            url = Bundle.main.url(forResource: "BaseWordCodable", withExtension: "realm")
+        #endif
+        let config = Realm.Configuration.init(fileURL: url, readOnly: false)
+        do{
+            self.realmWordYAPI = try Realm(configuration: config)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            print("error = ", error)
+            return
+        }
+        print("init ModelRealmWordCodable",self)
     }
     deinit {
-        print("deinit ParsingResponse")
+        print("deinit ModelRealmWordCodable",self)
     }
 
-    //MARK- extracting code to get token
-
-    func getObservableCodeToGetTokenFromResponse(response: HTTPURLResponse) -> Observable<String>? {
-        guard let stringResponse = response.url?.absoluteString else{
-            return nil
+    func appendWordRealmYAPI(wordCodable: WordCodableJSON) throws {
+        try self.realmWordYAPI.write {
+            self.realmWordYAPI.add(WordObjectRealm.init(wordCodable: wordCodable))
         }
-        if stringResponse.range(of: "code=") == nil {
-            return nil
-        }
-        let start = stringResponse.index(stringResponse.endIndex, offsetBy: -7)
-        let end = stringResponse.endIndex
-        let substringCode = String(stringResponse[start..<end])
-        return Observable<String>.of(substringCode)
     }
+
+    func getArrayWordRealmYAPI() -> Array<WordObjectRealm>? {
+        let arrayReault = Array<WordObjectRealm>(self.realmWordYAPI.objects(WordObjectRealm.self))
+        print("count = ", arrayReault.count)
+        print(arrayReault.last?.def.last?.text ?? "empty")
+        return arrayReault
+    }
+
+
 
     
 
+
+        
+
+//    func deleteDictionary(numberDictionary: Int) {
+//        do{
+//            try self.realmUser.write {
+//                self.userObject.listDictionary.remove(at: numberDictionary)
+//                self.behaviorSubject.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
+//            }
+//        }catch{
+//            print("remove dictionary failed")
+//        }
+//    }
+//
+//    func changeNameDictionary(dictionaryObject: DictionaryObject, newName: String) throws{
+//        do{
+//            try self.realmUser.write {
+//                dictionaryObject.name = newName
+//                self.behaviorSubject.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
+//            }
+//        }catch{
+//            print("remove dictionary failed")
+//        }
+//
+//    }
+//
+//    func getDictionariesForUserWithInsertFirstEmpty()-> Array<DictionaryObject>{
+//        let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObject.self)
+//        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
+//        var result: Array<DictionaryObject> = Array<DictionaryObject>(resultDictionaries.filter(predicate))
+//        result.insert(DictionaryObject.init(name: "-", typeDictionary: "-"), at: 0) // filling first line
+//        return result
+//    }
+//
+//    func getDictionariesForUser()-> Array<DictionaryObject>{
+//        let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObject.self)
+//        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
+//        let result: Array<DictionaryObject> = Array<DictionaryObject>(resultDictionaries.filter(predicate))
+//        return result
+//    }
+//
+//    func getLastDictionaryForUser() -> DictionaryObject? {
+//        return (self.modelRealmUser.realmUser.objects(DictionaryObject.self)).last
+//    }
+//
+//
+//
+//
+
 }
+
+
+
+
+
+
 
 

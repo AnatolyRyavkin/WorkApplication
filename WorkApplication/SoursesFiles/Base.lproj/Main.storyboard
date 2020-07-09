@@ -523,10 +523,10 @@
             </objects>
             <point key="canvasLocation" x="956" y="-96"/>
         </scene>
-        <!--View Controller Rename-->
+        <!--View Controller Rename Dictionary-->
         <scene sceneID="tHQ-rM-LBv">
             <objects>
-                <viewController restorationIdentifier="vcRenameDictionary" storyboardIdentifier="vcRenameDictionary" id="YO1-SO-K8c" customClass="ViewControllerRename" customModule="WorkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="vcRenameDictionary" storyboardIdentifier="vcRenameDictionary" id="YO1-SO-K8c" customClass="ViewControllerRenameDictionary" customModule="WorkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lth-sz-Juy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -891,7 +891,7 @@
             </objects>
             <point key="canvasLocation" x="3000" y="-968"/>
         </scene>
-        <!--DictionaryName-->
+        <!--Learn words-->
         <scene sceneID="LP3-Q1-Z6k">
             <objects>
                 <viewController restorationIdentifier="vcDictionary" storyboardIdentifier="vcDictionary" id="4Eh-xu-mkV" customClass="ViewControllerDictionary" customModule="WorkApplication" customModuleProvider="target" sceneMemberID="viewController">
@@ -1027,7 +1027,7 @@
                         <viewLayoutGuide key="safeArea" id="JBO-ou-tn0"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="DictionaryName" id="BR7-P8-bmB">
+                    <navigationItem key="navigationItem" title="Learn words" id="BR7-P8-bmB">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="edit" id="j2U-rb-3nJ"/>
                             <barButtonItem systemItem="add" id="Gzl-ve-Ewy"/>
@@ -1036,6 +1036,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="barButtonAdd" destination="Gzl-ve-Ewy" id="kVb-q0-12N"/>
+                        <outlet property="barButtonEdit" destination="j2U-rb-3nJ" id="L1M-YV-Yc7"/>
+                        <outlet property="barButtonSearch" destination="SJ8-i1-SS4" id="az5-Wa-KCF"/>
+                        <outlet property="buttonPronons" destination="9Ie-JD-frS" id="uMf-bp-puq"/>
+                        <outlet property="buttonVisual" destination="eBV-EG-kCE" id="NQY-az-ccy"/>
+                        <outlet property="buttonVoice" destination="34Z-4J-Cpz" id="QGT-yR-gDs"/>
+                        <outlet property="buttonWrite" destination="rvN-Lv-4oD" id="9MB-Gr-q08"/>
                         <outlet property="tableView" destination="7Tx-0l-fHH" id="Qrc-3d-Hys"/>
                     </connections>
                 </viewController>

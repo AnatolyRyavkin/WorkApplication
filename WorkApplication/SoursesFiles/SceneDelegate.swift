@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow.init()
         window?.windowScene = windowScene
         window?.backgroundColor = UIColor.blue
-        let vc = ViewControllerCheckAuthAPIYandexDictionary.init()
+        let vc = ViewControllerLaunchApp.init()
         let nc = UINavigationController.init(rootViewController: vc)
         window?.rootViewController = nc
         coordinatorApp.start(from: nc).subscribe({ _ in

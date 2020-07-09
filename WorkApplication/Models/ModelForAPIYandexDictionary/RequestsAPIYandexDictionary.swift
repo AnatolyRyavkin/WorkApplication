@@ -32,10 +32,16 @@ enum StatusErrorForGetRequestAPIYandex{
     }
 }
 
+enum TranslationDirection: String{
+    case EnRu = "en-ru"
+    case RuEn = "ru-en"
+}
+
 class RequestsAPIYandexDictionary {
 
-    typealias MyJSONString = String
     static let Shared = RequestsAPIYandexDictionary()
+
+    var publishSubjectResponseYAPI = PublishSubject<WordCodableJSON?>()
 
     private init(){
         print("init RequestAPIYandexDictionary")
@@ -45,102 +51,38 @@ class RequestsAPIYandexDictionary {
         print("deinit RequestAPIYandexDictionary")
     }
 
-//MARK- getRequestFull
-
-    func getRequestFull(urlStringComponent: (sheme: String, host: String, path: String)? = nil ,preferensURLConvertabele urlConvertabele : URLConvertible? = nil, params: [String:String]? = nil, metodString: String, paramsForHeader: [String : String]? = nil, body: Data? = nil) -> URLRequest? {
-
-        var urlComponents: URLComponents
-
-        if let url = try? urlConvertabele?.asURL() {
-            urlComponents = URLComponents.init(url: url, resolvingAgainstBaseURL: false)!
-        }
-        else{
-            guard let urlStrComp = urlStringComponent else{
-                print("error URLComponentString")
-                return nil
-            }
-            urlComponents = URLComponents.init()
-            urlComponents.scheme = urlStrComp.sheme
-            urlComponents.host = urlStrComp.host
-            urlComponents.path = urlStrComp.path
-        }
-
-        var items = [URLQueryItem]()
-        if let params = params {
-            for (key,value) in params {
-                items.append(URLQueryItem(name: key, value: value))
-            }
-        }
-        items = items.filter{!$0.name.isEmpty}
-        if !items.isEmpty {
-            urlComponents.queryItems = items
-        }
-
-        var urlRequest = URLRequest(url: urlComponents.url!)
-        urlRequest.httpMethod = metodString
-        if let httpBody = body{
-            urlRequest.httpBody = httpBody
-        }
-
-
-
-        if let paramsForHeader = paramsForHeader {
-            for (key, value) in paramsForHeader {
-                let valueHeader:String = (key == "Content-Length") ? "\(urlRequest.httpBody?.count ?? 0)" : value
-                urlRequest.addValue(valueHeader, forHTTPHeaderField: key)
-            }
-        }
-        return urlRequest
-    }
-
-
-//MARK- getRequestShort
-
-    func getRequestShort(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil) -> URLRequest? {
-        return getRequestFull(urlStringComponent: nil, preferensURLConvertabele: urlString, params: params, metodString: metodString, paramsForHeader: nil, body: nil)
-    }
-
-
-    func getResponseAtRequest(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil) -> (responseAnswer: URLResponse?, dataAnswer: Data?, errorAnswer: Error?) {
-
-        guard var urlRequest = self.getRequestShort(urlString: urlString, params: params, metodString: metodString)
-            else {print("return (nil,nil,nil)")
-                return (nil,nil,nil)
-        }
-
-        if let parametrsHeader = paramsForHeader {
-            for (value,headerField) in parametrsHeader {
-                urlRequest.setValue(value, forHTTPHeaderField: headerField)
-            }
-        }
+    func requestTranslate(requestWord: String, translationDirection: TranslationDirection) -> PublishSubject<WordCodableJSON?> {
+        let trDir = translationDirection.rawValue
+        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+        let url = URL.init(string: urlString)!
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        var responseAnswer: URLResponse?
-        var dataAnswer: Data?
-        var errorAnswer: Error?
-        let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
-            responseAnswer = response!
-            dataAnswer = data
-            errorAnswer = error
-        })
-        let queue = OperationQueue.init()
-        queue.addBarrierBlock {
-            task.resume()
-        }
-        return (responseAnswer, dataAnswer, errorAnswer)
-    }
-
-
-    func getJSONStringAtRequest(urlString: String, params: [String:String]?, metodString: String, paramsForHeader: [String : String]? = nil ) -> MyJSONString? {
-        let response = getResponseAtRequest(urlString: urlString, params: params, metodString: metodString, paramsForHeader: paramsForHeader)
-        if let data = response.dataAnswer {
-            guard let jsonString = String(data: data, encoding: .utf8) else {
-                return nil
+        session.dataTaskMy(with: url) { result in
+            switch result {
+            case .success((let data, let response)):
+                guard response.statusCode == 200 else {
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        print("error = ",jsonString)
+                    }
+                    return
+                }
+//                if let jsonString = String(data: data, encoding: .utf8) {
+//                    print("data = ",jsonString)
+//                }
+                let decoder = JSONDecoder()
+                do{
+                    let word = try decoder.decode(WordCodableJSON.self, from: data)
+                    self.publishSubjectResponseYAPI.onNext(word)
+                    print("Status code = ", response.statusCode)
+                    //                dump(word)
+                } catch (let error) {
+                    print(error)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
-            print(jsonString)
-            return jsonString
-        }
-        return nil
+        }.resume()
+        return self.publishSubjectResponseYAPI
     }
 
 }

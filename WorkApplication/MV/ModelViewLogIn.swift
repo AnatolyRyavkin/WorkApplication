@@ -28,6 +28,14 @@ class ModelViewLogIn{
 
     private init(){
 
+        RequestsAPIYandexDictionary.Shared.requestTranslate(requestWord: "swift", translationDirection: .EnRu).subscribe(onNext: { wordCodable in
+            guard let wordCodable = wordCodable else {return}
+            try? ModelRealmWordCodable.Shared.appendWordRealmYAPI(wordCodable:wordCodable)
+            print(" --- ")
+            let text = ModelRealmWordCodable.Shared.getArrayWordRealmYAPI()
+            print(text?.description ?? "sdkjlaovkj;a???")
+            //dump(wordCodable)
+        }).disposed(by: self.disposeBag)
         
         self.arrayUserName = UserDefaults.standard.object(forKey: "allUsers") as? [String] ?? ["Default profile"]
         print(self.arrayUserName)

@@ -1,5 +1,5 @@
 //
-//  ChangeTitleDictionaryViewController.swift
+//  ViewControllerRenameDictionary.swift
 //  WorkApplication
 //
 //  Created by Anatoly Ryavkin on 22.06.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewControllerRename: UIViewController {
+class ViewControllerRenameDictionary: UIViewController {
 
     @IBOutlet weak var buttonSaveBack: UIButton!
     @IBOutlet weak var textFieldOldName: UITextField!
@@ -20,10 +20,10 @@ class ViewControllerRename: UIViewController {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        print("init ViewControllerRename",self)
+        print("init ViewControllerRenameDictionary",self)
     }
     deinit {
-        print("deinit ViewControllerRename",self)
+        print("deinit ViewControllerRenameDictionary",self)
     }
 
     override func viewDidLoad() {

@@ -15,7 +15,7 @@ class CoordinatorRenameDictionary: CoordinatorProtocol {
 
     var dictionaryObjectRename: DictionaryObject
     var userName: String!
-    var vcRenameDictionary: ViewControllerRename!
+    var vcRenameDictionary: ViewControllerRenameDictionary!
     lazy var nc: UINavigationController! = vcRenameDictionary.navigationController
     var modelViewRenameDictionary: ModelViewRenameDictionary!
 
@@ -23,7 +23,7 @@ class CoordinatorRenameDictionary: CoordinatorProtocol {
         self.dictionaryObjectRename = dictionaryObjectRename
         self.userName = userName
 
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcRenameDictionary") as? ViewControllerRename
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcRenameDictionary") as? ViewControllerRenameDictionary
             else{
                 print("error init vcRenameDictionary")
                 return nil

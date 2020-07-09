@@ -17,7 +17,7 @@ class ModelViewRenameDictionary{
     var dictionaryObjectRename: DictionaryObject!
 
     var disposeBag: DisposeBag! = DisposeBag()
-    weak var vcRenameDictionary: ViewControllerRename!
+    weak var vcRenameDictionary: ViewControllerRenameDictionary!
     var userName: String!
     var textNameDictionaryInput: String!
 
@@ -93,7 +93,7 @@ class ModelViewRenameDictionary{
                     $0 is CoordinatorRenameDictionary
                 }
                 self.nc?.viewControllers.removeAll{
-                    $0 is ViewControllerRename
+                    $0 is ViewControllerRenameDictionary
                 }
             }).disposed(by: self.disposeBag)
 

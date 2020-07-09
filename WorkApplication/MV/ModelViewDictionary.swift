@@ -56,6 +56,13 @@ class ModelViewDictionary {
 
         (self.vcDictionary as UIViewController).rx.viewDidLoad.asDriver().drive(onNext: { _ in
             //init sectionModel
+            
+
+
+
+
+
+
         }).disposed(by: self.disposeBag)
 
         (self.vcDictionary as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in

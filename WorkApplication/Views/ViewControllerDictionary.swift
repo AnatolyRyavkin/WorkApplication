@@ -11,7 +11,15 @@ import UIKit
 class ViewControllerDictionary: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var buttonVisual: UIButton!
+    @IBOutlet weak var buttonWrite: UIButton!
+    @IBOutlet weak var buttonVoice: UIButton!
+    @IBOutlet weak var buttonPronons: UIButton!
+    @IBOutlet weak var barButtonSearch: UIBarButtonItem!
+    @IBOutlet weak var barButtonAdd: UIBarButtonItem!
+    @IBOutlet weak var barButtonEdit: UIBarButtonItem!
+
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print("init ViewControllerDictionary",self)

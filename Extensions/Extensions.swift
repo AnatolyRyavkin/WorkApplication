@@ -209,5 +209,16 @@ extension URLSession {
         })
     }
 
+    public func dataTaskMy(with url: URL, completionHandlerMy: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void) -> URLSessionDataTask {
+
+        return dataTask(with: url, completionHandler: { (data, urlResponse, error) in
+            if let error = error {
+                completionHandlerMy(.failure(error))
+            } else if let data = data, let urlResponse = urlResponse as? HTTPURLResponse {
+                completionHandlerMy(.success((data, urlResponse)))
+            }
+        })
+    }
+
 }
 
