@@ -9,13 +9,13 @@
 import Foundation
 import RealmSwift
 
-class UserObject: Object{
+class UserObjectRealm: Object{
     @objc var userName: String = ""
-    var listDictionary: List<DictionaryObject> = List<DictionaryObject>()
+    var listDictionary: List<DictionaryObjectRealm> = List<DictionaryObjectRealm>()
 
     required init() {}
 
-    init(userName: String, dictionaryObject: DictionaryObject?) {
+    init(userName: String, dictionaryObject: DictionaryObjectRealm?) {
         super.init()
         if let dictObj = dictionaryObject{
             self.listDictionary.append(dictObj)

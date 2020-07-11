@@ -26,28 +26,28 @@
 		FD67A97124A078EB00FF210A /* ModelViewRenameDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97024A078EB00FF210A /* ModelViewRenameDictionary.swift */; };
 		FD67A97324A0899500FF210A /* ViewControllerRenameDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67A97224A0899500FF210A /* ViewControllerRenameDictionary.swift */; };
 		FD6E9CF624A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */; };
-		FD72713424AB3FA7007917BD /* ParsingResponseWithWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713324AB3FA7007917BD /* ParsingResponseWithWord.swift */; };
 		FD72713C24AB8567007917BD /* ViewControllerLaunchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72713B24AB8567007917BD /* ViewControllerLaunchApp.swift */; };
 		FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79E7902492D61300661CCF /* ModelRealmBase.swift */; };
 		FD7B9A1424A2043E00B421DA /* ViewControllerDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */; };
 		FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */; };
-		FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
-		FD97B1F02495309000E0E28A /* UsersBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FD97B1ED24952DE400E0E28A /* UsersBase.realm */; };
+		FD81A37F24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD81A37E24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift */; };
+		FD8B871F24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */; };
+		FD8B872124B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8B872024B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift */; };
 		FD97B1F22495653900E0E28A /* CoordinatorNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F12495653900E0E28A /* CoordinatorNewDictionary.swift */; };
 		FD97B1F42495664600E0E28A /* ModelViewNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */; };
 		FD97B1F6249566D800E0E28A /* ViewControllerNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */; };
 		FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9FBC42246868620058F9A8 /* WordObject.swift */; };
 		FDA4C9D924A7248D00815726 /* ModelSectionDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */; };
-		FDA4C9DB24A7AE7700815726 /* DataSourceWordsForDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4C9DA24A7AE7700815726 /* DataSourceWordsForDictionary.swift */; };
 		FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */; };
 		FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */; };
-		FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C34246FD491008569B5 /* DictionaryObject.swift */; };
-		FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C36246FD850008569B5 /* UserObject.swift */; };
-		FDAC4C39246FECBF008569B5 /* ModelRealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C38246FECBF008569B5 /* ModelRealmUser.swift */; };
+		FDAC4C35246FD491008569B5 /* DictionaryObjectRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C34246FD491008569B5 /* DictionaryObjectRealm.swift */; };
+		FDAC4C37246FD850008569B5 /* UserObjectRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C36246FD850008569B5 /* UserObjectRealm.swift */; };
+		FDAC4C39246FECBF008569B5 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C38246FECBF008569B5 /* RealmUser.swift */; };
 		FDAC4C3B246FF8EE008569B5 /* ViewControllerListDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3A246FF8EE008569B5 /* ViewControllerListDictionary.swift */; };
 		FDAC4C3D247010A3008569B5 /* ModelViewListDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3C247010A3008569B5 /* ModelViewListDictionary.swift */; };
-		FDAC4C3F24701DE9008569B5 /* DataSoursesDictionariesForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3E24701DE9008569B5 /* DataSoursesDictionariesForUser.swift */; };
+		FDAC4C3F24701DE9008569B5 /* MetodsForDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C3E24701DE9008569B5 /* MetodsForDictionary.swift */; };
 		FDAC4C4324707B7E008569B5 /* TableViewCellListDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4224707B7E008569B5 /* TableViewCellListDictionary.swift */; };
+		FDAF06CF24B8ABB2000DE76C /* MetodsForWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF06CE24B8ABB2000DE76C /* MetodsForWords.swift */; };
 		FDBAB72924A53EDB008748D0 /* CoordinatorDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBAB72824A53EDB008748D0 /* CoordinatorDictionary.swift */; };
 		FDBAB72B24A53FE0008748D0 /* ModelViewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBAB72A24A53FE0008748D0 /* ModelViewDictionary.swift */; };
 		FDE60AF4246D95A500D0A0BB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AF3246D95A500D0A0BB /* Protocols.swift */; };
@@ -80,28 +80,29 @@
 		FD67A97024A078EB00FF210A /* ModelViewRenameDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewRenameDictionary.swift; sourceTree = "<group>"; };
 		FD67A97224A0899500FF210A /* ViewControllerRenameDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerRenameDictionary.swift; sourceTree = "<group>"; };
 		FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsAPIYandexDictionary.swift; sourceTree = "<group>"; };
-		FD72713324AB3FA7007917BD /* ParsingResponseWithWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingResponseWithWord.swift; sourceTree = "<group>"; };
 		FD72713B24AB8567007917BD /* ViewControllerLaunchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLaunchApp.swift; sourceTree = "<group>"; };
 		FD79E7902492D61300661CCF /* ModelRealmBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmBase.swift; sourceTree = "<group>"; };
 		FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDictionary.swift; sourceTree = "<group>"; };
 		FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderForTableViewListDictionaries.swift; sourceTree = "<group>"; };
-		FD97B1ED24952DE400E0E28A /* UsersBase.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = UsersBase.realm; sourceTree = "<group>"; };
+		FD81A37E24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTableVeiwSectionDictionary.swift; sourceTree = "<group>"; };
+		FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellDictionaryWord.swift; sourceTree = "<group>"; };
+		FD8B872024B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellDictionarySearch.swift; sourceTree = "<group>"; };
 		FD97B1F12495653900E0E28A /* CoordinatorNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorNewDictionary.swift; sourceTree = "<group>"; };
 		FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewNewDictionary.swift; sourceTree = "<group>"; };
 		FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerNewDictionary.swift; sourceTree = "<group>"; };
 		FD9FBC42246868620058F9A8 /* WordObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordObject.swift; sourceTree = "<group>"; };
 		FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSectionDictionary.swift; sourceTree = "<group>"; };
-		FDA4C9DA24A7AE7700815726 /* DataSourceWordsForDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceWordsForDictionary.swift; sourceTree = "<group>"; };
 		FDAC4C30246FD384008569B5 /* RusMeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RusMeaningObject.swift; sourceTree = "<group>"; };
 		FDAC4C32246FD3C9008569B5 /* ExampleForRusMeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleForRusMeaningObject.swift; sourceTree = "<group>"; };
-		FDAC4C34246FD491008569B5 /* DictionaryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryObject.swift; sourceTree = "<group>"; };
-		FDAC4C36246FD850008569B5 /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
-		FDAC4C38246FECBF008569B5 /* ModelRealmUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRealmUser.swift; sourceTree = "<group>"; };
+		FDAC4C34246FD491008569B5 /* DictionaryObjectRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryObjectRealm.swift; sourceTree = "<group>"; };
+		FDAC4C36246FD850008569B5 /* UserObjectRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectRealm.swift; sourceTree = "<group>"; };
+		FDAC4C38246FECBF008569B5 /* RealmUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		FDAC4C3A246FF8EE008569B5 /* ViewControllerListDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerListDictionary.swift; sourceTree = "<group>"; };
 		FDAC4C3C247010A3008569B5 /* ModelViewListDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewListDictionary.swift; sourceTree = "<group>"; };
-		FDAC4C3E24701DE9008569B5 /* DataSoursesDictionariesForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSoursesDictionariesForUser.swift; sourceTree = "<group>"; };
+		FDAC4C3E24701DE9008569B5 /* MetodsForDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetodsForDictionary.swift; sourceTree = "<group>"; };
 		FDAC4C4224707B7E008569B5 /* TableViewCellListDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellListDictionary.swift; sourceTree = "<group>"; };
 		FDAC4C4624708885008569B5 /* MainBase.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = MainBase.realm; sourceTree = "<group>"; };
+		FDAF06CE24B8ABB2000DE76C /* MetodsForWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetodsForWords.swift; sourceTree = "<group>"; };
 		FDBAB72824A53EDB008748D0 /* CoordinatorDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDictionary.swift; sourceTree = "<group>"; };
 		FDBAB72A24A53FE0008748D0 /* ModelViewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewDictionary.swift; sourceTree = "<group>"; };
 		FDE60AF3246D95A500D0A0BB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -141,14 +142,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		FD0E61F324B758E400AAE6B1 /* ObjectsForRealm */ = {
+		FD0E61F424B760D800AAE6B1 /* ModelDictionaries */ = {
 			isa = PBXGroup;
 			children = (
-				FD0E61EF24B74CBC00AAE6B1 /* WordObjectRealm.swift */,
-				FDAC4C36246FD850008569B5 /* UserObject.swift */,
-				FDAC4C34246FD491008569B5 /* DictionaryObject.swift */,
+				FDAC4C3E24701DE9008569B5 /* MetodsForDictionary.swift */,
+				FDAC4C34246FD491008569B5 /* DictionaryObjectRealm.swift */,
+				FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */,
 			);
-			path = ObjectsForRealm;
+			path = ModelDictionaries;
+			sourceTree = "<group>";
+		};
+		FD0E61F524B760FA00AAE6B1 /* ModelWords */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF06CE24B8ABB2000DE76C /* MetodsForWords.swift */,
+				FD0E61EF24B74CBC00AAE6B1 /* WordObjectRealm.swift */,
+				FD0E61ED24B74C9C00AAE6B1 /* WordCodableJSON.swift */,
+			);
+			path = ModelWords;
 			sourceTree = "<group>";
 		};
 		FD174EB22464043B0090A002 = {
@@ -177,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				FDAC4C4624708885008569B5 /* MainBase.realm */,
-				FD97B1ED24952DE400E0E28A /* UsersBase.realm */,
 				FD174ED72464050C0090A002 /* SoursesFiles */,
 				FD174EDB24640D7D0090A002 /* Coordinator */,
 				FD174ED2246404690090A002 /* MV */,
@@ -190,11 +200,11 @@
 		FD174ED2246404690090A002 /* MV */ = {
 			isa = PBXGroup;
 			children = (
+				FD81A37D24BA14A5000F4D6F /* ModelVeiwDictionary */,
 				FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */,
 				FD67A97024A078EB00FF210A /* ModelViewRenameDictionary.swift */,
 				FDAC4C3C247010A3008569B5 /* ModelViewListDictionary.swift */,
 				FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */,
-				FDBAB72A24A53FE0008748D0 /* ModelViewDictionary.swift */,
 			);
 			path = MV;
 			sourceTree = "<group>";
@@ -205,11 +215,9 @@
 				FD72713B24AB8567007917BD /* ViewControllerLaunchApp.swift */,
 				FD67A97224A0899500FF210A /* ViewControllerRenameDictionary.swift */,
 				FDE60B01246DA27D00D0A0BB /* ViewControllerLogin.swift */,
-				FDAC4C3A246FF8EE008569B5 /* ViewControllerListDictionary.swift */,
 				FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */,
-				FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */,
-				FDAC4C4224707B7E008569B5 /* TableViewCellListDictionary.swift */,
-				FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */,
+				FD8B871D24B9E92E00B88CC0 /* UIForDictionary */,
+				FD8B871C24B9E90100B88CC0 /* UIForListDictionary */,
 				FD67A96C249DFA4C00FF210A /* ColorScheme.swift */,
 			);
 			path = Views;
@@ -218,10 +226,10 @@
 		FD174ED5246404B80090A002 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FD0E61F524B760FA00AAE6B1 /* ModelWords */,
+				FD0E61F424B760D800AAE6B1 /* ModelDictionaries */,
+				FD174EE32464102A0090A002 /* ModelDataForUser */,
 				FD72713224AB3DE4007917BD /* ModelForAPIYandexDictionary */,
-				FD0E61F324B758E400AAE6B1 /* ObjectsForRealm */,
-				FD174EE32464102A0090A002 /* ModelDataDictionariesForUser */,
-				FDAC4C2F246FD2DB008569B5 /* ModelDataRealmUser */,
 				FD174EE2246410170090A002 /* ModelDataRealmShared */,
 			);
 			path = Models;
@@ -279,32 +287,50 @@
 			path = ModelDataRealmShared;
 			sourceTree = "<group>";
 		};
-		FD174EE32464102A0090A002 /* ModelDataDictionariesForUser */ = {
+		FD174EE32464102A0090A002 /* ModelDataForUser */ = {
 			isa = PBXGroup;
 			children = (
-				FDAC4C38246FECBF008569B5 /* ModelRealmUser.swift */,
-				FDAC4C3E24701DE9008569B5 /* DataSoursesDictionariesForUser.swift */,
-				FDA4C9D824A7248D00815726 /* ModelSectionDictionary.swift */,
-				FDA4C9DA24A7AE7700815726 /* DataSourceWordsForDictionary.swift */,
+				FDAC4C36246FD850008569B5 /* UserObjectRealm.swift */,
+				FDAC4C38246FECBF008569B5 /* RealmUser.swift */,
 			);
-			path = ModelDataDictionariesForUser;
+			path = ModelDataForUser;
 			sourceTree = "<group>";
 		};
 		FD72713224AB3DE4007917BD /* ModelForAPIYandexDictionary */ = {
 			isa = PBXGroup;
 			children = (
-				FD72713324AB3FA7007917BD /* ParsingResponseWithWord.swift */,
-				FD0E61ED24B74C9C00AAE6B1 /* WordCodableJSON.swift */,
 				FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */,
 			);
 			path = ModelForAPIYandexDictionary;
 			sourceTree = "<group>";
 		};
-		FDAC4C2F246FD2DB008569B5 /* ModelDataRealmUser */ = {
+		FD81A37D24BA14A5000F4D6F /* ModelVeiwDictionary */ = {
 			isa = PBXGroup;
 			children = (
+				FDBAB72A24A53FE0008748D0 /* ModelViewDictionary.swift */,
+				FD81A37E24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift */,
 			);
-			path = ModelDataRealmUser;
+			path = ModelVeiwDictionary;
+			sourceTree = "<group>";
+		};
+		FD8B871C24B9E90100B88CC0 /* UIForListDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				FDAC4C3A246FF8EE008569B5 /* ViewControllerListDictionary.swift */,
+				FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */,
+				FDAC4C4224707B7E008569B5 /* TableViewCellListDictionary.swift */,
+			);
+			path = UIForListDictionary;
+			sourceTree = "<group>";
+		};
+		FD8B871D24B9E92E00B88CC0 /* UIForDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */,
+				FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */,
+				FD8B872024B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift */,
+			);
+			path = UIForDictionary;
 			sourceTree = "<group>";
 		};
 		FDE60AF2246D944600D0A0BB /* AccessoryFiles */ = {
@@ -378,7 +404,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */,
-				FD97B1F02495309000E0E28A /* UsersBase.realm in Resources */,
 				FD174ECB2464043D0090A002 /* LaunchScreen.storyboard in Resources */,
 				FD174EC82464043D0090A002 /* Assets.xcassets in Resources */,
 				FD174EC62464043B0090A002 /* Main.storyboard in Resources */,
@@ -437,8 +462,7 @@
 			files = (
 				FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */,
 				FD97B1F42495664600E0E28A /* ModelViewNewDictionary.swift in Sources */,
-				FDA4C9DB24A7AE7700815726 /* DataSourceWordsForDictionary.swift in Sources */,
-				FD97B1EF2495303000E0E28A /* UsersBase.realm in Sources */,
+				FDAF06CF24B8ABB2000DE76C /* MetodsForWords.swift in Sources */,
 				FD7B9A1424A2043E00B421DA /* ViewControllerDictionary.swift in Sources */,
 				FD9FBC43246868620058F9A8 /* WordObject.swift in Sources */,
 				FD67A96D249DFA4C00FF210A /* ColorScheme.swift in Sources */,
@@ -451,6 +475,7 @@
 				FDE60B02246DA27D00D0A0BB /* ViewControllerLogin.swift in Sources */,
 				FDAC4C4324707B7E008569B5 /* TableViewCellListDictionary.swift in Sources */,
 				FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */,
+				FD8B872124B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift in Sources */,
 				FDE60AFC246D969E00D0A0BB /* CoordinatorListDictionary.swift in Sources */,
 				FD0E61EE24B74C9C00AAE6B1 /* WordCodableJSON.swift in Sources */,
 				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,
@@ -458,23 +483,24 @@
 				FD67A96F24A0769800FF210A /* CoordinatorRenameDictionary.swift in Sources */,
 				FD67A97324A0899500FF210A /* ViewControllerRenameDictionary.swift in Sources */,
 				FDBAB72B24A53FE0008748D0 /* ModelViewDictionary.swift in Sources */,
+				FD81A37F24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift in Sources */,
 				FDBAB72924A53EDB008748D0 /* CoordinatorDictionary.swift in Sources */,
 				FDAC4C31246FD384008569B5 /* RusMeaningObject.swift in Sources */,
-				FDAC4C39246FECBF008569B5 /* ModelRealmUser.swift in Sources */,
-				FDAC4C37246FD850008569B5 /* UserObject.swift in Sources */,
+				FDAC4C39246FECBF008569B5 /* RealmUser.swift in Sources */,
+				FDAC4C37246FD850008569B5 /* UserObjectRealm.swift in Sources */,
 				FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */,
 				FD174EE924641AE40090A002 /* Item.swift in Sources */,
 				FD6E9CF624A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift in Sources */,
 				FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */,
 				FDE60AF6246D962100D0A0BB /* CoordinatorApp.swift in Sources */,
-				FDAC4C35246FD491008569B5 /* DictionaryObject.swift in Sources */,
+				FDAC4C35246FD491008569B5 /* DictionaryObjectRealm.swift in Sources */,
 				FD67A97124A078EB00FF210A /* ModelViewRenameDictionary.swift in Sources */,
 				FDAC4C3D247010A3008569B5 /* ModelViewListDictionary.swift in Sources */,
 				FDAC4C33246FD3C9008569B5 /* ExampleForRusMeaningObject.swift in Sources */,
 				FD174EC12464043B0090A002 /* SceneDelegate.swift in Sources */,
 				FDA4C9D924A7248D00815726 /* ModelSectionDictionary.swift in Sources */,
-				FDAC4C3F24701DE9008569B5 /* DataSoursesDictionariesForUser.swift in Sources */,
-				FD72713424AB3FA7007917BD /* ParsingResponseWithWord.swift in Sources */,
+				FD8B871F24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift in Sources */,
+				FDAC4C3F24701DE9008569B5 /* MetodsForDictionary.swift in Sources */,
 				FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */,
 				FDE60AF4246D95A500D0A0BB /* Protocols.swift in Sources */,
 			);

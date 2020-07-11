@@ -13,7 +13,7 @@ import UIKit
 
 class CoordinatorDictionary: CoordinatorProtocol {
 
-    var dictionaryObject: DictionaryObject!
+    var dictionaryObject: DictionaryObjectRealm!
 
     private var disposeBag: DisposeBag! = DisposeBag()
     weak var nc: UINavigationController!
@@ -22,7 +22,7 @@ class CoordinatorDictionary: CoordinatorProtocol {
     var modelViewDictionary: ModelViewDictionary!
 
 
-    init(dictionaryObject: DictionaryObject, userName: String){
+    init(dictionaryObject: DictionaryObjectRealm, userName: String){
         self.userName = userName
         self.dictionaryObject = dictionaryObject
         self.vcDictionary = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcDictionary") as? ViewControllerDictionary

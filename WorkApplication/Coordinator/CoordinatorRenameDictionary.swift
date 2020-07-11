@@ -13,13 +13,13 @@ import UIKit
 
 class CoordinatorRenameDictionary: CoordinatorProtocol {
 
-    var dictionaryObjectRename: DictionaryObject
+    var dictionaryObjectRename: DictionaryObjectRealm
     var userName: String!
     var vcRenameDictionary: ViewControllerRenameDictionary!
     lazy var nc: UINavigationController! = vcRenameDictionary.navigationController
     var modelViewRenameDictionary: ModelViewRenameDictionary!
 
-    init?(dictionaryObjectRename: DictionaryObject, userName: String) {
+    init?(dictionaryObjectRename: DictionaryObjectRealm, userName: String) {
         self.dictionaryObjectRename = dictionaryObjectRename
         self.userName = userName
 
@@ -53,7 +53,7 @@ class CoordinatorRenameDictionary: CoordinatorProtocol {
         return Observable.empty()
     }
 
-    func openDictionary(dictionaryObject: DictionaryObject){
+    func openDictionary(dictionaryObject: DictionaryObjectRealm){
         let cootdinatorDictionary = CoordinatorDictionary.init(dictionaryObject: dictionaryObject, userName: self.userName)
         _ = coordinate(to: cootdinatorDictionary, from: self.nc)
     }

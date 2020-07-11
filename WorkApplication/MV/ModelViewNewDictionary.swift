@@ -18,18 +18,18 @@ class ModelViewNewDictionary{
     weak var vcNewDictionary: ViewControllerNewDictionary!
     var userName: String!
     var textNameDictionaryInput: String!
-    var typeDictionary: DictionaryObject.EnumDictionaryType!
+    var typeDictionary: DictionaryObjectRealm.EnumDictionaryType!
 
     var segmentType: Int = 0
     var nc: UINavigationController?{
         return self.vcNewDictionary.navigationController
     }
-    var dateSourseDictionaryForUser: DataSourceDictionariesForUser{
-        if let dataSource = DataSourceDictionariesForUser.dataSourceDictionariesForUser,
+    var dateSourseDictionaryForUser: MetodsForDictionary{
+        if let dataSource = MetodsForDictionary.objectMetodsDictionaryForSpecificUser,
             dataSource.userName == self.userName{
             return dataSource
         }else{
-            return DataSourceDictionariesForUser.init(userName: self.userName)
+            return MetodsForDictionary.init(userName: self.userName)
         }
     }
 
@@ -83,7 +83,7 @@ class ModelViewNewDictionary{
 
 
             self.vcNewDictionary.segmentTypeDictionary.rx.value.asDriver()
-                .map({ (num) -> DictionaryObject.EnumDictionaryType in
+                .map({ (num) -> DictionaryObjectRealm.EnumDictionaryType in
                     return (num == 0) ? .typeDictionaryRusEng : .typeDictionaryEngRus
             })
             .drive(onNext: { typeDictionary in
@@ -93,6 +93,7 @@ class ModelViewNewDictionary{
             self.vcNewDictionary.buttonSaveBack.rx.tap.asDriver()
             .drive(onNext: {
 
+                
                 try! self.dateSourseDictionaryForUser.appendDictionary(title: self.textNameDictionaryInput, type: self.typeDictionary)
 
                 if let arrayVC = self.nc?.viewControllers{

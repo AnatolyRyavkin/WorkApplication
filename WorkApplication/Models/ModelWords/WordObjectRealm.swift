@@ -15,10 +15,12 @@ class WordObjectRealm: Object {
 
     //@objc dynamic var keyMeaning: String = "empty"
 
-    convenience init(wordCodable: WordCodableJSON) {
+    convenience init?(wordCodable: WordCodableJSON) {
         self.init()
-        guard let arrayDef = wordCodable.def else {return}
-        for def in arrayDef{
+        if wordCodable.def.count == 0 {
+            return nil
+        }
+        for def in wordCodable.def{
             self.def.append(DictionaryEntryObject(def: def))
         }
     }

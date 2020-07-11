@@ -14,7 +14,7 @@ class ModelViewRenameDictionary{
 
     weak var coordinatorRenameDictionary: CoordinatorRenameDictionary!
 
-    var dictionaryObjectRename: DictionaryObject!
+    var dictionaryObjectRename: DictionaryObjectRealm!
 
     var disposeBag: DisposeBag! = DisposeBag()
     weak var vcRenameDictionary: ViewControllerRenameDictionary!
@@ -24,16 +24,16 @@ class ModelViewRenameDictionary{
     var nc: UINavigationController?{
         return self.vcRenameDictionary.navigationController
     }
-    var dateSourseDictionaryForUser: DataSourceDictionariesForUser{
-        if let dataSource = DataSourceDictionariesForUser.dataSourceDictionariesForUser,
+    var dateSourseDictionaryForUser: MetodsForDictionary{
+        if let dataSource = MetodsForDictionary.objectMetodsDictionaryForSpecificUser,
             dataSource.userName == self.userName{
             return dataSource
         }else{
-            return DataSourceDictionariesForUser.init(userName: self.userName)
+            return MetodsForDictionary.init(userName: self.userName)
         }
     }
 
-    init(dictionaryObjectRename: DictionaryObject, userName: String, coordinatorRenameDictionary: CoordinatorRenameDictionary){
+    init(dictionaryObjectRename: DictionaryObjectRealm, userName: String, coordinatorRenameDictionary: CoordinatorRenameDictionary){
         self.coordinatorRenameDictionary = coordinatorRenameDictionary
         self.dictionaryObjectRename = dictionaryObjectRename
         self.userName = userName

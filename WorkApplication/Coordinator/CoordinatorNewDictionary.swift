@@ -52,7 +52,7 @@ class CoordinatorNewDictionary: CoordinatorProtocol{
         return Observable.empty()
     }
 
-    func openDictionary(dictionaryObject: DictionaryObject){
+    func openDictionary(dictionaryObject: DictionaryObjectRealm){
         let cootdinatorDictionary = CoordinatorDictionary.init(dictionaryObject: dictionaryObject, userName: self.userName)
         _ = coordinate(to: cootdinatorDictionary, from: self.nc)
     }

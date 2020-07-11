@@ -13,14 +13,29 @@ import Alamofire
 import RxSwift
 import RxCocoa
 
-enum StatusErrorForGetRequestAPIYandex{
+typealias Res = Result<(Data,HTTPURLResponse),Error>
+
+public enum ErrorForGetRequestAPIYandex: Error, CaseIterable{
+
     case ERR_OK
     case ERR_KEY_INVALID
     case ERR_KEY_BLOCKED
     case ERR_DAILY_REQ_LIMIT_EXCEEDED
     case ERR_TEXT_TOO_LONG
     case ERR_LANG_NOT_SUPPORTED
-    var error: (num: Int, nameError: String){
+
+    case ERR_DONT_PARSING_WORD_OBJECT_REALM
+    case ERR_DONT_GET_WORD_CODABLE_JSON
+    case ERR_DONT_ADD_WORD_IN_DICTIONARY
+
+    case ERR_SERVER_DONT_AVIALABLE
+    case ERR_UNKNOWN
+
+    case BAD_REQUEST
+    case NOT_FOUND
+    case DONT_INTERNET
+
+    var discript: (num: Int, nameError: String){
         switch self {
         case .ERR_OK :  return (200, "ERR_OK")
         case .ERR_KEY_INVALID : return (401, "ERR_KEY_INVALID")
@@ -28,61 +43,585 @@ enum StatusErrorForGetRequestAPIYandex{
         case .ERR_DAILY_REQ_LIMIT_EXCEEDED : return (403, "ERR_DAILY_REQ_LIMIT_EXCEEDED")
         case .ERR_TEXT_TOO_LONG : return (413, "ERR_TEXT_TOO_LONG")
         case .ERR_LANG_NOT_SUPPORTED : return (501, "ERR_LANG_NOT_SUPPORTED")
+        case .ERR_DONT_PARSING_WORD_OBJECT_REALM : return (001, "ERR_DONT_PARSING_WORD_OBJECT_REALM")
+        case .ERR_DONT_GET_WORD_CODABLE_JSON : return (002, "ERR_DONT_GET_WORD_CODABLE_JSON")
+        case .ERR_UNKNOWN : return (003, "ERR_UNKNOWN")
+        case .ERR_SERVER_DONT_AVIALABLE : return (005, "ERR_SERVER_DONT_AVIALABLE")
+        case .BAD_REQUEST : return (400, "BAD_REQUEST")
+        case .NOT_FOUND : return (404, "NOT_FOUND")
+        case .DONT_INTERNET : return (700, "DONT_INTERNET")
+        case .ERR_DONT_ADD_WORD_IN_DICTIONARY : return (004, "ERR_DONT_ADD_WORD_IN_DICTIONARY")
         }
     }
+
+    static func makeSelfAtCode(code: Int) -> ErrorForGetRequestAPIYandex {
+        for meaning in ErrorForGetRequestAPIYandex.allCases{
+            if meaning.discript.num == code{
+                return meaning
+            }
+        }
+        return .ERR_UNKNOWN
+    }
+}
+
+enum MyResponse{
+    case success(WordObjectRealm)
+    case failure(ErrorForGetRequestAPIYandex)
 }
 
 enum TranslationDirection: String{
     case EnRu = "en-ru"
     case RuEn = "ru-en"
+    case testError = "testError"
 }
 
 class RequestsAPIYandexDictionary {
 
     static let Shared = RequestsAPIYandexDictionary()
 
-    var publishSubjectResponseYAPI = PublishSubject<WordCodableJSON?>()
-
+    var disposeBag = DisposeBag()
+    
     private init(){
         print("init RequestAPIYandexDictionary")
     }
-
     deinit {
         print("deinit RequestAPIYandexDictionary")
     }
 
-    func requestTranslate(requestWord: String, translationDirection: TranslationDirection) -> PublishSubject<WordCodableJSON?> {
+
+    //MARK- POST
+
+    func POSTRequestWordFull(requestWord: String, translationDirection: TranslationDirection) -> Observable<MyResponse> {
+
         let trDir = translationDirection.rawValue
-        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+
+        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup"
+
+        let body = "key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)".data(using: .utf8)
+
         let url = URL.init(string: urlString)!
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        session.dataTaskMy(with: url) { result in
-            switch result {
-            case .success((let data, let response)):
-                guard response.statusCode == 200 else {
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        print("error = ",jsonString)
+
+        let request = self.getRequestFull(urlStringComponent: nil, preferensURLConvertabele: url, params: nil, metodString: "POST", paramsForHeader: nil, body: body)!
+
+        let session = URLSession.init(configuration: URLSessionConfiguration.default)
+
+        return Observable<MyResponse>.create { (observer) -> Disposable in
+
+            session.dataTaskMy(with: request) { (result: Res)  in
+                switch result {
+                case .success((let data, let response)):
+                    switch response.statusCode {
+                    case 200:
+                        do{
+                            //                            if let jsonString = String(data: data, encoding: .utf8) {
+                            //                                print(jsonString)
+                            //                            }
+                            let decoder = JSONDecoder()
+                            let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
+                            if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
+                                observer.onNext(.success(wordObjectRealm))
+                            }else{
+                                observer.onNext(.failure(.ERR_DONT_PARSING_WORD_OBJECT_REALM))
+                            }
+                        } catch (_) {
+                            observer.onNext(.failure(.ERR_DONT_GET_WORD_CODABLE_JSON))
+                        }
+                    case 400:
+                        do{
+                            let json = try JSONSerialization.jsonObject(with: data, options: [])
+                            if  let dictionary = json as? [String : Any] {
+                                if let code = dictionary["code"] as? Int{
+                                    let error = ErrorForGetRequestAPIYandex.makeSelfAtCode(code: code)
+                                    observer.onNext(.failure(error))
+                                }
+                            } else {
+                                print("JSON is invalid")
+                                observer.onNext(.failure(.ERR_UNKNOWN))
+                            }
+                        } catch (_) {
+                            observer.onNext(.failure(.ERR_UNKNOWN))
+                        }
+                    case 401:
+                        observer.onNext(.failure(.ERR_KEY_INVALID))
+                    case 402:
+                        observer.onNext(.failure(.ERR_KEY_BLOCKED))
+                    case 403:
+                        observer.onNext(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+                    case 413:
+                        observer.onNext(.failure(.ERR_TEXT_TOO_LONG))
+                    case 501:
+                        observer.onNext(.failure(.ERR_LANG_NOT_SUPPORTED))
+                    default:
+                        observer.onNext(.failure(.ERR_UNKNOWN))
                     }
-                    return
+                case .failure(let error):
+                    switch (error as NSError).code {
+                    case 401:
+                        observer.onNext(.failure(.ERR_KEY_INVALID))
+                    case 402:
+                        observer.onNext(.failure(.ERR_KEY_BLOCKED))
+                    case 403:
+                        observer.onNext(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+                    case 413:
+                        observer.onNext(.failure(.ERR_TEXT_TOO_LONG))
+                    case 501:
+                        observer.onNext(.failure(.ERR_LANG_NOT_SUPPORTED))
+                    case 400:
+                        observer.onNext(.failure(.BAD_REQUEST))
+                    case 404:
+                        observer.onNext(.failure(.NOT_FOUND))
+                    case 600 ... 800 :
+                        observer.onNext(.failure(.DONT_INTERNET))
+                    case -2000 ... -1 :
+                        observer.onNext(.failure(.DONT_INTERNET))
+                    default:
+                        observer.onNext(.failure(.ERR_UNKNOWN))
+                    }
                 }
-//                if let jsonString = String(data: data, encoding: .utf8) {
-//                    print("data = ",jsonString)
-//                }
-                let decoder = JSONDecoder()
-                do{
-                    let word = try decoder.decode(WordCodableJSON.self, from: data)
-                    self.publishSubjectResponseYAPI.onNext(word)
-                    print("Status code = ", response.statusCode)
-                    //                dump(word)
-                } catch (let error) {
-                    print(error)
+            }.resume()
+            return Disposables.create()
+        }
+        .observeOn(MainScheduler.instance)
+    }
+
+
+    //MARK- POSTRequest -> Observable<WordObjectRealm> with trows
+
+    func getObservableWord(requestWord: String, translationDirection: TranslationDirection,
+                           handlerError: @escaping (Error) throws -> Observable<WordObjectRealm>) -> Observable<WordObjectRealm> {
+        return self.POSTRequestWordFull(requestWord: requestWord, translationDirection: translationDirection)
+            .flatMap { (response) throws -> Observable<WordObjectRealm> in
+                switch response {
+                case .success(let wordObjectRealm) :
+                    return Observable<WordObjectRealm>.of(wordObjectRealm)
+                case .failure(let error):
+                    return Observable.error(error)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+        }
+        .catchError(handlerError)
+    }
+
+
+    func getWord(requestWord: String, translationDirection: TranslationDirection,
+                           handlerError: @escaping (Error) throws -> Observable<WordObjectRealm> , observer: @escaping (WordObjectRealm) -> Void) throws -> Disposable{
+        return self.POSTRequestWordFull(requestWord: requestWord, translationDirection: translationDirection)
+            .flatMap { (response) throws -> Observable<WordObjectRealm> in
+                switch response {
+                case .success(let wordObjectRealm) :
+                    return Observable<WordObjectRealm>.of(wordObjectRealm)
+                case .failure(let error):
+                    return Observable.error(error)
+                }
+        }
+        .catchError(handlerError)
+        .subscribe(onNext: observer)
+
+    }
+
+
+    //MARK- MakeRequest
+
+    func getRequestFull(urlStringComponent: (sheme: String, host: String, path: String)? = nil ,preferensURLConvertabele urlConvertabele : URLConvertible? = nil, params: [String:String]? = nil, metodString: String, paramsForHeader: [String : String]? = nil, body: Data? = nil) -> URLRequest? {
+
+        var urlComponents: URLComponents
+
+        if let url = try? urlConvertabele?.asURL() {
+            urlComponents = URLComponents.init(url: url, resolvingAgainstBaseURL: false)!
+        }
+        else{
+            guard let urlStrComp = urlStringComponent else{
+                print("error URLComponentString")
+                return nil
             }
-        }.resume()
-        return self.publishSubjectResponseYAPI
+            urlComponents = URLComponents.init()
+            urlComponents.scheme = urlStrComp.sheme
+            urlComponents.host = urlStrComp.host
+            urlComponents.path = urlStrComp.path
+        }
+
+        var items = [URLQueryItem]()
+        if let params = params {
+            for (key,value) in params {
+                items.append(URLQueryItem(name: key, value: value))
+            }
+        }
+        items = items.filter{!$0.name.isEmpty}
+        if !items.isEmpty {
+            urlComponents.queryItems = items
+        }
+
+        var urlRequest = URLRequest(url: urlComponents.url!)
+        urlRequest.httpMethod = metodString
+        if let httpBody = body{
+            urlRequest.httpBody = httpBody
+        }
+
+
+
+        if let paramsForHeader = paramsForHeader {
+            for (key, value) in paramsForHeader {
+                let valueHeader:String = (key == "Content-Length") ? "\(urlRequest.httpBody?.count ?? 0)" : value
+                urlRequest.addValue(valueHeader, forHTTPHeaderField: key)
+            }
+        }
+        return urlRequest
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //MARK- GET
+//
+//    func GETRequestWordFull(requestWord: String, translationDirection: TranslationDirection) -> Observable<MyResponse> {
+//        let trDir = translationDirection.rawValue
+//        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+//        let url = URL.init(string: urlString)!
+//        let config = URLSessionConfiguration.default
+//        let session = URLSession(configuration: config)
+//
+//        return Observable<MyResponse>.create { (observer) -> Disposable in
+//
+//            session.dataTaskMy(with: url) { (result: Res)  in
+//                switch result {
+//                case .success((let data, let response)):
+//                    switch response.statusCode {
+//                    case 200:
+//                        do{
+//                            //                            if let jsonString = String(data: data, encoding: .utf8) {
+//                            //                                print(jsonString)
+//                            //                            }
+//                            let decoder = JSONDecoder()
+//                            let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
+//                            if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
+//                                observer.onNext(.success(wordObjectRealm))
+//                            }else{
+//                                observer.onNext(.failure(.ERR_DONT_PARSING_WORD_OBJECT_REALM))
+//                            }
+//                        } catch (_) {
+//                            observer.onNext(.failure(.ERR_DONT_GET_WORD_CODABLE_JSON))
+//                        }
+//                    case 400:
+//                        do{
+//                            let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                            if  let dictionary = json as? [String : Any] {
+//                                if let code = dictionary["code"] as? Int{
+//                                    let error = ErrorForGetRequestAPIYandex.makeSelfAtCode(code: code)
+//                                    observer.onNext(.failure(error))
+//                                }
+//                            } else {
+//                                print("JSON is invalid")
+//                                observer.onNext(.failure(.ERR_UNKNOWN))
+//                            }
+//                        } catch (_) {
+//                            observer.onNext(.failure(.ERR_UNKNOWN))
+//                        }
+//                    case 401:
+//                        observer.onNext(.failure(.ERR_KEY_INVALID))
+//                    case 402:
+//                        observer.onNext(.failure(.ERR_KEY_BLOCKED))
+//                    case 403:
+//                        observer.onNext(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                    case 413:
+//                        observer.onNext(.failure(.ERR_TEXT_TOO_LONG))
+//                    case 501:
+//                        observer.onNext(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                    default:
+//                        observer.onNext(.failure(.ERR_UNKNOWN))
+//                    }
+//                case .failure(let error):
+//                    switch (error as NSError).code {
+//                    case 401:
+//                        observer.onNext(.failure(.ERR_KEY_INVALID))
+//                    case 402:
+//                        observer.onNext(.failure(.ERR_KEY_BLOCKED))
+//                    case 403:
+//                        observer.onNext(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                    case 413:
+//                        observer.onNext(.failure(.ERR_TEXT_TOO_LONG))
+//                    case 501:
+//                        observer.onNext(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                    case 400:
+//                        observer.onNext(.failure(.BAD_REQUEST))
+//                    case 404:
+//                        observer.onNext(.failure(.NOT_FOUND))
+//                    case 600 ... 800 :
+//                        observer.onNext(.failure(.DONT_INTERNET))
+//                    case -2000 ... -1 :
+//                        observer.onNext(.failure(.DONT_INTERNET))
+//                    default:
+//                        observer.onNext(.failure(.ERR_UNKNOWN))
+//                    }
+//                }
+//            }.resume()
+//            return Disposables.create()
+//        }
+//        .observeOn(MainScheduler.instance)
+//    }
+
+
+
+
+//    func requestRxWithoutErrorGetWord(requestWord: String, translationDirection: TranslationDirection) -> Observable<MyResponse> {
+//        let trDir = translationDirection.rawValue
+//        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+//        let url = URL.init(string: urlString)!
+//        let request = URLRequest(url: url)
+//        return URLSession.shared.rx.response(request: request)
+//            .flatMap { (response, data) -> Observable<MyResponse> in
+//                switch response.statusCode {
+//                case 200:
+//                    do{
+//                        let decoder = JSONDecoder()
+//                        let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
+//                        if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
+//                            return Observable.of(.success(wordObjectRealm))
+//                        }
+//                        return Observable.of(.failure(.ERR_DONT_PARSING_WORD_OBJECT_REALM))
+//                    } catch (_) {
+//                        return Observable.of(.failure(.ERR_DONT_GET_WORD_CODABLE_JSON))
+//                    }
+//                case 401:
+//                    return Observable.of(.failure(.ERR_KEY_INVALID))
+//                case 402:
+//                    return Observable.of(.failure(.ERR_KEY_BLOCKED))
+//                case 403:
+//                    return Observable.of(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                case 413:
+//                    return Observable.of(.failure(.ERR_TEXT_TOO_LONG))
+//                case 501:
+//                    return Observable.of(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                default:
+//                    return Observable.of(.failure(.ERR_UNKNOWN))
+//                }
+//        }
+//        .subscribeOn(MainScheduler.instance)
+//    }
+//
+//
+//    func getObservableWordRxWithoutError(requestWord: String, translationDirection: TranslationDirection) -> Observable<WordObjectRealm?> {
+//        let trDir = translationDirection.rawValue
+//        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+//        let url = URL.init(string: urlString)!
+//        let request = URLRequest(url: url)
+//        return URLSession.shared.rx.response(request: request)
+//            .flatMap { (response, data) -> Observable<WordObjectRealm?> in
+//                let decoder = JSONDecoder()
+//                let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
+//                if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
+//                    return Observable.of(wordObjectRealm)
+//                }
+//                return Observable.of(nil)
+//        }
+//        .subscribeOn(MainScheduler.instance)
+//
+//    }
+//
+//
+//
+//    func requestGetTranslateStandardInEventWord(requestWord: String, translationDirection: TranslationDirection,
+//                                                eventHandler: @escaping (Event<MyResponse>) -> Void) {
+//
+//        let observer = AnyObserver<MyResponse>.init(eventHandler: eventHandler)
+//        let trDir = translationDirection.rawValue
+//        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+//        let url = URL.init(string: urlString)!
+//        let config = URLSessionConfiguration.default
+//        let session = URLSession(configuration: config)
+//
+//        session.dataTaskMy(with: url) { (result: Res)  in
+//
+//            Observable<Res>.just(result)
+//                .flatMap({ (result: Res) -> Observable<MyResponse> in
+//                    switch result {
+//                    case .success((let data, let response)):
+//                        switch response.statusCode {
+//                        case 200:
+//                            do{
+//                                let decoder = JSONDecoder()
+//                                let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
+//                                if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
+//                                    return Observable.of(.success(wordObjectRealm))
+//                                }
+//                                return Observable.of(.failure(.ERR_DONT_PARSING_WORD_OBJECT_REALM))
+//                            } catch (_) {
+//                                return Observable.of(.failure(.ERR_DONT_GET_WORD_CODABLE_JSON))
+//                            }
+//                        case 401:
+//                            return Observable.of(.failure(.ERR_KEY_INVALID))
+//                        case 402:
+//                            return Observable.of(.failure(.ERR_KEY_BLOCKED))
+//                        case 403:
+//                            return Observable.of(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                        case 413:
+//                            return Observable.of(.failure(.ERR_TEXT_TOO_LONG))
+//                        case 501:
+//                            return Observable.of(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                        default:
+//                            return Observable.of(.failure(.ERR_UNKNOWN))
+//                        }
+//                    case .failure(let error):
+//                        switch (error as NSError).code {
+//                        case 401:
+//                            return Observable.of(.failure(.ERR_KEY_INVALID))
+//                        case 402:
+//                            return Observable.of(.failure(.ERR_KEY_BLOCKED))
+//                        case 403:
+//                            return Observable.of(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                        case 413:
+//                            return Observable.of(.failure(.ERR_TEXT_TOO_LONG))
+//                        case 501:
+//                            return Observable.of(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                        case 400:
+//                            return Observable.of(.failure(.BAD_REQUEST))
+//                        case 404:
+//                            return Observable.of(.failure(.NOT_FOUND))
+//                        case 600 ... 800 :
+//                            return Observable.of(.failure(.DONT_INTERNET))
+//                        default:
+//                            return Observable.of(.failure(.ERR_UNKNOWN))
+//                        }
+//                    }
+//                })
+//                .observeOn(MainScheduler.instance)
+//                .subscribe(observer)
+//                .disposed(by: self.disposeBag)
+//        }.resume()
+//    }
+
+
+
+
+
+
+//Observable<Res>.just(result)
+//                .flatMap({ (result: Res) -> Observable<MyResponse> in
+//                    switch result {
+//                    case .success((let data, let response)):
+//                        switch response.statusCode {
+//                        case 200:
+//                            do{
+//                                let decoder = JSONDecoder()
+//                                let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
+//                                if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
+//                                    return Observable.of(.success(wordObjectRealm))
+//                                }
+//                                return Observable.of(.failure(.ERR_DONT_PARSING_WORD_OBJECT_REALM))
+//                            } catch (_) {
+//                                return Observable.of(.failure(.ERR_DONT_GET_WORD_CODABLE_JSON))
+//                            }
+//                        case 401:
+//                            return Observable.of(.failure(.ERR_KEY_INVALID))
+//                        case 402:
+//                            return Observable.of(.failure(.ERR_KEY_BLOCKED))
+//                        case 403:
+//                            return Observable.of(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                        case 413:
+//                            return Observable.of(.failure(.ERR_TEXT_TOO_LONG))
+//                        case 501:
+//                            return Observable.of(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                        default:
+//                            return Observable.of(.failure(.ERR_UNKNOWN))
+//                        }
+//                    case .failure(let error):
+//                        switch (error as NSError).code {
+//                        case 401:
+//                            return Observable.of(.failure(.ERR_KEY_INVALID))
+//                        case 402:
+//                            return Observable.of(.failure(.ERR_KEY_BLOCKED))
+//                        case 403:
+//                            return Observable.of(.failure(.ERR_DAILY_REQ_LIMIT_EXCEEDED))
+//                        case 413:
+//                            return Observable.of(.failure(.ERR_TEXT_TOO_LONG))
+//                        case 501:
+//                            return Observable.of(.failure(.ERR_LANG_NOT_SUPPORTED))
+//                        case 400:
+//                            return Observable.of(.failure(.BAD_REQUEST))
+//                        case 404:
+//                            return Observable.of(.failure(.NOT_FOUND))
+//                        case 600 ... 800 :
+//                            return Observable.of(.failure(.DONT_INTERNET))
+//                        default:
+//                            return Observable.of(.failure(.ERR_UNKNOWN))
+//                        }
+//                    }
+//                })
+//                .observeOn(MainScheduler.instance)
+//                .subscribe(observer)
+//                .disposed(by: self.disposeBag)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//func requestTranslateResponseWordObjectRealm(requestWord: String, translationDirection: TranslationDirection) {
+//        let trDir = translationDirection.rawValue
+//        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+//        let url = URL.init(string: urlString)!
+//        let config = URLSessionConfiguration.default
+//        let session = URLSession(configuration: config)
+//        session.dataTaskMy(with: url) { result in
+//            switch result {
+//            case .success((let data, let response)):
+//                guard response.statusCode == 200 else {
+//                    if let jsonString = String(data: data, encoding: .utf8) {
+//                        print("Status code = ", response.statusCode)
+//                        print("error = ",jsonString)
+//                    }
+//                    return
+//                }
+//                let decoder = JSONDecoder()
+//                do{
+//                    let word = try decoder.decode(WordCodableJSON.self, from: data)
+//                    self.publishSubjectResponseWordObjectRealm.onNext(WordObjectRealm.init(wordCodable: word))
+//                } catch (let error) {
+//                    print(error)
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }.resume()
+//    }
+
+
+//    func requestResult(requestWord: String, translationDirection: TranslationDirection) -> Observable<Res>{
+//        let trDir = translationDirection.rawValue
+//        let urlString = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200707T204930Z.ad0118aaace6d7cf.8e79f678653ae9589a3d414cfc330579d3d2dceb&lang=\(trDir)&text=\(requestWord)"
+//        let url = URL.init(string: urlString)!
+//        let config = URLSessionConfiguration.default
+//        let session = URLSession(configuration: config)
+//        return session.dataTaskMy(with: url) { result in
+//            return Observable<Res>.of(result)
+//        }.resume()
+//    }
+
+
+
+

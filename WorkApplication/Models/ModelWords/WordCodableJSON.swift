@@ -9,7 +9,7 @@
 import Foundation
 
 struct WordCodableJSON: Codable {
-    let def: [DictionaryEntryCodable]?
+    let def: [DictionaryEntryCodable]
 }
 struct DictionaryEntryCodable: Codable {
     let text: String?

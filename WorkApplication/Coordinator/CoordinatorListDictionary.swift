@@ -60,13 +60,13 @@ class CoordinatorListDictionary: CoordinatorProtocol{
         return Observable.empty()
     }
 
-    func launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: DictionaryObject, userName: String) -> Observable<Void> {
+    func launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: DictionaryObjectRealm, userName: String) -> Observable<Void> {
         let coordinatorChangeTitleDictionary = CoordinatorRenameDictionary.init(dictionaryObjectRename: dictionaryObjectRename, userName: userName)!
         _ = self.coordinate(to: coordinatorChangeTitleDictionary, from: self.nc)
         return Observable.empty()
     }
 
-    func openDictionary(dictionaryObject: DictionaryObject){
+    func openDictionary(dictionaryObject: DictionaryObjectRealm){
         let cootdinatorDictionary = CoordinatorDictionary.init(dictionaryObject: dictionaryObject, userName: self.userName)
         _ = coordinate(to: cootdinatorDictionary, from: self.nc)
     }

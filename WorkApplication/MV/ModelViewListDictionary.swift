@@ -18,19 +18,19 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
 
     let cellListDictionary = "cellListDictionary"
 
-    var dictionaryObject: DictionaryObject!
+    var dictionaryObject: DictionaryObjectRealm!
 
     var disposeBag: DisposeBag! = DisposeBag()
     weak var vcListDictionary: ViewControllerListDictionary!
     var userName: String!
     weak var tableView: UITableView!
 
-    var dateSourseDictionaryForUser: DataSourceDictionariesForUser{
-        if let dataSource = DataSourceDictionariesForUser.dataSourceDictionariesForUser,
+    var dateSourseDictionaryForUser: MetodsForDictionary{
+        if let dataSource = MetodsForDictionary.objectMetodsDictionaryForSpecificUser,
             dataSource.userName == self.userName{
             return dataSource
         }else{
-            return DataSourceDictionariesForUser.init(userName: self.userName)
+            return MetodsForDictionary.init(userName: self.userName)
         }
     }
 
@@ -67,7 +67,8 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
                 self.vcListDictionary.barButtonEdit.tintColor = (isEdit) ? UIColor.red : ColorScheme.Shared.cFFE69C
             }).disposed(by: self.disposeBag)
 
-            _ = self.dateSourseDictionaryForUser.behaviorSubject.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
+
+            _ = self.dateSourseDictionaryForUser.behaviorSubjectDictionary.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
                 switch row{
                 case 0:
                     let myShadow = NSShadow()
@@ -104,7 +105,7 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
 
                     ]
 
-                    var string: String = "\(dictionary.listWordObjectsByID.count)"
+                    var string: String = "\(dictionary.listWordObjects.count)"
                     var attributeString = NSAttributedString(string: string, attributes: attribute)
                     cell.labelCountItem.attributedText = attributeString
 
