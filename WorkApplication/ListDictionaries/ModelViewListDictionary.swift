@@ -12,33 +12,22 @@ import RxCocoa
 import RxDataSources
 
 
-class ModelViewListDictionary : NSObject, UITableViewDelegate{
+class ModelViewListDictionary : NSObject {
 
     weak var coordinatorListDictionary: CoordinatorListDictionary?
 
     let cellListDictionary = "cellListDictionary"
-
-    var dictionaryObject: DictionaryObjectRealm!
-
     var disposeBag: DisposeBag! = DisposeBag()
     weak var vcListDictionary: ViewControllerListDictionary!
-    var userName: String!
-    weak var tableView: UITableView!
-
-    var dateSourseDictionaryForUser: MetodsForDictionary{
-        if let dataSource = MetodsForDictionary.objectMetodsDictionaryForSpecificUser,
-            dataSource.userName == self.userName{
-            return dataSource
-        }else{
-            return MetodsForDictionary.init(userName: self.userName)
-        }
+    var userObject: UserObjectRealm {
+        UserObjectRealm.CurrentUserObjectRealm!
     }
+    weak var tableView: UITableView!
 
     var firstvcListDictionaryDidAppear = true
 
-    init(userName: String, coordinatorListDictionary: CoordinatorListDictionary){
+    init( coordinatorListDictionary: CoordinatorListDictionary){
         self.coordinatorListDictionary = coordinatorListDictionary
-        self.userName = userName
         print("init ModelViewListDictionary")
     }
 
@@ -48,10 +37,22 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
 
     func binding(){
 
+//MARK-  subscribe at vcListDictionary viewWillAppear
+
         (self.vcListDictionary as UIViewController).rx.viewWillAppear.asDriver().drive(onNext: { _ in
-            self.vcListDictionary.tableView.isEditing = false
+
+            self.vcListDictionary.navigationController?.navigationBar.addSubview(self.vcListDictionary.labelNavigationItem)
+            self.vcListDictionary.labelNavigationItem.text = self.userObject.userName
+            self.vcListDictionary.labelNavigationItem.textAlignment = .center
             
+            self.vcListDictionary.tableView.isEditing = false
+            if self.firstvcListDictionaryDidAppear == false {
+                return
+            }
+
         }).disposed(by: self.disposeBag)
+
+//MARK-  subscribe at vcListDictionary viewDidAppear
 
 
         (self.vcListDictionary as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
@@ -68,37 +69,7 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
             }).disposed(by: self.disposeBag)
 
 
-            _ = self.dateSourseDictionaryForUser.behaviorSubjectDictionary.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
-                switch row{
-                case 0:
-                    let myShadow = NSShadow()
-                    myShadow.shadowBlurRadius = 2
-                    myShadow.shadowOffset = CGSize(width: 2, height: 2)
-                    myShadow.shadowColor = UIColor.gray
-
-                    let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCTextTitle ,
-                                      NSAttributedString.Key.font: UIFont(name: "Futura", size: 25.0)!,
-                                      NSAttributedString.Key.shadow: myShadow,
-                    ]
-                    
-                    var string: String = "Count"
-                    var attributeString = NSAttributedString(string: string, attributes: attribute)
-                    cell.labelCountItem.attributedText = attributeString
-                    cell.labelCountItem.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
-
-                    string = "Name"
-                    attributeString = NSAttributedString(string: string, attributes: attribute)
-                    cell.labelNameDictionary.attributedText = attributeString
-                    cell.labelNameDictionary.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
-
-                    string = "Type"
-                    attributeString = NSAttributedString(string: string, attributes: attribute)
-                    cell.labelTypeDictionary.attributedText = attributeString
-                    cell.labelTypeDictionary.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
-
-                    cell.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
-
-                default:
+            _ = self.userObject.metods.behaviorSubjectDictionaryToUser.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
 
                     let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCText ,
                                       NSAttributedString.Key.font: UIFont(name: "Futura", size: 20.0)!,
@@ -113,46 +84,50 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
                     attributeString = NSAttributedString(string: string, attributes: attribute)
                     cell.labelNameDictionary.attributedText = attributeString
 
-                    string = (dictionary.typeDictionary == "typeDictionaryEngRus") ? "eng-rus" : "rus-eng"
+                    string = (dictionary.typeDictionary == TranslationDirection.EnRu.rawValue) ? TranslationDirection.EnRu.rawValue : TranslationDirection.RuEn.rawValue
                     attributeString = NSAttributedString(string: string, attributes: attribute)
                     cell.labelTypeDictionary.attributedText = attributeString
 
                     cell.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
 
-                }
-
             }
+
+            self.vcListDictionary.barButtonCancelProfile.rx.tap
+                .subscribe(onNext: { _ in
+                    _ = self.coordinatorListDictionary!.launchCoordinatorLogIn()
+                }).disposed(by: self.disposeBag)
 
             self.vcListDictionary.barButtonAddDictionary.rx.tap
                 .subscribe(onNext: {
-                    _ = self.coordinatorListDictionary!.launchCoordinatorMakeNewDictionary(userName: self.userName)
+                    _ = self.coordinatorListDictionary!.launchCoordinatorMakeNewDictionary()
+            }).disposed(by: self.disposeBag)
+
+            self.vcListDictionary.buttonAddDictionary.rx.tap
+                .subscribe(onNext: {
+                    _ = self.coordinatorListDictionary!.launchCoordinatorMakeNewDictionary()
             }).disposed(by: self.disposeBag)
 
             self.vcListDictionary.barButtonEdit.rx.tap
                 .subscribe(onNext: {
                     self.tableView.setEditing(!self.tableView.isEditing, animated: true)
-                    //if self.tableView.isEditing {self.tableView}
                 }).disposed(by: self.disposeBag)
 
             self.tableView.rx.itemDeleted.asDriver().drive(onNext: { indexPath in
-                if indexPath.row != 0 {
-                    self.dateSourseDictionaryForUser.deleteDictionary(numberDictionary: indexPath.row - 1)
-                }
+                self.userObject.metods.deleteDictionaryOnEverySideAtNumberInListDictionaryThisDictionary(numberDictionary: indexPath.row)
             }).disposed(by: self.disposeBag)
 
             self.tableView.rx.itemSelected.asDriver()
                 .do(onNext: { indexPath in
                     self.tableView.deselectRow(at: indexPath, animated: false)
                 })
-                .filter({ indexPath -> Bool in
-                    indexPath.row != 0
-                })
                 .do(onNext: { indexPath in
+                    var dictionaryObject: DictionaryObjectRealm
                     self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCCellSelected
-                    self.dictionaryObject = self.dateSourseDictionaryForUser.getDictionariesForUserWithInsertFirstEmpty()[indexPath.row]
+                    dictionaryObject = self.userObject.listDictionary[indexPath.row]
                     switch self.tableView.isEditing{
-                    case true:  _ = self.coordinatorListDictionary?.launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: self.dictionaryObject, userName: self.userName)
-                    case false: self.coordinatorListDictionary!.openDictionary(dictionaryObject: self.dictionaryObject)
+                    case true:  _ = self.coordinatorListDictionary?.launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: dictionaryObject)
+                    case false:
+                        self.coordinatorListDictionary!.openDictionary(dictionaryObject: dictionaryObject)
                     }
 
                 })
@@ -162,9 +137,8 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
                     }
                 }).disposed(by: self.disposeBag)
 
-            self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
-
-
+                //self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
+                //self.tableView.rx.setDataSource(self).disposed(by: self.disposeBag)
 
         }).disposed(by: self.disposeBag)
 
@@ -172,16 +146,84 @@ class ModelViewListDictionary : NSObject, UITableViewDelegate{
 
     //MARK- tableViewDelegate
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        switch indexPath.row {
-        case 0:
-            return UITableViewCell.EditingStyle.none
-        default:
-            return UITableViewCell.EditingStyle.delete
-        }
-    }
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        switch indexPath.row {
+//        case 0:
+//            return UITableViewCell.EditingStyle.none
+//        default:
+//            return UITableViewCell.EditingStyle.delete
+//        }
+//    }
+
+
+//MARK- dataSource
+
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == .delete) {
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//               switch row{
+//                case 0:
+//                    let myShadow = NSShadow()
+//                    myShadow.shadowBlurRadius = 2
+//                    myShadow.shadowOffset = CGSize(width: 2, height: 2)
+//                    myShadow.shadowColor = UIColor.gray
+//
+//                    let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCTextTitle ,
+//                                      NSAttributedString.Key.font: UIFont(name: "Futura", size: 25.0)!,
+//                                      NSAttributedString.Key.shadow: myShadow,
+//                    ]
+//
+//                    var string: String = "Count"
+//                    var attributeString = NSAttributedString(string: string, attributes: attribute)
+//                    cell.labelCountItem.attributedText = attributeString
+//                    cell.labelCountItem.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+//
+//                    string = "Name"
+//                    attributeString = NSAttributedString(string: string, attributes: attribute)
+//                    cell.labelNameDictionary.attributedText = attributeString
+//                    cell.labelNameDictionary.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+//
+//                    string = "Type"
+//                    attributeString = NSAttributedString(string: string, attributes: attribute)
+//                    cell.labelTypeDictionary.attributedText = attributeString
+//                    cell.labelTypeDictionary.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+//
+//                    cell.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+
+//                default:
 
 
 

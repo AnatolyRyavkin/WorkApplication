@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import RxDataSources
+import RxCocoa
+import RxSwift
 import RealmSwift
 
 class RealmUser{
@@ -14,19 +17,17 @@ class RealmUser{
     var realmUser: Realm!
 
     static let shared = RealmUser()
-
+    static var RealmMy: Realm {
+        RealmUser.shared.realmUser
+    }
 
     private init() {
-        var url: URL
-        #if DEBUG
-            url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyApplication/WorkApplication/WorkApplication/UsersBase.realm")
-        #else
-            url = Bundle.main.url(forResource: "UsersBase", withExtension: "realm")
-        #endif
+        //let url = Bundle.main.bundleURL.appendingPathComponent("UserBase.realm")
+        let url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyApplication/WorkApplication/WorkApplication/UsersBase.realm")
         let config = Realm.Configuration.init(fileURL: url, readOnly: false)
+
         do{
             self.realmUser = try Realm(configuration: config)
-            
         } catch let error as NSError {
             print(error.localizedDescription)
             print("error = ", error)
@@ -38,8 +39,86 @@ class RealmUser{
     deinit {
         print("deinit RealmUser",self)
     }
-    
+
+    func addUserObjectRealm(userObjectRealm: UserObjectRealm) {
+        try! self.realmUser.write {
+            self.realmUser.add(userObjectRealm)
+        }
+    }
+    func updateUserObjectRealm(userObjectRealm: UserObjectRealm) {
+        try! self.realmUser.write {
+            self.realmUser.add(userObjectRealm, update: .modified)
+        }
+    }
+    func removeUserObjectRealm(userObjectRealm: UserObjectRealm) {
+        try! self.realmUser.write {
+            userObjectRealm.listDictionary.forEach { (dictionaryObjectRealm) in
+                self.realmUser.delete(dictionaryObjectRealm)
+            }
+            self.realmUser.delete(userObjectRealm)
+        }
+    }
+
+    func findUserObjectRealmAtUserName(userName: String) -> UserObjectRealm? {
+        self.realmUser.object(ofType: UserObjectRealm.self, forPrimaryKey: userName)
+    }
+
+    func removeUserObjectIfExistAtUserName(userName: String) {
+        if let userObjectRealm = self.findUserObjectRealmAtUserName(userName: userName) {
+            self.removeUserObjectRealm(userObjectRealm: userObjectRealm)
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //(forResource: "UserBase", withExtension: "realm")
+
+        //var url: URL
+
+        //#if DEBUG
+            //url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyApplication/WorkApplication/WorkApplication/UsersBase.realm")
+        //#else
+         //   url = Bundle.main.url(forResource: "UsersBase", withExtension: "realm")
+        //#endif
+//        let config = Realm.Configuration.init(fileURL: url, readOnly: false, schemaVersion: 1,
+//            migrationBlock: { migration, oldSchemaVersion in
+//                if (oldSchemaVersion < 1) {
+//                    migration.enumerateObjects(ofType:UserObjectRealm.className()) { oldObject, newObject in
+//                        let id = NSUUID().uuidString
+//                        newObject!["userName"] = id
+//                    }
+//                }
+//        })
+
+//        let urlMainBase = Bundle.main.url(forResource: "MainBase", withExtension: "realm")
+
+
+
+///Users/ryavkinto/Library/Developer/CoreSimulator/Devices/AD5B226C-D42F-4082-8F38-08DDBAB2C86F/data/Containers/Bundle/Application/94F57622-199C-48CC-997B-1E5EA896743B/WorkApplication.app/UserBase.realm
+
+
+
 
 
 

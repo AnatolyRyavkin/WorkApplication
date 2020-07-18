@@ -13,7 +13,20 @@ class WordObjectRealm: Object {
 
     var def = List<DictionaryEntryObject>()
 
-    //@objc dynamic var keyMeaning: String = "empty"
+    @objc dynamic var word: String = ""
+    @objc dynamic var mainMeaning: String = ""
+    var wordAddMainMeaning: String {
+        (self.metods.stringFromAny(self.value(forKey: "word")) + self.metods.stringFromAny(self.value(forKey: "mainMeaning") ) )
+    }
+    
+    private var metodsIn: MetodsForWords?
+
+    var metods: MetodsForWords{
+        if metodsIn == nil {
+            metodsIn = MetodsForWords.init(word: self)
+        }
+        return metodsIn!
+    }
 
     convenience init?(wordCodable: WordCodableJSON) {
         self.init()
@@ -23,10 +36,19 @@ class WordObjectRealm: Object {
         for def in wordCodable.def{
             self.def.append(DictionaryEntryObject(def: def))
         }
+        self.mainMeaning = {def[0].tr[0].text ?? "-"}()
+        if let word = def[0].text{
+            self.word = word
+        } else {
+            #if DEBUG
+            fatalError("dont make wordObjectRealm - have not word !")
+            #else
+            self.word = "?"
+            #endif
+        }
     }
 
 }
-
 
 class DictionaryEntryObject: Object {
 

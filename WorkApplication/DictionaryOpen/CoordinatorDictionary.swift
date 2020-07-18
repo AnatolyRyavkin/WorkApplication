@@ -17,31 +17,34 @@ class CoordinatorDictionary: CoordinatorProtocol {
 
     private var disposeBag: DisposeBag! = DisposeBag()
     weak var nc: UINavigationController!
-    var userName: String!
+    var userObjectRealm: UserObjectRealm = UserObjectRealm.CurrentUserObjectRealm!
     var vcDictionary: ViewControllerDictionary!
     var modelViewDictionary: ModelViewDictionary!
 
 
-    init(dictionaryObject: DictionaryObjectRealm, userName: String){
-        self.userName = userName
-        self.dictionaryObject = dictionaryObject
+    init(dictionaryObject: DictionaryObjectRealm){
+
+
         self.vcDictionary = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcDictionary") as? ViewControllerDictionary
-        self.modelViewDictionary = ModelViewDictionary.init(dictionaryObject: dictionaryObject, userName: userName, coordinatorDictionary: self)
+        self.modelViewDictionary = ModelViewDictionary.init(dictionaryObject: dictionaryObject,  coordinatorDictionary: self)
         self.modelViewDictionary.vcDictionary = self.vcDictionary
         CoordinatorApp.addCoordinatorToArray(coor: self)
         print("init CoordinatorDictionary  - ",self)
     }
 
     deinit {
-        modelViewDictionary.disposeBag = nil
+        self.modelViewDictionary.dictionaryObjectRealm.metods.clean()
+        self.modelViewDictionary.disposeBag = nil
+        self.vcDictionary = nil
+        self.modelViewDictionary = nil
         print("deinit CoordinatorDictionary - ",self)
     }
 
     func start(from nc: UINavigationController) -> Observable<Void> {
         self.nc = nc
         self.modelViewDictionary.binding()
-        print("start coordinatorDictionary for userName: \(self.userName!)")
-        self.nc.pushViewController(self.vcDictionary, animated: true)
+        print("start coordinatorDictionary for userName: \(self.userObjectRealm.userName)")
+        self.nc.pushViewController(self.vcDictionary, animated: false) //true)
         return Observable.empty()
     }
 

@@ -15,6 +15,7 @@ class ViewControllerLogin: UIViewController {
     @IBOutlet weak var buttonFindProfile: UIButton!
     @IBOutlet weak var pickerProfiles: UIPickerView!
     @IBOutlet weak var labelProfileUser: UILabel!
+    @IBOutlet weak var buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist: UIButton!
 
 
     required init?(coder: NSCoder) {
@@ -43,10 +44,17 @@ class ViewControllerLogin: UIViewController {
 
         self.labelProfileUser.textColor = ColorScheme.Shared.colorLVCProfileUserLabelText
 
+        self.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = ColorScheme.Shared.colorLVCButtonNextDontActive
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
     }
 
 }

@@ -14,22 +14,16 @@ import UIKit
 class CoordinatorRenameDictionary: CoordinatorProtocol {
 
     var dictionaryObjectRename: DictionaryObjectRealm
-    var userName: String!
+    var userObjectRealm: UserObjectRealm = UserObjectRealm.CurrentUserObjectRealm!
     var vcRenameDictionary: ViewControllerRenameDictionary!
     lazy var nc: UINavigationController! = vcRenameDictionary.navigationController
     var modelViewRenameDictionary: ModelViewRenameDictionary!
 
-    init?(dictionaryObjectRename: DictionaryObjectRealm, userName: String) {
+    init(dictionaryObjectRename: DictionaryObjectRealm) {
         self.dictionaryObjectRename = dictionaryObjectRename
-        self.userName = userName
-
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcRenameDictionary") as? ViewControllerRenameDictionary
-            else{
-                print("error init vcRenameDictionary")
-                return nil
-        }
+         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcRenameDictionary") as? ViewControllerRenameDictionary
         self.vcRenameDictionary = vc
-        self.modelViewRenameDictionary = ModelViewRenameDictionary.init(dictionaryObjectRename: dictionaryObjectRename, userName: userName, coordinatorRenameDictionary: self)
+        self.modelViewRenameDictionary = ModelViewRenameDictionary.init(dictionaryObjectRename: dictionaryObjectRename, coordinatorRenameDictionary: self)
         self.modelViewRenameDictionary.vcRenameDictionary = self.vcRenameDictionary
         CoordinatorApp.addCoordinatorToArray(coor: self)
         print("init CoordinatorRenameDictionary")
@@ -43,7 +37,7 @@ class CoordinatorRenameDictionary: CoordinatorProtocol {
     func start(from nc: UINavigationController) -> Observable<Void> {
         self.nc = nc
         self.modelViewRenameDictionary.binding()
-        print("start coordinatorRenameDictionary for userName: \(self.userName ?? "nil user")")
+        print("start coordinatorRenameDictionary for userName: \(self.userObjectRealm.userName )")
         self.nc.pushViewController(self.vcRenameDictionary, animated: true)
         return Observable.empty()
     }
@@ -54,7 +48,7 @@ class CoordinatorRenameDictionary: CoordinatorProtocol {
     }
 
     func openDictionary(dictionaryObject: DictionaryObjectRealm){
-        let cootdinatorDictionary = CoordinatorDictionary.init(dictionaryObject: dictionaryObject, userName: self.userName)
+        let cootdinatorDictionary = CoordinatorDictionary.init(dictionaryObject: dictionaryObject )
         _ = coordinate(to: cootdinatorDictionary, from: self.nc)
     }
 

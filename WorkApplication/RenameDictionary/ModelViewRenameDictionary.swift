@@ -18,25 +18,17 @@ class ModelViewRenameDictionary{
 
     var disposeBag: DisposeBag! = DisposeBag()
     weak var vcRenameDictionary: ViewControllerRenameDictionary!
-    var userName: String!
+    var userObjectRealm: UserObjectRealm = UserObjectRealm.CurrentUserObjectRealm!
     var textNameDictionaryInput: String!
 
     var nc: UINavigationController?{
         return self.vcRenameDictionary.navigationController
     }
-    var dateSourseDictionaryForUser: MetodsForDictionary{
-        if let dataSource = MetodsForDictionary.objectMetodsDictionaryForSpecificUser,
-            dataSource.userName == self.userName{
-            return dataSource
-        }else{
-            return MetodsForDictionary.init(userName: self.userName)
-        }
-    }
 
-    init(dictionaryObjectRename: DictionaryObjectRealm, userName: String, coordinatorRenameDictionary: CoordinatorRenameDictionary){
-        self.coordinatorRenameDictionary = coordinatorRenameDictionary
+
+    init(dictionaryObjectRename: DictionaryObjectRealm, coordinatorRenameDictionary: CoordinatorRenameDictionary){
         self.dictionaryObjectRename = dictionaryObjectRename
-        self.userName = userName
+        self.coordinatorRenameDictionary = coordinatorRenameDictionary
         print("init ModelViewRenameDictionary")
     }
 
@@ -81,13 +73,14 @@ class ModelViewRenameDictionary{
 
             self.vcRenameDictionary.buttonSaveBack.rx.tap.asDriver()
             .drive(onNext: {
-                try! self.dateSourseDictionaryForUser.changeNameDictionary(dictionaryObject: self.dictionaryObjectRename, newName: self.textNameDictionaryInput)
+                //try! self.dictionaryObjectRename.metods.changeNameDictionary( newName: self.textNameDictionaryInput)
+                try! self.userObjectRealm.metods.renameDictionary(dictionaryObjectRealm: self.dictionaryObjectRename, newName: self.textNameDictionaryInput)
                 self.nc?.popViewController(animated: true)
             }).disposed(by: self.disposeBag)
 
             self.vcRenameDictionary.buttonSaveNext.rx.tap.asDriver()
             .drive(onNext: {
-                try! self.dateSourseDictionaryForUser.changeNameDictionary(dictionaryObject: self.dictionaryObjectRename, newName: self.textNameDictionaryInput)
+                try! self.dictionaryObjectRename.metods.changeNameDictionary( newName: self.textNameDictionaryInput)
                 self.coordinatorRenameDictionary!.openDictionary(dictionaryObject: self.dictionaryObjectRename)
                 CoordinatorApp.arrayCoordinators.removeAll{
                     $0 is CoordinatorRenameDictionary

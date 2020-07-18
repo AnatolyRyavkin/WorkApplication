@@ -6,6 +6,7 @@
 //  Copyright © 2020 AnatolyRyavkin. All rights reserved.
 //
 
+
 import Foundation
 import RxSwift
 import RxDataSources
@@ -13,17 +14,24 @@ import RxCocoa
 import UIKit
 
 struct ModelSectionDictionary{
-    var arrayWord: Array<WordObjectRealm>
-    var arrayTitleWord: Array<String> = []
-    var nameSection: String = ""
 
-    init(nameSection: String, arrayWord: [WordObjectRealm]){
+    var arrayWordObjectRealm: Array<WordObjectRealm>
+    var nameSection: String = ""
+    var typeTranslationDirectionSection: TranslationDirection = TranslationDirection.EnRu
+    var arrayTitleWord: Array<String> = [String]()
+
+    static var TranslationDirectionLast: TranslationDirection!
+
+    init(nameSection: String, arrayWordObjectRealm: [WordObjectRealm], typeTranslationDirectionSection: TranslationDirection){
         self.nameSection = nameSection
-        self.arrayWord = arrayWord
-        self.arrayTitleWord = self.arrayWord.map{
-            $0.def[0].text ?? "!!!!!!!!"
-        }
+        self.arrayWordObjectRealm = arrayWordObjectRealm
+        self.typeTranslationDirectionSection = typeTranslationDirectionSection
+        self.arrayTitleWord = arrayWordObjectRealm.map({ wordObjectRealm in
+            return wordObjectRealm.def[0].text!
+        })
     }
+
+
 }
 
 extension ModelSectionDictionary: AnimatableSectionModelType{
@@ -31,9 +39,16 @@ extension ModelSectionDictionary: AnimatableSectionModelType{
     typealias Identity = String
     typealias Item = String
 
-    init(original: ModelSectionDictionary, items: [Item]) {
+    init(original: ModelSectionDictionary, items: [Item] = [""]) {
         self = original
         self.arrayTitleWord = items
+    }
+
+    init(original: ModelSectionDictionary, nameSection: String, arrayWordObjectRealm: [WordObjectRealm], typeTranslationDirectionSection: TranslationDirection) {
+        self.init(original: original)
+        self.nameSection = nameSection
+        self.arrayWordObjectRealm = arrayWordObjectRealm
+        self.typeTranslationDirectionSection = typeTranslationDirectionSection
     }
 
     var identity: String {
@@ -45,3 +60,83 @@ extension ModelSectionDictionary: AnimatableSectionModelType{
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//import Foundation
+//import RxSwift
+//import RxDataSources
+//import RxCocoa
+//import UIKit
+//
+//struct ModelSectionDictionary{
+//
+//    var arrayWordObjectRealm: Array<WordObjectRealm>
+//    var nameSection: String = ""
+//    var typeTranslationDirectionSection: TranslationDirection = TranslationDirection.EnRu
+//    var arrayTitleWord: Array<String> = [String]()
+//
+//    static var TranslationDirectionLast: TranslationDirection!
+//
+//    init(nameSection: String, arrayWordObjectRealm: [WordObjectRealm], typeTranslationDirectionSection: TranslationDirection){
+//        self.nameSection = nameSection
+//        self.arrayWordObjectRealm = arrayWordObjectRealm
+//        self.typeTranslationDirectionSection = typeTranslationDirectionSection
+//        self.arrayTitleWord = arrayWordObjectRealm.map({ wordObjectRealm in
+//            return wordObjectRealm.def[0].text!
+//        })
+//    }
+//
+//
+//}
+//
+//extension ModelSectionDictionary: AnimatableSectionModelType{
+//
+//    typealias Identity = String
+//    typealias Item = String
+//
+//    init(original: ModelSectionDictionary, items: [Item] = [""]) {
+//        self = original
+//        self.arrayTitleWord = items
+//    }
+//
+//    init(original: ModelSectionDictionary, nameSection: String, arrayWordObjectRealm: [WordObjectRealm], typeTranslationDirectionSection: TranslationDirection) {
+//        self.init(original: original)
+//        self.nameSection = nameSection
+//        self.arrayWordObjectRealm = arrayWordObjectRealm
+//        self.typeTranslationDirectionSection = typeTranslationDirectionSection
+//    }
+//
+//    var identity: String {
+//        nameSection
+//    }
+//
+//    var items: [Item] {
+//        return self.arrayTitleWord
+//    }
+//
+//}
+
+
+
+

@@ -14,73 +14,70 @@ import RealmSwift
 
 class MetodsForWords {
 
-    static let Shared = MetodsForWords()
+
+    //var modelRealmMainBase: ModelRealmBase = ModelRealmBase.shared
     let disposeBag = DisposeBag()
-    var realmUser: Realm = RealmUser.shared.realmUser
-
-    func deleteWord() {}
-
-
-    //    func appendDictionary(title: String, type: DictionaryObjectRealm.EnumDictionaryType) throws {
-
-    //        RequestsAPIYandexDictionary.Shared.getObservableWord(requestWord: "to  ewf ervf", translationDirection: .RuEn,
-    //            handlerError: { error in
-    //                            print((error as! ErrorForGetRequestAPIYandex).discript.nameError)
-    //                            return Observable<WordObjectRealm>.error(error)
-    //        })
-    //            .subscribe( onNext: {wordObjectRealm in
-    //                let newDictionary = DictionaryObjectRealm.init(name: title, typeDictionary: type.rawValue)
-    //                self.appendWordObject(wordObject: wordObjectRealm, dictionaryObject: newDictionary)
-    //                self.userObject.listDictionary.append(newDictionary)
-    //                self.behaviorSubjectDictionary.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
-    //            }).disposed(by: self.disposeBag)
-
-
-    //        do {
-    //            try RequestsAPIYandexDictionary.Shared.getWord(requestWord: "i", translationDirection: .EnRu, handlerError: {error in
-    //                print((error as! ErrorForGetRequestAPIYandex).discript.nameError)
-    //                return Observable<WordObjectRealm>.error(error)
-    //            }){wordObjectRealm in
-    //                let newDictionary = DictionaryObjectRealm.init(name: title, typeDictionary: type.rawValue)
-    //                self.appendWordObject(wordObject: wordObjectRealm, dictionaryObject: newDictionary)
-    //                self.userObject.listDictionary.append(newDictionary)
-    //                self.behaviorSubjectDictionary.onNext(self.getDictionariesForUserWithInsertFirstEmpty())
-    //            }.disposed(by: self.disposeBag)
-    //        } catch let error {
-    //            print((error as! ErrorForGetRequestAPIYandex).discript.nameError)
-    //        }
-
-    //    }
-
-
-//    func getWordsForDictionaryWithInsertFirstEmpty()-> Array<WordObjectRealm>{
-//        let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObjectRealm.self)
-//        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
-//        var result: Array<DictionaryObjectRealm> = Array<DictionaryObjectRealm>(resultDictionaries.filter(predicate))
-//        result.insert(DictionaryObjectRealm.init(name: "-", typeDictionary: "-"), at: 0) // filling first line
-//        print(result.count)
-//        return result
-//    }
-
-//    func getWordForUser()-> Array<DictionaryObjectRealm>{
-//        let resultDictionaries = self.modelRealmUser.realmUser.objects(DictionaryObjectRealm.self)
-//        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", userName)
-//        let result: Array<DictionaryObjectRealm> = Array<DictionaryObjectRealm>(resultDictionaries.filter(predicate))
-//        return result
-//    }
-
-    func getLastDictionaryForUser() -> WordObjectRealm? {
-        return (self.realmUser.objects(WordObjectRealm.self)).last
+    var realmUser: Realm {
+        RealmUser.shared.realmUser
     }
 
-    func appendWordObject(wordObject: WordObjectRealm?, dictionaryObject: DictionaryObjectRealm) {
-        guard let wordObject = wordObject else { return}
-        do{
-            try self.realmUser.write {
-                dictionaryObject.listWordObjects.append(wordObject)
-            }
-        }catch{
-            print("append Word in dictionary failed")
+    var behaviorSubjectWord: BehaviorSubject<WordObjectRealm>!
+
+    var word: WordObjectRealm!
+
+    init(word: WordObjectRealm){
+        self.word = word
+        self.behaviorSubjectWord = BehaviorSubject.init(value: self.word)
+
+        print("init MetodsForWord",self)
+    }
+
+    deinit {
+        print("deinit MetodsForWord",self)
+    }
+
+    func emmitingBehaviorSubjectWord() {
+        self.behaviorSubjectWord.onNext(self.word)
+    }
+
+    
+    func saveToRealm() {
+        try! realmUser.write {
+            realmUser.add(self.word)
         }
     }
+
+    func changeKeyMeaning(mainMeaning: String?) {
+        guard let mainMeaning = mainMeaning else {
+            return
+        }
+        do{
+            try self.realmUser.write {
+                self.word.mainMeaning = mainMeaning
+                self.emmitingBehaviorSubjectWord()
+            }
+        }catch let error as NSError{
+            print(error.localizedDescription)
+        }
+    }
+
+    func returnWordObjectRealmIfExistToBase(wordObjectRealm: WordObjectRealm) -> WordObjectRealm? {
+        let resultsWords = realmUser.objects(WordObjectRealm.self)
+        for word in resultsWords {
+            let s1 = "\(String(describing: word.value(forKey: "word")))" + "\(String(describing: word.value(forKey: "mainMeaning")))"
+            let s2 = "\(String(describing: wordObjectRealm.value(forKey: "word")))" + "="  + "\(String(describing: wordObjectRealm.value(forKey: "mainMeaning")))"
+            if s1 == s2 {
+                return word
+            }
+        }
+        return nil
+    }
+
+    func stringFromAny(_ value:Any?) -> String {
+        if let nonNil = value, !(nonNil is NSNull) {
+            return String(describing: nonNil)
+        }
+        return ""
+    }
+
 }

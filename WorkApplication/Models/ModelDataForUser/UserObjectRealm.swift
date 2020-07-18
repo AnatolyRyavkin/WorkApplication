@@ -10,24 +10,56 @@ import Foundation
 import RealmSwift
 
 class UserObjectRealm: Object{
-    @objc var userName: String = ""
+
+    @objc dynamic var id = ""
+    @objc dynamic var userName: String = ""
     var listDictionary: List<DictionaryObjectRealm> = List<DictionaryObjectRealm>()
 
-    required init() {}
-
-    init(userName: String, dictionaryObject: DictionaryObjectRealm?) {
-        super.init()
-        if let dictObj = dictionaryObject{
-            self.listDictionary.append(dictObj)
-        }
-        self.userName = userName
-        //print("init userObject",self)
+    override public static func primaryKey() -> String? {
+        return "userName"
     }
 
+    required init() {
+        super.init()
+        //print("++++++++++++++++++++++++++init UserObjectRealm", userName)
+    }
     deinit {
-        //print("deinit userObject",self)
+        //print("___________________________deinit UserObjectRealm", userName)
+    }
+
+    private static var CurrentUserObjRealm: UserObjectRealm?
+
+    static var CurrentUserObjectRealm: UserObjectRealm? {
+        get{
+            if UserObjectRealm.CurrentUserObjRealm == nil{
+                UserObjectRealm.CurrentUserObjRealm = UserDefaults.standard.getCurrentUserName()
+            }
+            return UserObjectRealm.CurrentUserObjRealm
+        }
+        set{
+            print("- - - - - -    currentUserOld = \(CurrentUserObjRealm?.userName ?? "empty")")
+            UserObjectRealm.CurrentUserObjRealm?.metodsIn?.behaviorSubjectDictionaryToUser.dispose()
+            UserObjectRealm.CurrentUserObjRealm?.metodsIn = nil
+            UserDefaults.standard.setCurrentUserName(userObject: newValue)
+            UserObjectRealm.CurrentUserObjRealm = newValue
+            print("- - - - - -    currentUserNew = \(CurrentUserObjRealm?.userName ?? "empty")")
+        }
+    }
+
+    static func CleanCurrentUser() {
+        UserDefaults.standard.cleanUserDefault()
+        UserObjectRealm.CurrentUserObjRealm = nil
+    }
+
+    private var  metodsIn: MetodsForUser?
+
+    var metods: MetodsForUser{
+        if metodsIn == nil {
+            metodsIn = MetodsForUser.init(userObjectRealm: self)
+        }
+        return metodsIn!
     }
     
+    
 }
-
 

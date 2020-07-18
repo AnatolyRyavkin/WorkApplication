@@ -9,71 +9,12 @@
 import Foundation
 import UIKit
 import WebKit
-import Alamofire
 import RxSwift
 import RxCocoa
+import Alamofire
 
-typealias Res = Result<(Data,HTTPURLResponse),Error>
 
-public enum ErrorForGetRequestAPIYandex: Error, CaseIterable{
 
-    case ERR_OK
-    case ERR_KEY_INVALID
-    case ERR_KEY_BLOCKED
-    case ERR_DAILY_REQ_LIMIT_EXCEEDED
-    case ERR_TEXT_TOO_LONG
-    case ERR_LANG_NOT_SUPPORTED
-
-    case ERR_DONT_PARSING_WORD_OBJECT_REALM
-    case ERR_DONT_GET_WORD_CODABLE_JSON
-    case ERR_DONT_ADD_WORD_IN_DICTIONARY
-
-    case ERR_SERVER_DONT_AVIALABLE
-    case ERR_UNKNOWN
-
-    case BAD_REQUEST
-    case NOT_FOUND
-    case DONT_INTERNET
-
-    var discript: (num: Int, nameError: String){
-        switch self {
-        case .ERR_OK :  return (200, "ERR_OK")
-        case .ERR_KEY_INVALID : return (401, "ERR_KEY_INVALID")
-        case .ERR_KEY_BLOCKED : return (402, "ERR_KEY_BLOCKED")
-        case .ERR_DAILY_REQ_LIMIT_EXCEEDED : return (403, "ERR_DAILY_REQ_LIMIT_EXCEEDED")
-        case .ERR_TEXT_TOO_LONG : return (413, "ERR_TEXT_TOO_LONG")
-        case .ERR_LANG_NOT_SUPPORTED : return (501, "ERR_LANG_NOT_SUPPORTED")
-        case .ERR_DONT_PARSING_WORD_OBJECT_REALM : return (001, "ERR_DONT_PARSING_WORD_OBJECT_REALM")
-        case .ERR_DONT_GET_WORD_CODABLE_JSON : return (002, "ERR_DONT_GET_WORD_CODABLE_JSON")
-        case .ERR_UNKNOWN : return (003, "ERR_UNKNOWN")
-        case .ERR_SERVER_DONT_AVIALABLE : return (005, "ERR_SERVER_DONT_AVIALABLE")
-        case .BAD_REQUEST : return (400, "BAD_REQUEST")
-        case .NOT_FOUND : return (404, "NOT_FOUND")
-        case .DONT_INTERNET : return (700, "DONT_INTERNET")
-        case .ERR_DONT_ADD_WORD_IN_DICTIONARY : return (004, "ERR_DONT_ADD_WORD_IN_DICTIONARY")
-        }
-    }
-
-    static func makeSelfAtCode(code: Int) -> ErrorForGetRequestAPIYandex {
-        for meaning in ErrorForGetRequestAPIYandex.allCases{
-            if meaning.discript.num == code{
-                return meaning
-            }
-        }
-        return .ERR_UNKNOWN
-    }
-}
-
-enum MyResponse{
-    case success(WordObjectRealm)
-    case failure(ErrorForGetRequestAPIYandex)
-}
-
-enum TranslationDirection: String{
-    case EnRu = "en-ru"
-    case RuEn = "ru-en"
-    case testError = "testError"
-}
 
 class RequestsAPIYandexDictionary {
 
@@ -113,14 +54,16 @@ class RequestsAPIYandexDictionary {
                     switch response.statusCode {
                     case 200:
                         do{
-                            //                            if let jsonString = String(data: data, encoding: .utf8) {
-                            //                                print(jsonString)
-                            //                            }
                             let decoder = JSONDecoder()
                             let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
                             if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
                                 observer.onNext(.success(wordObjectRealm))
                             }else{
+                                #if DEBUG
+                                if let jsonString = String(data: data, encoding: .utf8) {
+                                    print(jsonString)
+                                }
+                                #endif
                                 observer.onNext(.failure(.ERR_DONT_PARSING_WORD_OBJECT_REALM))
                             }
                         } catch (_) {
@@ -201,9 +144,22 @@ class RequestsAPIYandexDictionary {
         .catchError(handlerError)
     }
 
+//    func getObservableWordForErrorWithoutThrowing(requestWord: String, translationDirection: TranslationDirection,
+//                           handlerError: @escaping (Error) -> Observable<WordObjectRealm>) -> Observable<WordObjectRealm> {
+//        return self.POSTRequestWordFull(requestWord: requestWord, translationDirection: translationDirection)
+//            .flatMap { (response) -> Observable<WordObjectRealm> in
+//                switch response {
+//                case .success(let wordObjectRealm) :
+//                    return Observable<WordObjectRealm>.of(wordObjectRealm)
+//                case .failure(let error):
+//                    return Observable.error(error)
+//                }
+//        }
+//    }
+
 
     func getWord(requestWord: String, translationDirection: TranslationDirection,
-                           handlerError: @escaping (Error) throws -> Observable<WordObjectRealm> , observer: @escaping (WordObjectRealm) -> Void) throws -> Disposable{
+                           handlerError: @escaping (Error) throws -> Observable<WordObjectRealm> , observerSuccess: @escaping (WordObjectRealm) -> Void) throws -> Disposable{
         return self.POSTRequestWordFull(requestWord: requestWord, translationDirection: translationDirection)
             .flatMap { (response) throws -> Observable<WordObjectRealm> in
                 switch response {
@@ -214,7 +170,7 @@ class RequestsAPIYandexDictionary {
                 }
         }
         .catchError(handlerError)
-        .subscribe(onNext: observer)
+        .subscribe(onNext: observerSuccess)
 
     }
 
