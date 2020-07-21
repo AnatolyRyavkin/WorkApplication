@@ -27,11 +27,10 @@ struct ModelSectionDictionary{
         self.arrayWordObjectRealm = arrayWordObjectRealm
         self.typeTranslationDirectionSection = typeTranslationDirectionSection
         self.arrayTitleWord = arrayWordObjectRealm.map({ wordObjectRealm in
-            return wordObjectRealm.def[0].text!
-        })
+            print(wordObjectRealm.word + wordObjectRealm.mainMeaning)
+            return wordObjectRealm.word + wordObjectRealm.mainMeaning
+         })
     }
-
-
 }
 
 extension ModelSectionDictionary: AnimatableSectionModelType{

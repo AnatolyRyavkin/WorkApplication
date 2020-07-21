@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
 
 public let AlphaBettaAllEng  = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ "
 
 public let AlphaBettaAllRus  = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ "
-
-
 
 public let AlphaBettaArrayEngUpper: Array<String> = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 

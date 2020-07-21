@@ -8,12 +8,15 @@
 
 import UIKit
 import WebKit
+import RxSwift
+
 
 class ViewControllerLaunchApp: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
     }
-    
 }
+
+

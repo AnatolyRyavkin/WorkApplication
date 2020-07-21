@@ -25,7 +25,7 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
 
                 let configurationCellWordMy: ModelTableVeiwSectionDictionary.ConfigureCell = { dataSources, tableView, indexPath, item in
 
-                    var cell: TableViewCellDictionaryWord? = tableView.dequeueReusableCell(withIdentifier: "TableViewCellDictionaryWord")                                                                   as? TableViewCellDictionaryWord
+                    var cell: TableViewCellDictionaryWord? = tableView.dequeueReusableCell(withIdentifier: "TableViewCellDictionaryWord") as? TableViewCellDictionaryWord
                     if cell == nil{
                         cell = TableViewCellDictionaryWord.init(style: .default, reuseIdentifier: "TableViewCellDictionaryWord")
                     }
@@ -38,9 +38,7 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
                 let configureHeaderSectionMy: (TableViewSectionedDataSource<ModelSectionDictionary>, Int) -> String? = { (dataSource, numberSection) -> String? in
 
                     var alphaBettaArrayUpper = [""]
-                    let arrayWordObjectRealmForSection = dataSource.sectionModels
-                    let typeTranslationDirection = arrayWordObjectRealmForSection[0].typeTranslationDirectionSection
-                    switch typeTranslationDirection {
+                    switch DataSourseForTableWords.lastUseTypeDictionary! {
                     case TranslationDirection.EnRu: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
                     case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
                     default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper

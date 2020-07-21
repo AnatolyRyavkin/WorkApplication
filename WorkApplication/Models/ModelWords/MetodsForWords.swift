@@ -23,11 +23,11 @@ class MetodsForWords {
 
     var behaviorSubjectWord: BehaviorSubject<WordObjectRealm>!
 
-    var word: WordObjectRealm!
+    var wordObjectRealm: WordObjectRealm!
 
-    init(word: WordObjectRealm){
-        self.word = word
-        self.behaviorSubjectWord = BehaviorSubject.init(value: self.word)
+    init(wordObjectRealm: WordObjectRealm){
+        self.wordObjectRealm = wordObjectRealm
+        self.behaviorSubjectWord = BehaviorSubject.init(value: self.wordObjectRealm)
 
         print("init MetodsForWord",self)
     }
@@ -37,13 +37,13 @@ class MetodsForWords {
     }
 
     func emmitingBehaviorSubjectWord() {
-        self.behaviorSubjectWord.onNext(self.word)
+        self.behaviorSubjectWord.onNext(self.wordObjectRealm)
     }
 
     
     func saveToRealm() {
         try! realmUser.write {
-            realmUser.add(self.word)
+            realmUser.add(self.wordObjectRealm)
         }
     }
 
@@ -53,7 +53,7 @@ class MetodsForWords {
         }
         do{
             try self.realmUser.write {
-                self.word.mainMeaning = mainMeaning
+                self.wordObjectRealm.mainMeaning = mainMeaning
                 self.emmitingBehaviorSubjectWord()
             }
         }catch let error as NSError{
@@ -61,14 +61,23 @@ class MetodsForWords {
         }
     }
 
-    func returnWordObjectRealmIfExistToBase(wordObjectRealm: WordObjectRealm) -> WordObjectRealm? {
+    func returnWordObjectRealmIfExistToBase() -> WordObjectRealm? {
         let resultsWords = realmUser.objects(WordObjectRealm.self)
-        for word in resultsWords {
-            let s1 = "\(String(describing: word.value(forKey: "word")))" + "\(String(describing: word.value(forKey: "mainMeaning")))"
-            let s2 = "\(String(describing: wordObjectRealm.value(forKey: "word")))" + "="  + "\(String(describing: wordObjectRealm.value(forKey: "mainMeaning")))"
-            if s1 == s2 {
-                return word
+        for wordObjectRealmFromResult in resultsWords {
+            if self.wordObjectRealm.wordAddMainMeaning == wordObjectRealm.wordAddMainMeaning {
+                return wordObjectRealmFromResult
             }
+        }
+        return nil
+    }
+
+
+    func returnWordObjectRealmIfExistToBase(mainMeaning: String) -> WordObjectRealm? {
+
+        let result = realmUser.objects(WordObjectRealm.self).filter("word == %@ AND mainMeaning == %@",self.wordObjectRealm.word,mainMeaning)
+        
+        if result.count > 0 {
+            return result[0]
         }
         return nil
     }

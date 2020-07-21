@@ -29,34 +29,34 @@ class ViewControllerNewDictionary: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = ColorScheme.Shared.colorNDBackgroundShared
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
 
-        self.labelName.textColor = ColorScheme.Shared.colorNDTitlesText
-        self.ladelType.textColor = ColorScheme.Shared.colorNDTitlesText
-        self.labelYourNewDictionary.textColor = ColorScheme.Shared.colorNDTitlesText
+        self.labelName.textColor = myColor(arColor: LabelTitle1)
+        self.ladelType.textColor = myColor(arColor: LabelTitle1)
+        self.labelYourNewDictionary.textColor = myColor(arColor: LabelTitle1)
 
-        self.textFieldImputNameDictionary.backgroundColor = ColorScheme.Shared.colorNDBackgroundInputTitle
-        self.textFieldImputNameDictionary.textColor = ColorScheme.Shared.colorNDBInputTitle
+        self.textFieldImputNameDictionary.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
+        self.textFieldImputNameDictionary.textColor = myColor(arColor: TextFieldTitleActive1)
 
-        self.buttonSaveNext.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
-        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
-        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
+        self.buttonSaveNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+        self.buttonSaveNext.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
+        self.buttonSaveNext.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
-        self.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
-        self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
-        self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
+        self.buttonSaveBack.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+        self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
+        self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
-        self.segmentTypeDictionary.tintColor = ColorScheme.Shared.colorNDSegmentText
-        self.segmentTypeDictionary.selectedSegmentTintColor = ColorScheme.Shared.colorNDSegmentActive
-        self.segmentTypeDictionary.backgroundColor = ColorScheme.Shared.colorNDSegmentBackground
+        self.segmentTypeDictionary.tintColor = myColor(arColor: TextFieldBackgroundActive1)
+        self.segmentTypeDictionary.selectedSegmentTintColor = myColor(arColor: ControlBackgroundActive1)
+        self.segmentTypeDictionary.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.barTintColor = ColorScheme.Shared.navigationBarBackgroundGray
-        self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
+        self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
+        self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
     }
     
 }

@@ -11,6 +11,92 @@ import RxSwift
 import RxCocoa
 import UIKit
 
+struct ScreenSize
+{
+    static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width
+    static let SCREEN_HEIGHT        = UIScreen.main.bounds.size.height
+    static let SCREEN_MAX_LENGTH    = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+    static let SCREEN_MIN_LENGTH    = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+}
+
+struct Version{
+    static let SYS_VERSION_FLOAT = (UIDevice.current.systemVersion as NSString).floatValue
+    static let iOS7 = (Version.SYS_VERSION_FLOAT < 8.0 && Version.SYS_VERSION_FLOAT >= 7.0)
+    static let iOS8 = (Version.SYS_VERSION_FLOAT >= 8.0 && Version.SYS_VERSION_FLOAT < 9.0)
+    static let iOS9 = (Version.SYS_VERSION_FLOAT >= 9.0 && Version.SYS_VERSION_FLOAT < 10.0)
+}
+
+enum Device {
+    case IS_IPHONE_4_OR_LESS
+    case IS_IPHONE_5
+    case IS_IPHONE_6_7
+    case IS_IPHONE_6P_7P
+    case IS_IPAD
+    case IS_IPAD_PRO
+    case IS_DEF_DEVICE
+
+    static var type: Device {
+        let a = 0
+        let currentDevice = UIDevice.current.userInterfaceIdiom
+        switch currentDevice {
+        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0:
+            return .IS_IPHONE_4_OR_LESS
+        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0:
+            return .IS_IPHONE_5
+        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0:
+            return .IS_IPHONE_6_7
+        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0:
+            return .IS_IPHONE_6P_7P
+        case _ where currentDevice == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0:
+            return .IS_IPAD
+        case _ where currentDevice == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1366.0:
+            return .IS_IPAD_PRO
+        default:
+            return .IS_DEF_DEVICE
+        }
+    }
+}
+
+
+public struct FontForTable {
+
+    let a = 0
+
+    static let fontUserCustom: UIFont? = nil
+
+    static let fontFuturaLitle = UIFont.init(name: "Futura", size: 15)!
+    static let fontFuturaMidle = UIFont.init(name: "Futura", size: 20)!
+    static let fontFuturaBig = UIFont.init(name: "Futura", size: 25)!
+    static let fontSistemLitle = UIFont.init(name: "Arial", size: 15)!
+    static let fontSistemMidle = UIFont.init(name: "Arial", size: 20)!
+    static let fontSistemBig = UIFont.init(name: "Arial", size: 25)!
+
+    static var Shared: UIFont {
+        if let fontUserCustom = fontUserCustom {
+            return fontUserCustom
+        } else {
+            switch Device.type {
+            case .IS_IPHONE_4_OR_LESS:
+                return fontSistemBig
+            case .IS_IPHONE_5:
+                return fontSistemBig
+            case .IS_IPHONE_6_7:
+                return fontSistemBig
+            case .IS_IPHONE_6P_7P:
+                return fontSistemBig
+            case .IS_IPAD:
+                return fontSistemBig
+            case .IS_IPAD_PRO:
+                return fontSistemBig
+            default:
+                return fontSistemBig
+            }
+        }
+    }
+}
+
+public var FontForTables: UIFont!
+
 
 enum TranslationDirection: String{
     case EnRu = "en-ru"
@@ -162,6 +248,10 @@ extension Reactive where Base == UIViewController{
 
     var viewDidDisappear: ControlEvent<Void> {
         return controlEvent(for: #selector(UIViewController.viewDidDisappear))
+    }
+
+    var viewDidLayoutSubviews: ControlEvent<Void> {
+        return controlEvent(for: #selector(UIViewController.viewDidLayoutSubviews))
     }
 }
 

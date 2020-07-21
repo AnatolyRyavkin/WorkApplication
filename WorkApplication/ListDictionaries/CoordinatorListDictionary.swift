@@ -45,7 +45,7 @@ class CoordinatorListDictionary: CoordinatorProtocol{
             self.nc.popToViewController(self.vcListDictionary, animated: true)
             return Observable.empty()
         } else {
-            nc.pushViewController(self.vcListDictionary, animated: false) //!CoordinatorListDictionary.FirstAppear)
+            nc.pushViewController(self.vcListDictionary, animated: true) //!CoordinatorListDictionary.FirstAppear)
             CoordinatorListDictionary.FirstAppear = false
         }
         return Observable.empty()

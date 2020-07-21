@@ -18,7 +18,7 @@ class TableViewCellListDictionary: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+        self.backgroundColor = myColor(arColor: ViewBackground1)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

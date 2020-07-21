@@ -31,6 +31,7 @@ class CoordinatorApp: CoordinatorProtocol {
 
     func start(from nc: UINavigationController) -> Observable<Void> {
         self.nc = nc
+        
         if UserObjectRealm.CurrentUserObjectRealm != nil {
             let coordinatorListDictionary = CoordinatorListDictionary.init()
             self.coordinate(to: coordinatorListDictionary, from: self.nc).subscribe{ _ in}.disposed(by: self.disposeBag)

@@ -44,7 +44,7 @@ class CoordinatorDictionary: CoordinatorProtocol {
         self.nc = nc
         self.modelViewDictionary.binding()
         print("start coordinatorDictionary for userName: \(self.userObjectRealm.userName)")
-        self.nc.pushViewController(self.vcDictionary, animated: false) //true)
+        self.nc.pushViewController(self.vcDictionary, animated: true) //true)
         return Observable.empty()
     }
 

@@ -209,8 +209,8 @@
 		FD174ED5246404B80090A002 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FD0E61F524B760FA00AAE6B1 /* ModelWords */,
 				FD0E61F424B760D800AAE6B1 /* ModelDictionaries */,
+				FD0E61F524B760FA00AAE6B1 /* ModelWords */,
 				FD174EE32464102A0090A002 /* ModelDataForUser */,
 				FD72713224AB3DE4007917BD /* ModelForAPIYandexDictionary */,
 				FD174EE2246410170090A002 /* ModelDataRealmShared */,

@@ -35,8 +35,8 @@ class ViewControllerListDictionary: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
-        self.tableView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
+        self.tableView.backgroundColor = myColor(arColor: ViewBackground1)
         self.tableView.allowsSelectionDuringEditing = true
 
         if let navigationController = self.navigationController {
@@ -47,12 +47,12 @@ class ViewControllerListDictionary: UIViewController {
 
             self.navigationItem.setRightBarButtonItems([self.barButtonAddDictionary, self.barButtonEdit], animated: false)
             self.navigationItem.setLeftBarButtonItems([self.barButtonCancelProfile, self.barButtonEdit], animated: false)
-            self.navigationController?.navigationBar.barTintColor = ColorScheme.Shared.navigationBarBackgroundBlue
-            self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
+            self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
+            self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarBackground1)
 
             self.navigationBar = navigationController.navigationBar
             self.labelNavigationItem = UILabel(frame: CGRect(x: navigationBar.frame.width/2 - navigationBar.frame.width/4, y: 0, width:navigationBar.frame.width/2, height: navigationBar.frame.height))
-            labelNavigationItem.textColor = ColorScheme.Shared.navigationBarText
+            labelNavigationItem.textColor = myColor(arColor: NavigationBarTitle1)
 
         }
 
@@ -61,8 +61,8 @@ class ViewControllerListDictionary: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.barTintColor = ColorScheme.Shared.navigationBarBackgroundBlue
-        self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
+        self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
+        self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
 
         //MARK- Header TableView Custom + Button
 
@@ -71,8 +71,8 @@ class ViewControllerListDictionary: UIViewController {
         myShadow.shadowOffset = CGSize(width: 2, height: 2)
         myShadow.shadowColor = UIColor.gray
 
-        let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCTextTitle ,
-                          NSAttributedString.Key.font: UIFont(name: "Futura", size: 25.0)!,
+        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle2) ,
+                          NSAttributedString.Key.font: FontForTable.Shared,
                           NSAttributedString.Key.shadow: myShadow,
         ]
 
@@ -90,12 +90,11 @@ class ViewControllerListDictionary: UIViewController {
 
         buttonAddDictionary.layer.cornerRadius = 18
 
-        buttonAddDictionary.tintColor = ColorScheme.Shared.colorBLCCellSelected
-        buttonAddDictionary.backgroundColor = ColorScheme.Shared.navigationBarBackgroundBlue
+        buttonAddDictionary.tintColor = myColor(arColor: ControlTitleActive1)
+        buttonAddDictionary.backgroundColor = myColor(arColor: ControlBackgroundActive1)
 
-        self.headerTableView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+        self.headerTableView.backgroundColor = myColor(arColor: ViewBackground1)
 
-        
 
     }
 

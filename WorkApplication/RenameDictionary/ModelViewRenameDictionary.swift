@@ -58,12 +58,12 @@ class ModelViewRenameDictionary{
             .map { (string) -> Bool in
                 let isStringDontEmpty = string?.count ?? 0 < 1 || string?.filter{$0 == Character(" ")}.count == string?.count
                 if !isStringDontEmpty{
-                    self.vcRenameDictionary.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueActive
-                    self.vcRenameDictionary.buttonSaveNext.backgroundColor = ColorScheme.Shared.colorNDButtonContinueActive
+                    self.vcRenameDictionary.buttonSaveBack.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+                    self.vcRenameDictionary.buttonSaveNext.backgroundColor = myColor(arColor: ControlBackgroundActive1)
                     self.textNameDictionaryInput = string
                 }else{
-                    self.vcRenameDictionary.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
-                    self.vcRenameDictionary.buttonSaveNext.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
+                    self.vcRenameDictionary.buttonSaveBack.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+                    self.vcRenameDictionary.buttonSaveNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
                 }
                 self.vcRenameDictionary.buttonSaveNext.isEnabled = !isStringDontEmpty
                 return !isStringDontEmpty

@@ -62,8 +62,8 @@ class HeaderForTableViewListDictionaries: UIView {
         myShadow.shadowOffset = CGSize(width: 2, height: 2)
         myShadow.shadowColor = UIColor.gray
 
-        let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCTextTitle ,
-                          NSAttributedString.Key.font: UIFont(name: "Futura", size: 25.0)!,
+        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                          NSAttributedString.Key.font: FontForTable.Shared,
                           NSAttributedString.Key.shadow: myShadow,
         ]
 
@@ -80,7 +80,7 @@ class HeaderForTableViewListDictionaries: UIView {
         let attributeStringCount = NSAttributedString(string: string, attributes: attribute)
         labelCount.attributedText = attributeStringCount
 
-        self.backgroundColor = ColorScheme.Shared.colorBLCBackgroundTitleTable
+        self.backgroundColor = myColor(arColor: LabelBackground1)
 
     }
 

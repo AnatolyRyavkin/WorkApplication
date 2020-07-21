@@ -12,6 +12,8 @@ class ViewControllerDictionary: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var buttonReferensAPIYandex: UIButton!
+
     @IBOutlet weak var buttonVisual: UIButton!
     @IBOutlet weak var buttonWrite: UIButton!
     @IBOutlet weak var buttonVoice: UIButton!
@@ -42,46 +44,10 @@ class ViewControllerDictionary: UIViewController {
         print("deinit ViewControllerDictionary",self)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.searchBar.returnKeyType = .search
-
-        self.view.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
-        self.tableView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
-        self.tableView.allowsSelectionDuringEditing = false
-
-        if self.navigationController != nil {
-            self.navigationItem.setRightBarButtonItems([ self.barButtonEdit], animated: false)
-            self.navigationController?.navigationBar.barTintColor = ColorScheme.Shared.navigationBarBackgroundBlue
-            self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
-        }
-
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.barTintColor = ColorScheme.Shared.navigationBarBackgroundBlue
-        self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
-
-        if let navigationBar = self.navigationBar {
-            let labelNavigationLabel = UILabel(frame: CGRect(x: navigationBar.frame.width/2 - navigationBar.frame.width/4, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height))
-            labelNavigationLabel.textColor = ColorScheme.Shared.navigationBarText
-            labelNavigationLabel.textAlignment = .center
-            navigationBar.addSubview(labelNavigationLabel)
-            self.labelNavigationLabel = labelNavigationLabel
-        }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.labelNavigationLabel.removeFromSuperview()
+        //11
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -112,10 +78,98 @@ class ViewControllerDictionary: UIViewController {
             self.searchBar.resignFirstResponder()
             self.view.layoutIfNeeded()
         }
+
     }
 
     func hiddenSearchBarWithoutAnimation() {
         self.hiddenSearchBarWithAnimation(durationAnimation: 0)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                          NSAttributedString.Key.font: FontForTable.Shared,
+                          NSAttributedString.Key.underlineStyle : 1
+            ] as [NSAttributedString.Key : Any]
+        
+        self.buttonReferensAPIYandex.titleLabel?.font = FontForTable.Shared
+        self.buttonReferensAPIYandex.titleLabel?.lineBreakMode = .byWordWrapping
+        let attributeString = NSAttributedString(string: "Реализовано с помощью сервиса «API «Яндекс.Словарь»",
+                                                 attributes: attribute)
+        self.buttonReferensAPIYandex.setAttributedTitle(attributeString, for: .normal)
+    }
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        super.viewDidLayoutSubviews()
+
+        self.searchBar.returnKeyType = .search
+
+        self.tableView?.backgroundView?.backgroundColor = myColor(arColor: ViewBackground1)
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
+
+
+
+//        let myShadow = NSShadow()
+//        myShadow.shadowBlurRadius = 2
+//        myShadow.shadowOffset = CGSize(width: 2, height: 2)
+//        myShadow.shadowColor = UIColor.gray
+//
+//        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+//                          NSAttributedString.Key.font: FontForTable.Shared,
+//                          NSAttributedString.Key.shadow: myShadow,
+//        ]
+//
+//
+//        self.buttonReferensAPIYandex.titleLabel?.font = FontForTable.fontSistemLitle
+
+//        let textButton = wordObjectRealm.word
+//
+//        let attributeStringWord = NSAttributedString(string: stringWord, attributes: attribute)
+
+
+
+
+
+
+
+        self.buttonVisual.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+        self.buttonVisual.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+
+        self.buttonWrite.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+        self.buttonWrite.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+
+        self.buttonVoice.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+        self.buttonVoice.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+
+        self.buttonPronons.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+        self.buttonPronons.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+
+        self.buttonAddWord.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+        self.buttonAddWord.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
+        self.tableView.backgroundColor = myColor(arColor: ViewBackground1)
+        self.tableView.allowsSelectionDuringEditing = false
+
+        self.navigationItem.setRightBarButtonItems([ self.barButtonEdit], animated: false)
+
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
+        self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
+
+        if let navigationBar = self.navigationBar {
+            let labelNavigationLabel = UILabel(frame: CGRect(x: navigationBar.frame.width/2 - navigationBar.frame.width/4, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height))
+            labelNavigationLabel.textColor = myColor(arColor: NavigationBarTitle1)
+            labelNavigationLabel.textAlignment = .center
+            navigationBar.addSubview(labelNavigationLabel)
+            self.labelNavigationLabel = labelNavigationLabel
+        }
+
+
     }
 
 }

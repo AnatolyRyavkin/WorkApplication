@@ -29,32 +29,33 @@ class ViewControllerRenameDictionary: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = ColorScheme.Shared.colorNDBackgroundShared
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
 
-        self.labelEditNameDictionary.textColor = ColorScheme.Shared.colorNDTitlesText
-        self.labelOldName.textColor = ColorScheme.Shared.colorNDTitlesText
-        self.ladelNewLabel.textColor = ColorScheme.Shared.colorNDTitlesText
 
-        self.textFieldOldName.backgroundColor = ColorScheme.Shared.colorNDBackgroundInputTitle
-        self.textFieldOldName.textColor = ColorScheme.Shared.colorNDBInputTitle
+        self.labelEditNameDictionary.textColor = myColor(arColor: LabelTitle1)
+        self.labelOldName.textColor = myColor(arColor: LabelTitle1)
+        self.ladelNewLabel.textColor = myColor(arColor: LabelTitle1)
 
-        self.textFieldNewName.backgroundColor = ColorScheme.Shared.colorNDBackgroundInputTitle
-        self.textFieldNewName.textColor = ColorScheme.Shared.colorNDBInputTitle
+        self.textFieldOldName.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
+        self.textFieldOldName.textColor = myColor(arColor: TextFieldTitleActive1)
 
-        self.buttonSaveNext.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
-        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
-        self.buttonSaveNext.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
+        self.textFieldNewName.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
+        self.textFieldNewName.textColor = myColor(arColor: TextFieldTitleActive1)
 
-        self.buttonSaveBack.backgroundColor = ColorScheme.Shared.colorNDButtonContinueDontActive
-        self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .disabled)
-        self.buttonSaveBack.setTitleColor(ColorScheme.Shared.colorNDButtonContinueText, for: .normal)
+        self.buttonSaveNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+        self.buttonSaveNext.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
+        self.buttonSaveNext.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+
+        self.buttonSaveBack.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+        self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
+        self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.barTintColor = ColorScheme.Shared.navigationBarBackgroundGray
-        self.navigationController?.navigationBar.tintColor = ColorScheme.Shared.navigationBarText
+        self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
+        self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
     }
 }

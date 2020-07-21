@@ -29,22 +29,22 @@ class ViewControllerLogin: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = ColorScheme.Shared.colorLVCBackgroundShared
+        self.view.backgroundColor = myColor(arColor: ViewBackground2)
 
-        self.textFieldUsername.textColor = ColorScheme.Shared.colorLVCTextFieldText
-        self.textFieldUsername.backgroundColor = ColorScheme.Shared.colorLVCBackgroundTextField
+        self.textFieldUsername.textColor = myColor(arColor: TextFieldTitleActive1)
+        self.textFieldUsername.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
 
-        self.buttonNext.backgroundColor = ColorScheme.Shared.colorLVCButtonNextDontActive
-        self.buttonNext.setTitleColor(ColorScheme.Shared.colorLVCButtonNextText, for: .disabled)
-        self.buttonNext.setTitleColor(ColorScheme.Shared.colorLVCButtonNextText, for: .normal)
+        self.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+        self.buttonNext.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
+        self.buttonNext.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
-        self.buttonFindProfile.setTitleColor(ColorScheme.Shared.colorLVCButtonFindMyProfileText, for: .normal)
+        self.buttonFindProfile.setTitleColor(myColor(arColor: LabelTitle2), for: .normal)
 
-        self.pickerProfiles.tintColor = ColorScheme.Shared.colorLVCTextFieldText
+        self.pickerProfiles.tintColor = myColor(arColor: ControlTitleActive1)
 
-        self.labelProfileUser.textColor = ColorScheme.Shared.colorLVCProfileUserLabelText
+        self.labelProfileUser.textColor = myColor(arColor: LabelTitle2)
 
-        self.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = ColorScheme.Shared.colorLVCButtonNextDontActive
+        self.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: LabelTitle2)
 
     }
     override func viewWillAppear(_ animated: Bool) {

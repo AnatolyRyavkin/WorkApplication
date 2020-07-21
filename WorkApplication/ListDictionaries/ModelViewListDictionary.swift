@@ -57,6 +57,8 @@ class ModelViewListDictionary : NSObject {
 
         (self.vcListDictionary as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
 
+            self.userObject.metods.emmitingBehaviorSubjectDictionaryToUser()
+            
             if self.firstvcListDictionaryDidAppear == false {
                 return
             }
@@ -65,14 +67,14 @@ class ModelViewListDictionary : NSObject {
             self.tableView = self.vcListDictionary.tableView
 
             self.tableView.rx.isEdit.subscribe(onNext: { isEdit in
-                self.vcListDictionary.barButtonEdit.tintColor = (isEdit) ? UIColor.red : ColorScheme.Shared.cFFE69C
+                self.vcListDictionary.barButtonEdit.tintColor = (isEdit) ? UIColor.red : myColor(arColor: NavigationBarTitle1)
             }).disposed(by: self.disposeBag)
 
 
             _ = self.userObject.metods.behaviorSubjectDictionaryToUser.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
 
-                    let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCText ,
-                                      NSAttributedString.Key.font: UIFont(name: "Futura", size: 20.0)!,
+                    let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                                      NSAttributedString.Key.font: FontForTable.Shared,
 
                     ]
 
@@ -88,7 +90,7 @@ class ModelViewListDictionary : NSObject {
                     attributeString = NSAttributedString(string: string, attributes: attribute)
                     cell.labelTypeDictionary.attributedText = attributeString
 
-                    cell.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+                    cell.contentView.backgroundColor = myColor(arColor: ViewBackground1)
 
             }
 
@@ -118,11 +120,11 @@ class ModelViewListDictionary : NSObject {
 
             self.tableView.rx.itemSelected.asDriver()
                 .do(onNext: { indexPath in
-                    self.tableView.deselectRow(at: indexPath, animated: false)
+                    self.tableView.deselectRow(at: indexPath, animated: true)
                 })
                 .do(onNext: { indexPath in
                     var dictionaryObject: DictionaryObjectRealm
-                    self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCCellSelected
+                    self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: ViewBackground1)
                     dictionaryObject = self.userObject.listDictionary[indexPath.row]
                     switch self.tableView.isEditing{
                     case true:  _ = self.coordinatorListDictionary?.launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: dictionaryObject)
@@ -133,36 +135,13 @@ class ModelViewListDictionary : NSObject {
                 })
                 .drive(onNext: { indexPath in
                     UIView.animate(withDuration: 0.5) {
-                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = ColorScheme.Shared.colorBLCBackgroundShared
+                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: ViewBackground1)
                     }
                 }).disposed(by: self.disposeBag)
-
-                //self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
-                //self.tableView.rx.setDataSource(self).disposed(by: self.disposeBag)
 
         }).disposed(by: self.disposeBag)
 
     }
-
-    //MARK- tableViewDelegate
-
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        switch indexPath.row {
-//        case 0:
-//            return UITableViewCell.EditingStyle.none
-//        default:
-//            return UITableViewCell.EditingStyle.delete
-//        }
-//    }
-
-
-//MARK- dataSource
-
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if (editingStyle == .delete) {
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//    }
 
 }
 
@@ -202,7 +181,7 @@ class ModelViewListDictionary : NSObject {
 //                    myShadow.shadowColor = UIColor.gray
 //
 //                    let attribute = [ NSAttributedString.Key.foregroundColor: ColorScheme.Shared.colorBLCTextTitle ,
-//                                      NSAttributedString.Key.font: UIFont(name: "Futura", size: 25.0)!,
+//                                      NSAttributedString.Key.font: FontForTable.Shared,
 //                                      NSAttributedString.Key.shadow: myShadow,
 //                    ]
 //

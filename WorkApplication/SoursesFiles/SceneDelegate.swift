@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow.init()
         window?.windowScene = windowScene
-        window?.backgroundColor = UIColor.blue
+        window?.backgroundColor = myColor(arColor: ViewBackground1)
         let vc = ViewControllerLaunchApp.init()
         let nc = UINavigationController.init(rootViewController: vc)
         window?.rootViewController = nc

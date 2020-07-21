@@ -23,7 +23,7 @@ class WordObjectRealm: Object {
 
     var metods: MetodsForWords{
         if metodsIn == nil {
-            metodsIn = MetodsForWords.init(word: self)
+            metodsIn = MetodsForWords.init(wordObjectRealm: self)
         }
         return metodsIn!
     }
@@ -46,6 +46,13 @@ class WordObjectRealm: Object {
             self.word = "?"
             #endif
         }
+    }
+
+    convenience init(wordObjectRealm: WordObjectRealm, mainMeaning: String) {
+        self.init()
+        self.def = wordObjectRealm.def
+        self.word = wordObjectRealm.word
+        self.mainMeaning = mainMeaning
     }
 
 }

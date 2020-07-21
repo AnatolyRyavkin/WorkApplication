@@ -58,6 +58,9 @@ class RequestsAPIYandexDictionary {
                             let wordCodable = try decoder.decode(WordCodableJSON.self, from: data)
                             if let wordObjectRealm = WordObjectRealm.init(wordCodable: wordCodable){
                                 observer.onNext(.success(wordObjectRealm))
+                                if let jsonString = String(data: data, encoding: .utf8) {
+                                    print(jsonString)
+                                }
                             }else{
                                 #if DEBUG
                                 if let jsonString = String(data: data, encoding: .utf8) {
