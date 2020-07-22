@@ -13,31 +13,9 @@ class SourceClass{
 
         guard let inString = inputString
             else{ return nil }
-        var array = inString.components(separatedBy: " ").filter { string in
+        let array = inString.components(separatedBy: " ").filter { string in
             return (string != " ") && (string != "")
         }
-
-        array = array.map{ string in
-            if string == "тп" {
-                //print(inString)
-                return "т.п."
-            }
-             if string == "обыкн" || string == "обыкнов" {
-                //print(inString)
-                return "обычно"
-            }
-            if string == "неодобр" {
-                //print(inString)
-                return "неодобрительно"
-            }
-            if string.hasSuffix("-л"){
-                //print(inString)
-                let stringNew = string.dropLast(2).appending("-либо")
-                return stringNew
-            }
-            return string
-        }
-
         var stringOut: String? = nil
         for (i, st) in array.enumerated() {
             if i == 0 {
@@ -47,8 +25,6 @@ class SourceClass{
                 stringOut?.append(String(" \(st)"))
             }
         }
-
-        //print(stringOut ?? "nil")
         return stringOut
     }
 
@@ -62,10 +38,8 @@ class SourceClass{
         arrayOut = arrayOut.map({ (string) in
             guard let stringOut = self.checkString(inputString: string)
                 else{ print("fatal error") ; fatalError()}
-            //print(stringOut)
             return stringOut
         })
-        //print(arrayOut)
         return arrayOut
     }
 
@@ -322,6 +296,5 @@ class Item: SourceClass {
             }
         }
     }
-
 }
 

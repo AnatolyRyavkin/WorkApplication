@@ -17,16 +17,10 @@ class DataSourseForTableWords {
     var behaviorSubjectModelsSectionDictionary: BehaviorSubject<[ModelSectionDictionary]>!
     var dictionaryObjectRealm: DictionaryObjectRealm! = nil
     var disposeBag: DisposeBag! = DisposeBag()
-
-
-
     public static var lastUseTypeDictionary: TranslationDirection!
-
     convenience init(dictionary: DictionaryObjectRealm) {
         self.init()
-
         self.dictionaryObjectRealm = dictionary
-
         self.dictionaryObjectRealm.metods.behaviorSubjectWordsToDictionary.subscribe(onNext:{arrayArraysWordsAtAlphaBetta in
 
             var arrayModelsSection = Array<ModelSectionDictionary>()
@@ -65,12 +59,10 @@ class DataSourseForTableWords {
 
     deinit {
         self.disposeBag = nil
-        //self.dictionaryObjectRealm.metods.dictionary = nil
         self.dictionaryObjectRealm = nil
         ModelTableVeiwSectionDictionary.Clean()
         print("deinit DataSourceForTableWords - --------------------------")
     }
-
 }
 
 

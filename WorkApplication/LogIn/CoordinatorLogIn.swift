@@ -16,8 +16,6 @@ class CoordinatorLogIn: CoordinatorProtocol{
     let modelViewLogIn = ModelViewLogIn.Shared
     private let disposeBag = DisposeBag()
     var nc: UINavigationController!
-//    var observerOldUser: AnyObserver<UserObjectRealm>!
-//    var observerNewUser: AnyObserver<String>!
     var vcLogIn: ViewControllerLogin
 
 

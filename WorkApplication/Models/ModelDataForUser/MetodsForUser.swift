@@ -14,11 +14,7 @@ import RealmSwift
 
 class MetodsForUser {
 
-
-    //var modelRealmMainBase: ModelRealmBase = ModelRealmBase.shared
-
     let disposeBag = DisposeBag()
-
 
     var realmUser: Realm {
         RealmUser.shared.realmUser
@@ -56,8 +52,7 @@ class MetodsForUser {
         self.behaviorSubjectDictionaryToUser.onNext(self.dictionaries)
     }
 
-
-    //MARK- TEST
+//MARK- TEST
 
     func appendDictionaryTest
         (title: String, type: TranslationDirection) throws -> DictionaryObjectRealm? {
@@ -80,9 +75,7 @@ class MetodsForUser {
         return newDictionary
     }
 
-    //MARK- endTest
-
-
+//MARK- endTest
 
     func alreadyExistToBaseSameDictionaryObjectRealmForThisUser(dictionaryObjectRealm: DictionaryObjectRealm) -> Bool {
         let resultDictionaries = self.realmUser.objects(DictionaryObjectRealm.self)
@@ -120,7 +113,6 @@ class MetodsForUser {
         return nil
     }
 
-
     func returnNumberInListDictionaryIfExistForThisUser(dictionaryObjectRealm: DictionaryObjectRealm) -> Int? {
         let resultDictionaries = self.realmUser.objects(DictionaryObjectRealm.self)
         let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", self.userName)
@@ -132,7 +124,6 @@ class MetodsForUser {
         }
         return nil
     }
-
 
     func appendDictionaryToListDictionaryThisUserAndRealm(dictionaryObjectRealm: DictionaryObjectRealm) throws {
         do {
@@ -146,7 +137,6 @@ class MetodsForUser {
             throw myError
         }
     }
-
 
     func creatingDictionaryAndAddToListDictionaryThisUser
         (title: String, type: TranslationDirection) throws -> DictionaryObjectRealm? {

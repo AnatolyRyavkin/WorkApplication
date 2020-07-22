@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		26EB1D2E72406A5BAA68642D /* Pods_WorkApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68BEA0D72C9454D6F2B0A2D /* Pods_WorkApplication.framework */; };
-		FD0A9B6124675227001FA785 /* WorkVariant.txt in Resources */ = {isa = PBXBuildFile; fileRef = FD0A9B6024675227001FA785 /* WorkVariant.txt */; };
+		FD0A9B6124675227001FA785 /* DictionaryAfterParsing.txt in Resources */ = {isa = PBXBuildFile; fileRef = FD0A9B6024675227001FA785 /* DictionaryAfterParsing.txt */; };
 		FD0D2D5424C05D080065866E /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D2D5324C05D080065866E /* GlobalConstants.swift */; };
 		FD0E61EE24B74C9C00AAE6B1 /* WordCodableJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0E61ED24B74C9C00AAE6B1 /* WordCodableJSON.swift */; };
 		FD0E61F024B74CBC00AAE6B1 /* WordObjectRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0E61EF24B74CBC00AAE6B1 /* WordObjectRealm.swift */; };
@@ -21,6 +21,7 @@
 		FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD174EEA24645A8F0090A002 /* DataItems.swift */; };
 		FD40C92B24BB603700DE019A /* MetodsForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD40C92A24BB603700DE019A /* MetodsForUser.swift */; };
 		FD40C92D24BB7FCB00DE019A /* DataSourseForTableWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD40C92C24BB7FCB00DE019A /* DataSourseForTableWords.swift */; };
+		FD4A34A224C89CDE000E7B04 /* NetworkingForKey in Resources */ = {isa = PBXBuildFile; fileRef = FD4A34A124C89CDE000E7B04 /* NetworkingForKey */; };
 		FD60B5CA247092340042D3E2 /* MainBase.realm in Sources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD60B5CC247097380042D3E2 /* MainBase.realm in Resources */ = {isa = PBXBuildFile; fileRef = FDAC4C4624708885008569B5 /* MainBase.realm */; };
 		FD6395E1246F468A0060CA41 /* ModelViewLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */; };
@@ -65,7 +66,7 @@
 		7177F006691783A1AE91A48E /* Pods-WorkApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkApplication.release.xcconfig"; path = "Target Support Files/Pods-WorkApplication/Pods-WorkApplication.release.xcconfig"; sourceTree = "<group>"; };
 		D4BA6955D96DB0F4A98705EA /* Pods-WorkApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkApplication.debug.xcconfig"; path = "Target Support Files/Pods-WorkApplication/Pods-WorkApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		D68BEA0D72C9454D6F2B0A2D /* Pods_WorkApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorkApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD0A9B6024675227001FA785 /* WorkVariant.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WorkVariant.txt; sourceTree = "<group>"; };
+		FD0A9B6024675227001FA785 /* DictionaryAfterParsing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryAfterParsing.txt; sourceTree = "<group>"; };
 		FD0D2D5324C05D080065866E /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		FD0E61ED24B74C9C00AAE6B1 /* WordCodableJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCodableJSON.swift; sourceTree = "<group>"; };
 		FD0E61EF24B74CBC00AAE6B1 /* WordObjectRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordObjectRealm.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		FD174EEA24645A8F0090A002 /* DataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItems.swift; sourceTree = "<group>"; };
 		FD40C92A24BB603700DE019A /* MetodsForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetodsForUser.swift; sourceTree = "<group>"; };
 		FD40C92C24BB7FCB00DE019A /* DataSourseForTableWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourseForTableWords.swift; sourceTree = "<group>"; };
+		FD4A34A124C89CDE000E7B04 /* NetworkingForKey */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NetworkingForKey; sourceTree = "<group>"; };
 		FD6395E0246F468A0060CA41 /* ModelViewLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewLogIn.swift; sourceTree = "<group>"; };
 		FD67A96C249DFA4C00FF210A /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		FD67A96E24A0769800FF210A /* CoordinatorRenameDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorRenameDictionary.swift; sourceTree = "<group>"; };
@@ -175,7 +177,7 @@
 				FD174ED6246404F80090A002 /* ExtensionsAndGlobalConstants */,
 				FD174EBD2464043B0090A002 /* WorkApplication */,
 				FD174EDA24640D6C0090A002 /* Protocols */,
-				FDE60AF2246D944600D0A0BB /* AccessoryFiles */,
+				FDE60AF2246D944600D0A0BB /* AccessoryFilesDontExecute */,
 				FD174EBC2464043B0090A002 /* Products */,
 				83F944185498E5C2321E57BB /* Pods */,
 				644EAD86BB79C34659C8F783 /* Frameworks */,
@@ -272,6 +274,7 @@
 		FD72713224AB3DE4007917BD /* ModelForAPIYandexDictionary */ = {
 			isa = PBXGroup;
 			children = (
+				FD4A34A124C89CDE000E7B04 /* NetworkingForKey */,
 				FD6E9CF524A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift */,
 			);
 			path = ModelForAPIYandexDictionary;
@@ -366,14 +369,14 @@
 			path = DictionaryOpen;
 			sourceTree = "<group>";
 		};
-		FDE60AF2246D944600D0A0BB /* AccessoryFiles */ = {
+		FDE60AF2246D944600D0A0BB /* AccessoryFilesDontExecute */ = {
 			isa = PBXGroup;
 			children = (
-				FD0A9B6024675227001FA785 /* WorkVariant.txt */,
+				FD0A9B6024675227001FA785 /* DictionaryAfterParsing.txt */,
 				FD174EEA24645A8F0090A002 /* DataItems.swift */,
 				FD174EE824641AE40090A002 /* Item.swift */,
 			);
-			path = AccessoryFiles;
+			path = AccessoryFilesDontExecute;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,7 +444,8 @@
 				FD174ECB2464043D0090A002 /* LaunchScreen.storyboard in Resources */,
 				FD174EC82464043D0090A002 /* Assets.xcassets in Resources */,
 				FD174EC62464043B0090A002 /* Main.storyboard in Resources */,
-				FD0A9B6124675227001FA785 /* WorkVariant.txt in Resources */,
+				FD4A34A224C89CDE000E7B04 /* NetworkingForKey in Resources */,
+				FD0A9B6124675227001FA785 /* DictionaryAfterParsing.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

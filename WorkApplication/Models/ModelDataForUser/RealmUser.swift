@@ -13,7 +13,7 @@ import RxSwift
 import RealmSwift
 
 class RealmUser{
-     
+    
     var realmUser: Realm!
 
     static let shared = RealmUser()
@@ -22,12 +22,18 @@ class RealmUser{
     }
 
     private init() {
-        //let url = Bundle.main.bundleURL.appendingPathComponent("UserBase.realm")
+        #if DEBUG
+        // if the project was downloaded from github you need to change it to yor own ( or make let config = Realm.Configuration.defaultConfiguration )
         let url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyDictionaries/WorkApplication/WorkApplication/UsersBase.realm")
+        #else
+        let url = Bundle.main.bundleURL.appendingPathComponent("UserBase.realm")
+        #endif
         let config = Realm.Configuration.init(fileURL: url, readOnly: false)
+        //let config = Realm.Configuration.defaultConfiguration
 
         do{
             self.realmUser = try Realm(configuration: config)
+//MARK- Clean all base
 //            try! realmUser.write {
 //                realmUser.deleteAll()
 //            }

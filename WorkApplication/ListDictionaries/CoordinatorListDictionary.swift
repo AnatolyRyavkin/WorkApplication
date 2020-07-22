@@ -45,14 +45,13 @@ class CoordinatorListDictionary: CoordinatorProtocol{
             self.nc.popToViewController(self.vcListDictionary, animated: true)
             return Observable.empty()
         } else {
-            nc.pushViewController(self.vcListDictionary, animated: true) //!CoordinatorListDictionary.FirstAppear)
+            nc.pushViewController(self.vcListDictionary, animated: true) 
             CoordinatorListDictionary.FirstAppear = false
         }
         return Observable.empty()
     }
 
     func launchCoordinatorMakeNewDictionary() -> Observable<Void> {
-        let a = 1
         var coordinatorMakeNewDictionary: CoordinatorNewDictionary
         let result = CoordinatorApp.arrayCoordinators.filter{ $0 is CoordinatorNewDictionary}
         if let coor = (result.first as? CoordinatorNewDictionary), coor.userObjectRealm == self.userObjectRealm {

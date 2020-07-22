@@ -56,11 +56,9 @@ class WordObject: Object {
         if let arrayIdiom = itemSource.arrayIdiom{
             self.listIdiom.append(objectsIn: arrayIdiom)
         }
-        //print("init wordObject",self)
     }
 
     deinit {
-        //print("deinit wordObject",self)
     }
 
 

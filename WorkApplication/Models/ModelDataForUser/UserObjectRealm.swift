@@ -21,10 +21,8 @@ class UserObjectRealm: Object{
 
     required init() {
         super.init()
-        //print("++++++++++++++++++++++++++init UserObjectRealm", userName)
     }
     deinit {
-        //print("___________________________deinit UserObjectRealm", userName)
     }
 
     private static var CurrentUserObjRealm: UserObjectRealm?
@@ -59,7 +57,6 @@ class UserObjectRealm: Object{
         }
         return metodsIn!
     }
-    
-    
+
 }
 

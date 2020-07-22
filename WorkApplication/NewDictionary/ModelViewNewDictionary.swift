@@ -25,7 +25,6 @@ class ModelViewNewDictionary{
         return self.vcNewDictionary.navigationController
     }
 
-
     var firstLaunchVCNewDictionaryDidAppear = true
     
     init(coordinatorNewDictionary: CoordinatorNewDictionary){
@@ -55,7 +54,6 @@ class ModelViewNewDictionary{
 
             self.vcNewDictionary.textFieldImputNameDictionary.becomeFirstResponder()
 
-
             self.vcNewDictionary.textFieldImputNameDictionary.rx.text
             .map { (string) -> Bool in
                 let isStringDontEmpty = string?.count ?? 0 < 1 || string?.filter{$0 == Character(" ")}.count == string?.count
@@ -73,7 +71,6 @@ class ModelViewNewDictionary{
             .bind(to: self.vcNewDictionary.buttonSaveBack.rx.isEnabled)
             .disposed(by: self.disposeBag)
 
-
             self.vcNewDictionary.segmentTypeDictionary.rx.value.asDriver()
                 .map({ (num) -> TranslationDirection in
                     return (num == 0) ? .RuEn : .EnRu
@@ -81,7 +78,6 @@ class ModelViewNewDictionary{
             .drive(onNext: { typeDictionary in
                 self.typeDictionary = typeDictionary
             }).disposed(by: self.disposeBag)
-
 
             self.vcNewDictionary.buttonSaveBack.rx.tap
             .do(onNext:{ _ in
@@ -169,46 +165,11 @@ class ModelViewNewDictionary{
                         let alert = UIAlertController.init(title: nil, message: "No Enternet", preferredStyle: .alert)
                         self.vcNewDictionary!.present(alert, animated: true, completion: nil)
                     }
-
                 }
                 })
             .subscribe()
             .disposed(by: self.disposeBag)
 
-            
-
-//            self.vcNewDictionary.buttonSaveBack.rx.tap.asDriver()
-//            .drive(onNext: {
-//
-//                try! self.userObjectRealm.metods.appendDictionary(title: self.textNameDictionaryInput, type: self.typeDictionary)
-//
-//                if let arrayVC = self.nc?.viewControllers{
-//                    let vc = arrayVC.filter { $0 is ViewControllerListDictionary }.first
-//                    if vc != nil{
-//                        self.nc?.popViewController(animated: true)
-//                    }else{print("error - vc = nil")}
-//                }else{print("error - arrayNC = nil")}
-//
-//            }).disposed(by: self.disposeBag)
-
-
-//            self.vcNewDictionary.buttonSaveNext.rx.tap.asDriver()
-//            .drive(onNext: {
-//
-//                try! self.userObject.metods.appendDictionary(title: self.textNameDictionaryInput, type: self.typeDictionary)
-//                guard let dictionary = self.userObject.metods.getLastDictionaryForUser() else {
-//                    print("dictionary = nil")
-//                    return
-//                }
-//                self.coordinatorNewDictionary!.openDictionary(dictionaryObject: dictionary)
-//                CoordinatorApp.arrayCoordinators.removeAll{
-//                    $0 is CoordinatorNewDictionary
-//                }
-//                self.nc?.viewControllers.removeAll{
-//                    $0 is ViewControllerNewDictionary
-//                }
-//            }).disposed(by: self.disposeBag)
-            
         }).disposed(by: self.disposeBag)
 
     }

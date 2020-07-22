@@ -66,14 +66,9 @@ class ModelViewLogIn{
         }
 
         (vcLogIn as UIViewController).rx.viewWillAppear.asDriver().drive(onNext: { _ in
-
-            //self.vcLogIn.textFieldUsername.becomeFirstResponder()
-
             if !self.firstLaunchVCLogInDidAppear {
                 return
             }
-            
-
             self.observerOldUser = AnyObserver<UserObjectRealm>.init{ event in
                 switch event{
                 case .next(let userObjectRealm):
@@ -113,15 +108,15 @@ class ModelViewLogIn{
 
             self.vcLogIn.textFieldUsername.text = (self.arrayUserName.count > 0) ? self.arrayUserName[0] : ""
 
-            //MARK- Subscribe on launch ListDictionary
+//MARK- Subscribe on launch ListDictionary
 
 
             self.publishSubjectLaunchUserOld.subscribe(self.observerOldUser).disposed(by: self.disposeBag)
             self.publishSubjectLaunchUserNew.subscribe(self.observerNewUser).disposed(by: self.disposeBag)
 
-            //MARK- subscribe textFieldUserName
+//MARK- subscribe textFieldUserName
 
-                    //MARK- Enable Button Next
+//MARK- Enable Button Next
 
 
             self.vcLogIn.textFieldUsername.rx.text.asDriver().drive(onNext: { text in
@@ -160,7 +155,7 @@ class ModelViewLogIn{
             .disposed(by: self.disposeBag)
 
 
-            //MARK- Tap button Next
+//MARK- Tap button Next
 
             self.vcLogIn.buttonNext.rx.tap.asDriver().drive(onNext: { _ in
 
@@ -170,7 +165,7 @@ class ModelViewLogIn{
 
             }).disposed(by: self.disposeBag)
 
-            //MARK- Tap button Find Profile
+//MARK- Tap button Find Profile
 
             self.vcLogIn.buttonFindProfile.rx.tap
                 .map { !self.vcLogIn.pickerProfiles.isHidden }
@@ -205,7 +200,7 @@ class ModelViewLogIn{
                 .bind(to: self.vcLogIn.pickerProfiles.rx.isUserInteractionEnabled)
                 .disposed(by: self.disposeBag)
 
-            //MARK- PicerProfiles
+//MARK- PicerProfiles
 
             self.behaviorSubjectForPicker.bind(to: self.vcLogIn.pickerProfiles.rx.itemTitles){ _, string in
                 self.vcLogIn.pickerProfiles.selectedRow(inComponent: 0)
@@ -218,7 +213,7 @@ class ModelViewLogIn{
                 self.vcLogIn.textFieldUsername.text = self.arrayUserName[row]
             }).disposed(by: self.disposeBag)
 
-            //MARK- buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist
+//MARK- buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist
 
             self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.rx.tap
                 .asDriver()
@@ -248,7 +243,7 @@ class ModelViewLogIn{
         }).disposed(by: self.disposeBag)
     }
 
-    //MARK- alert
+//MARK- alert
 
     func showAllert(newUserName: String) {
 

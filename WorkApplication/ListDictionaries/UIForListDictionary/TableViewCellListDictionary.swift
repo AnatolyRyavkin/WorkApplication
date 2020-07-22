@@ -14,7 +14,6 @@ class TableViewCellListDictionary: UITableViewCell {
     @IBOutlet weak var labelTypeDictionary: UILabel!
     @IBOutlet weak var labelCountItem: UILabel!
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -24,7 +23,5 @@ class TableViewCellListDictionary: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
 
     }
-
-    
 
 }

@@ -32,18 +32,9 @@ class DataItems {
         var i = 0
         for elementForItemOptional in arrayBeginNS{
             i += 1
-            print("item - %i",i)
-            //if i == 10{ return }
             guard let elementForItem = elementForItemOptional as? Dictionary<String, Any> else { fatalError("dictionary dont uwriping")}
             let item: Item = Item.init(dictionarySource: elementForItem)
             self.arrayItems.append(item)
-
-            //if ProcessInfo.processInfo.arguments.contains("PRINTDATA") {
-                //print(" \n \n ===================== SOURCE ======================  \n ")
-                //print(elementForItem)
-                //print(" \n \n ++++++++++++++++++++++ ITEM +++++++++++++++++++++++  \n ")
-                //item.printSelf()
-            //}
         }
     }
 }

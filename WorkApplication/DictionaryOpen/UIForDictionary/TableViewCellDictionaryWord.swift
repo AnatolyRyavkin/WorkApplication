@@ -13,20 +13,7 @@ class TableViewCellDictionaryWord: UITableViewCell {
     @IBOutlet weak var labelFirst: UILabel!
     @IBOutlet weak var labelSecond: UILabel!
 
-
     weak var tableView: UITableView?
-
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//    }
-
-//    override func layoutSubviews(){
-//        super.layoutSubviews()
-//
-//        guard let tableView = self.tableView else {return}
-//        tableView.rowHeight = 50
-//    }
 
     func setMeaning(dataSource: ModelTableVeiwSectionDictionary, indexPath: IndexPath, tableView: UITableView) {
 
@@ -65,9 +52,6 @@ class TableViewCellDictionaryWord: UITableViewCell {
 
             labelFirst.attributedText = attributeStringWord
             labelSecond.attributedText = attributeStringMainMeaning
-
-//            labelFirst.adjustsFontSizeToFitWidth = true
-//            labelSecond.adjustsFontSizeToFitWidth = true
 
             self.labelFirst.text = wordObjectRealm.word
             self.labelSecond.text = wordObjectRealm.mainMeaning

@@ -18,13 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
 
-//        UserDefaults.standard.cleanUserDefault()
-//        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-//        UserDefaults.standard.cleanUserDefault()
-//        UserDefaults.resetStandardUserDefaults()
-//        UserDefaults.standard.cleanUserDefault()
-
-
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow.init()
         window?.windowScene = windowScene

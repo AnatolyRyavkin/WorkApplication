@@ -18,7 +18,6 @@ class MetodsForDictionary {
 
     weak var dictionary: DictionaryObjectRealm!
 
-    //var modelRealmMainBase: ModelRealmBase = ModelRealmBase.shared
     var disposeBag: DisposeBag! = DisposeBag()
     
     var realmUser: Realm {

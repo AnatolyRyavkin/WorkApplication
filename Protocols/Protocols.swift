@@ -11,17 +11,6 @@ import Foundation
 import UIKit
 import RxSwift
 
-//protocol ModelViewProtocol {
-//    associatedtype T: CoordinatorProtocol
-//    var coordinatorSelf: T? { get set }
-//    func binding()
-//}
-
-protocol ProtocolExistTableView {
-    var tableView: UITableView! { get set }
-}
-
-
 
  protocol CoordinatorProtocol {
     associatedtype ElementForObservableStart = Observable<Void>
@@ -31,11 +20,3 @@ protocol ProtocolExistTableView {
     func start(from nc: UINavigationController) -> ElementForObservableStart
     func coordinate< Coordinator: CoordinatorProtocol>(to coordinator: Coordinator, from nc: UINavigationController)  -> ElementForObservableCoordinate
 }
-
-//protocol CoordinatorProtocol {
-//    associatedtype ElementForObservableStart = Observable<Void>
-//    associatedtype ElementForObservableCoordinate = Observable<Void>
-//
-//    func start(from viewController: UIViewController) -> ElementForObservableStart
-//    func coordinate< Coordinator: CoordinatorProtocol>(to coordinator: Coordinator, from viewController: UIViewController)  -> ElementForObservableCoordinate
-//}

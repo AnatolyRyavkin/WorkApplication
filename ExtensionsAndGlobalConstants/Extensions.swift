@@ -11,52 +11,32 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-struct ScreenSize
-{
-    static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width
-    static let SCREEN_HEIGHT        = UIScreen.main.bounds.size.height
-    static let SCREEN_MAX_LENGTH    = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
-    static let SCREEN_MIN_LENGTH    = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+enum UIUserInterfaceIdiom : Int {
+    case Unspecified
+    case phone
+    case pad
 }
 
-struct Version{
-    static let SYS_VERSION_FLOAT = (UIDevice.current.systemVersion as NSString).floatValue
-    static let iOS7 = (Version.SYS_VERSION_FLOAT < 8.0 && Version.SYS_VERSION_FLOAT >= 7.0)
-    static let iOS8 = (Version.SYS_VERSION_FLOAT >= 8.0 && Version.SYS_VERSION_FLOAT < 9.0)
-    static let iOS9 = (Version.SYS_VERSION_FLOAT >= 9.0 && Version.SYS_VERSION_FLOAT < 10.0)
+struct ScreenSize {
+    static let screenWidth = UIScreen.main.bounds.size.width
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let screenMaxLength = max(ScreenSize.screenWidth, ScreenSize.screenHeight)
+    static let screenMinLength = min(ScreenSize.screenWidth, ScreenSize.screenHeight)
 }
 
-enum Device {
-    case IS_IPHONE_4_OR_LESS
-    case IS_IPHONE_5
-    case IS_IPHONE_6_7
-    case IS_IPHONE_6P_7P
-    case IS_IPAD
-    case IS_IPAD_PRO
-    case IS_DEF_DEVICE
+struct DeviceType {
+    static let iPhone4OrLess  = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength < 568.0
+    static let iPhoneSE = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 568.0
+    static let iPhone8 = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 667.0
+    static let iPhone8Plus = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 736.0
+    static let iPhoneXrOr11 = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 896.0
+    static let iPhoneXs = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 812.0
+    static let iPhoneXsMax = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 896.0
+    static let iPhone11Pro = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 1125.0
+    static let iPhone11ProMax = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength == 1242.0
 
-    static var type: Device {
-        let a = 0
-        let currentDevice = UIDevice.current.userInterfaceIdiom
-        switch currentDevice {
-        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0:
-            return .IS_IPHONE_4_OR_LESS
-        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0:
-            return .IS_IPHONE_5
-        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0:
-            return .IS_IPHONE_6_7
-        case _ where currentDevice == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0:
-            return .IS_IPHONE_6P_7P
-        case _ where currentDevice == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0:
-            return .IS_IPAD
-        case _ where currentDevice == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1366.0:
-            return .IS_IPAD_PRO
-        default:
-            return .IS_DEF_DEVICE
-        }
-    }
+    static let iPad = UIDevice.current.userInterfaceIdiom == .pad
 }
-
 
 public struct FontForTable {
 
@@ -75,28 +55,18 @@ public struct FontForTable {
         if let fontUserCustom = fontUserCustom {
             return fontUserCustom
         } else {
-            switch Device.type {
-            case .IS_IPHONE_4_OR_LESS:
-                return fontSistemBig
-            case .IS_IPHONE_5:
-                return fontSistemBig
-            case .IS_IPHONE_6_7:
-                return fontSistemBig
-            case .IS_IPHONE_6P_7P:
-                return fontSistemBig
-            case .IS_IPAD:
-                return fontSistemBig
-            case .IS_IPAD_PRO:
-                return fontSistemBig
-            default:
-                return fontFuturaMidle
+            if DeviceType.iPad {
+                return fontFuturaBig
+            }
+            if DeviceType.iPhone4OrLess {
+                return fontSistemLitle
             }
         }
+        return fontFuturaMidle
     }
 }
 
 public var FontForTables: UIFont!
-
 
 enum TranslationDirection: String{
     case EnRu = "en-ru"
@@ -119,7 +89,7 @@ typealias Res = Result<(Data,HTTPURLResponse),Error>
 
 public enum ErrorForGetRequestAPIYandex: Error, CaseIterable{
 
-    //MARK- Errors work with YandexAPI
+//MARK- Errors work with YandexAPI
 
     case ERR_OK
     case ERR_KEY_INVALID
@@ -139,7 +109,7 @@ public enum ErrorForGetRequestAPIYandex: Error, CaseIterable{
     case NOT_FOUND
     case DONT_INTERNET
 
-    //MARK- Internal Errors
+//MARK- Internal Errors
 
     case AlREADY_EXIST_TO_BASE_SAME_DICTIONARY_FOR_THIS_USER
 
@@ -211,7 +181,6 @@ public extension UISearchBar
             super.textInputMode
     }
 }
-
 
 //MARK- RX
 
@@ -297,8 +266,7 @@ extension UIView{
 }
 
 
-
-  //MARK- UserDefaults
+//MARK- UserDefaults
 
 extension UserDefaults{
 
@@ -329,61 +297,61 @@ extension UserDefaults{
 //
 //
 ////MARK- token
-//
-//    func setToken(token: String?) {
-//        set(token, forKey: "token")
-//    }
-//
-//    func getToken() -> String?{
-//        return string(forKey: "token")
-//    }
-//
-//    func setLoggedIn(userName: String) {
-//        if(userName != ""){
-//            set(userName, forKey: userName)
-//            addUserInArrayUsers(userName: userName)
-//        }
-//    }
-//
-//    func removeUser(userName: String) {
-//        removeObject(forKey: userName)
-//        if let array = readArrayUsers(){
-//            removeObject(forKey: "allUsers")
-//            set(array.map { $0 != userName }, forKey: "allUsers")
-//        }
-//    }
-//
-//    func isLoggedIn(value: String) -> Bool {
-//        return bool(forKey: value)
-//    }
-//
-//    func readLogged(forKey: String) -> String? {
-//        return string(forKey: forKey)
-//    }
-//
-//    func getLastLoggedIn() -> String? {
-//        return string(forKey: "lastUser")
-//    }
-//
-//    func setLastLoggedIn(userName: String){
-//        set(userName, forKey: "lastUser")
-//    }
-//
-//    func readArrayUsers() -> Array<String>? {
-//        return stringArray(forKey: "allUsers")
-//    }
-//
-//    func addUserInArrayUsers(userName: String) {
-//        var arrayUsers = Array<String>()
-//        if let array = readArrayUsers(){
-//            arrayUsers = array
-//        }
-//        arrayUsers.append(userName)
-//        removeObject(forKey: "allUsers")
-//        set(arrayUsers, forKey: "allUsers")
-//    }
-//
-//}
+
+extension UserDefaults{
+    func setToken(token: String?) {
+        set(token, forKey: "token")
+    }
+
+    func getToken() -> String?{
+        return string(forKey: "token")
+    }
+
+    func setLoggedIn(userName: String) {
+        if(userName != ""){
+            set(userName, forKey: userName)
+            addUserInArrayUsers(userName: userName)
+        }
+    }
+
+    func removeUser(userName: String) {
+        removeObject(forKey: userName)
+        if let array = readArrayUsers(){
+            removeObject(forKey: "allUsers")
+            set(array.map { $0 != userName }, forKey: "allUsers")
+        }
+    }
+
+    func isLoggedIn(value: String) -> Bool {
+        return bool(forKey: value)
+    }
+
+    func readLogged(forKey: String) -> String? {
+        return string(forKey: forKey)
+    }
+
+    func getLastLoggedIn() -> String? {
+        return string(forKey: "lastUser")
+    }
+
+    func setLastLoggedIn(userName: String){
+        set(userName, forKey: "lastUser")
+    }
+
+    func readArrayUsers() -> Array<String>? {
+        return stringArray(forKey: "allUsers")
+    }
+
+    func addUserInArrayUsers(userName: String) {
+        var arrayUsers = Array<String>()
+        if let array = readArrayUsers(){
+            arrayUsers = array
+        }
+        arrayUsers.append(userName)
+        removeObject(forKey: "allUsers")
+        set(arrayUsers, forKey: "allUsers")
+    }
+}
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {

@@ -14,8 +14,6 @@ import RealmSwift
 
 class MetodsForWords {
 
-
-    //var modelRealmMainBase: ModelRealmBase = ModelRealmBase.shared
     let disposeBag = DisposeBag()
     var realmUser: Realm {
         RealmUser.shared.realmUser
@@ -40,7 +38,6 @@ class MetodsForWords {
         self.behaviorSubjectWord.onNext(self.wordObjectRealm)
     }
 
-    
     func saveToRealm() {
         try! realmUser.write {
             realmUser.add(self.wordObjectRealm)

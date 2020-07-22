@@ -51,6 +51,5 @@ class CoordinatorRenameDictionary: CoordinatorProtocol {
         let cootdinatorDictionary = CoordinatorDictionary.init(dictionaryObject: dictionaryObject )
         _ = coordinate(to: cootdinatorDictionary, from: self.nc)
     }
-
-
+    
 }

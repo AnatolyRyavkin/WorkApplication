@@ -29,7 +29,6 @@ class ViewControllerDictionary: UIViewController {
     @IBOutlet weak var constraintEqualHeightButtonAddWithSearch: NSLayoutConstraint!
     @IBOutlet weak var constraintZeroHeightSearch: NSLayoutConstraint!
 
-
     var navigationBar: UINavigationBar? {
         return self.navigationController?.navigationBar
     }
@@ -47,7 +46,6 @@ class ViewControllerDictionary: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.labelNavigationLabel.removeFromSuperview()
-        //11
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -55,8 +53,7 @@ class ViewControllerDictionary: UIViewController {
         self.labelNavigationLabel.frame =  CGRect(x: size.width/2 - size.width/4, y: 0, width: size.width/2, height: self.navigationBar!.frame.height)
     }
 
-
-    //MARK- Appear disAppear SearchBar
+//MARK- Appear disAppear SearchBar
 
     func showSearchBarWithAnimation(durationAnimation: Float) {
         UIView.animate(withDuration: TimeInterval(durationAnimation)) {
@@ -78,7 +75,6 @@ class ViewControllerDictionary: UIViewController {
             self.searchBar.resignFirstResponder()
             self.view.layoutIfNeeded()
         }
-
     }
 
     func hiddenSearchBarWithoutAnimation() {
@@ -110,31 +106,6 @@ class ViewControllerDictionary: UIViewController {
 
         self.tableView?.backgroundView?.backgroundColor = myColor(arColor: ViewBackground1)
         self.view.backgroundColor = myColor(arColor: ViewBackground1)
-
-
-
-//        let myShadow = NSShadow()
-//        myShadow.shadowBlurRadius = 2
-//        myShadow.shadowOffset = CGSize(width: 2, height: 2)
-//        myShadow.shadowColor = UIColor.gray
-//
-//        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
-//                          NSAttributedString.Key.font: FontForTable.Shared,
-//                          NSAttributedString.Key.shadow: myShadow,
-//        ]
-//
-//
-//        self.buttonReferensAPIYandex.titleLabel?.font = FontForTable.fontSistemLitle
-
-//        let textButton = wordObjectRealm.word
-//
-//        let attributeStringWord = NSAttributedString(string: stringWord, attributes: attribute)
-
-
-
-
-
-
 
         self.buttonVisual.backgroundColor = myColor(arColor: ControlBackgroundActive1)
         self.buttonVisual.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
@@ -168,8 +139,5 @@ class ViewControllerDictionary: UIViewController {
             navigationBar.addSubview(labelNavigationLabel)
             self.labelNavigationLabel = labelNavigationLabel
         }
-
-
     }
-
 }

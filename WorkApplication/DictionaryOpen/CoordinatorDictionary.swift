@@ -21,9 +21,7 @@ class CoordinatorDictionary: CoordinatorProtocol {
     var vcDictionary: ViewControllerDictionary!
     var modelViewDictionary: ModelViewDictionary!
 
-
     init(dictionaryObject: DictionaryObjectRealm){
-
 
         self.vcDictionary = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcDictionary") as? ViewControllerDictionary
         self.modelViewDictionary = ModelViewDictionary.init(dictionaryObject: dictionaryObject,  coordinatorDictionary: self)
@@ -51,6 +49,5 @@ class CoordinatorDictionary: CoordinatorProtocol {
     func coordinate<Coordinator>(to coordinator: Coordinator, from nc: UINavigationController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
         return Observable.empty()
     }
-
 
 }

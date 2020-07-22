@@ -11,8 +11,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-
-
 class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<ModelSectionDictionary> {
 
     private static var SharedInvoke: ModelTableVeiwSectionDictionary!
@@ -49,7 +47,6 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
 
                 let sectionIndexTitlesMy: (TableViewSectionedDataSource<ModelSectionDictionary>) -> [String]? = { dataSource in
 
-                    //print(UserObjectRealm.CurrentUserObjectRealm.debugDescription)
                     var alphaBettaArrayUpper = [""]
                     switch DataSourseForTableWords.lastUseTypeDictionary! {
                     case TranslationDirection.EnRu: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
@@ -68,7 +65,7 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
                     default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
                     }
                     print(string,num)
-                    return 33
+                    return alphaBettaArrayUpper.count
                 }
 
                 return ModelTableVeiwSectionDictionary.init( configureCell: configurationCellWordMy,

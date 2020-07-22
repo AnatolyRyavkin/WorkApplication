@@ -11,7 +11,6 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-
 class DictionaryObjectRealm: Object{
 
     @objc dynamic var name: String = ""
@@ -28,14 +27,12 @@ class DictionaryObjectRealm: Object{
         return metodsIn!
     }
 
-
-
     required init() {
         super.init()
-        //print("init dictionary -", name)
+
     }
     deinit {
-        //print("deinit dictionary -", name)
+       
     }
 
 }

@@ -100,30 +100,6 @@ public func myColor(arColor: ARColorSet) -> UIColor {
 
 
 
-//public let gray2 = UIColor.init(hexString: "778899") // серый+
-//public let blue2 = UIColor.init(hexString: "0000FF") // синий+
-//public let gray1 = UIColor.init(hexString: "A6B0BC") // серый
-//public let purple2 = UIColor.init(hexString: "D0D0FF") // фиолетовый +
-//public let gray3 = UIColor.init(hexString: "D3D3D3") // серый ++
-//public let blue1 = UIColor.init(hexString: "00007F") // синий
-//public let orange1 = UIColor.init(hexString: "FFE69C") // оранжево-коричневый
-
-
-
-
-
-//public let purple1 = UIColor.init(hexString: "6666FF") // фиолетовый
-//public let gray2 = UIColor.init(hexString: "778899") // серый+
-//public let white1 = UIColor.init(hexString: "FFFFFF") // белый
-//public let blue2 = UIColor.init(hexString: "0000FF") // синий+
-//public let gray1 = UIColor.init(hexString: "A6B0BC") // серый
-//public let purple2 = UIColor.init(hexString: "D0D0FF") // фиолетовый +
-//public let gray3 = UIColor.init(hexString: "D3D3D3") // серый ++
-//public let black1 = UIColor.init(hexString: "000000") // черный
-//public let blue1 = UIColor.init(hexString: "00007F") // синий
-//public let orange1 = UIColor.init(hexString: "FFE69C") // оранжево-коричневый
-
-
 
 
 

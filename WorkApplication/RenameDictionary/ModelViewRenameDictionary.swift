@@ -73,7 +73,6 @@ class ModelViewRenameDictionary{
 
             self.vcRenameDictionary.buttonSaveBack.rx.tap.asDriver()
             .drive(onNext: {
-                //try! self.dictionaryObjectRename.metods.changeNameDictionary( newName: self.textNameDictionaryInput)
                 try! self.userObjectRealm.metods.renameDictionary(dictionaryObjectRealm: self.dictionaryObjectRename, newName: self.textNameDictionaryInput)
                 self.nc?.popViewController(animated: true)
             }).disposed(by: self.disposeBag)
