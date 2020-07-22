@@ -89,7 +89,7 @@ public struct FontForTable {
             case .IS_IPAD_PRO:
                 return fontSistemBig
             default:
-                return fontSistemBig
+                return fontFuturaMidle
             }
         }
     }

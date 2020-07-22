@@ -88,7 +88,7 @@ class ViewControllerDictionary: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle2) ,
                           NSAttributedString.Key.font: FontForTable.Shared,
                           NSAttributedString.Key.underlineStyle : 1
             ] as [NSAttributedString.Key : Any]

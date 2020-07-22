@@ -16,9 +16,6 @@ class TableViewCellDictionaryWord: UITableViewCell {
 
     weak var tableView: UITableView?
 
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//    }
 
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
@@ -47,22 +44,21 @@ class TableViewCellDictionaryWord: UITableViewCell {
 
             let wordObjectRealm = arrayWordObjectRealmForSection[indexPath.section].arrayWordObjectRealm[indexPath.row]
 
-//            let myShadow = NSShadow()
-//            myShadow.shadowBlurRadius = 2
-//            myShadow.shadowOffset = CGSize(width: 2, height: 2)
-//            myShadow.shadowColor = UIColor.gray
-
-            let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+            let attributeForWord = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
                               NSAttributedString.Key.font: FontForTable.Shared,
                               
-                              //NSAttributedString.Key.shadow: myShadow,
                 ] as [NSAttributedString.Key : Any]
+
+            let attributeForMainMeaning = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle2) ,
+                          NSAttributedString.Key.font: FontForTable.Shared,
+
+            ] as [NSAttributedString.Key : Any]
 
             let stringWord = wordObjectRealm.word
             let stringMainMeaning = wordObjectRealm.mainMeaning
 
-            let attributeStringWord = NSAttributedString(string: stringWord, attributes: attribute)
-            let attributeStringMainMeaning = NSAttributedString(string: stringMainMeaning, attributes: attribute)
+            let attributeStringWord = NSAttributedString(string: stringWord, attributes: attributeForWord)
+            let attributeStringMainMeaning = NSAttributedString(string: stringMainMeaning, attributes: attributeForMainMeaning)
 
             labelFirst.lineBreakMode = .byCharWrapping
             labelSecond.lineBreakMode = .byCharWrapping
@@ -70,8 +66,8 @@ class TableViewCellDictionaryWord: UITableViewCell {
             labelFirst.attributedText = attributeStringWord
             labelSecond.attributedText = attributeStringMainMeaning
 
-            labelFirst.adjustsFontSizeToFitWidth = true
-            labelSecond.adjustsFontSizeToFitWidth = true
+//            labelFirst.adjustsFontSizeToFitWidth = true
+//            labelSecond.adjustsFontSizeToFitWidth = true
 
             self.labelFirst.text = wordObjectRealm.word
             self.labelSecond.text = wordObjectRealm.mainMeaning

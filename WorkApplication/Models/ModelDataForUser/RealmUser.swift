@@ -23,7 +23,7 @@ class RealmUser{
 
     private init() {
         //let url = Bundle.main.bundleURL.appendingPathComponent("UserBase.realm")
-        let url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyApplication/WorkApplication/WorkApplication/UsersBase.realm")
+        let url = URL.init(fileURLWithPath: "Users/ryavkinto/Documents/MyDictionaries/WorkApplication/WorkApplication/UsersBase.realm")
         let config = Realm.Configuration.init(fileURL: url, readOnly: false)
 
         do{

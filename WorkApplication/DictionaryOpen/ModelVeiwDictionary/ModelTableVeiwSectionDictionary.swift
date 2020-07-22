@@ -43,7 +43,7 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
                     case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
                     default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
                     }
-                    return alphaBettaArrayUpper[numberSection]
+                    return "\(alphaBettaArrayUpper[numberSection])"
 
                 }
 
@@ -67,7 +67,8 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
                     case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
                     default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
                     }
-                    return alphaBettaArrayUpper.count
+                    print(string,num)
+                    return 33
                 }
 
                 return ModelTableVeiwSectionDictionary.init( configureCell: configurationCellWordMy,
@@ -77,7 +78,10 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
 
             }()
         }
+
         return ModelTableVeiwSectionDictionary.SharedInvoke
+
+
     }
 
     static func Clean() {
