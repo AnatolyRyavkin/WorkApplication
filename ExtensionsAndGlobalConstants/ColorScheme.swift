@@ -28,61 +28,79 @@ public let gray1 =     UIColor.init(hexString: "F2F2F2")    // серый light
 public let gray2 =     UIColor.init(hexString: "D3D3D3")    // серый
 public let gray3 =     UIColor.init(hexString: "A6B0BC")    // серый
 public let gray4 =     UIColor.init(hexString: "778899")    // серый dark
-
 public let indigo =     UIColor.init(hexString: "#4D54D8")   // indigo
 public let indigo2 =     UIColor.init(hexString: "#100873")   // indigo
 
 
-public let ControlBackgroundActive1 = (indigo,indigo,indigo)
+// guide apple
+
+public let Calendar =   UIColor.init(hexString: "FF3B30")
+public let iBooks =   UIColor.init(hexString: "FF9500")
+public let Noties = UIColor.init(hexString: "FFCC00")
+public let Messages =    UIColor.init(hexString: "4CD964")
+public let Videos =    UIColor.init(hexString: "5AC8FA")
+public let Safari =     UIColor.init(hexString: "007AFF")
+public let Podcasts =     UIColor.init(hexString: "5856D6")
+public let Music =     UIColor.init(hexString: "FF2D55")
+public let Settings =     UIColor.init(hexString: "8E8E93")
+public let AppleWatch =     UIColor.init(hexString: "#000000")
+public let Background =     UIColor.init(hexString: "#EFEFF4")
+public let Lines =     UIColor.init(hexString: "CECED2")
+public let Text =     UIColor.init(hexString: "#000000")
+public let Links =     UIColor.init(hexString: "#007AFF")
+
+
+
+public let ControlBackgroundActive1 = (indigo,Safari,indigo)
 //public let ControlBackgroundActive2 = (orange1,purple1,orange1)
 //public let ControlBackgroundActive3 = (orange1,purple1,orange1)
 
-public let ControlBackgroundDontActive1 = (gray4,gray4,gray4)
+public let ControlBackgroundDontActive1 = (gray4,Lines,gray4)
 //public let ControlBackgroundDontActive2 = (gray1,gray2,gray2)
 //public let ControlBackgroundDontActive3 = (gray1,gray2,gray2)
 
-public let ControlTitleActive1 = (gray2,gray2,gray2)
+public let ControlTitleActive1 = (gray2,white1,gray2)
 //public let ControlTitleActive2 = (gray3,blue1,gray2)
 //public let ControlTitleActive3 = (black1,white1,gray2)
 
-public let ControlTitleDontActive1 = (gray3,gray3,gray3)
+public let ControlTitleDontActive1 = (gray3,Settings,gray3)
 //public let ControlTitleDontActive2 = (black1,gray3,gray3)
 //public let ControlTitleDontActive3 = (black1,gray3,gray3)
 
-public let LabelBackground1 = (gray3,gray3,gray3)
+public let LabelBackground1 = (gray3,white1,gray3)
 //public let LabelBackground2 = (white1,blue1,gray2)
 //public let LabelBackground3 = (white1,blue1,gray2)
 
-public let LabelTitle1 = (black1,black1,black1)
-public let LabelTitle2 = (indigo2,indigo2,indigo2)               // TitleLabel
+public let LabelTitle1 = (black1,Text,black1)
+public let LabelTitle2 = (indigo2,Safari,indigo2)               // TitleLabel
 //public let LabelTitle3 = (black1,white1,gray2)
 
 
-public let TextFieldBackgroundActive1 = (gray2,gray2,gray2)
+public let TextFieldBackgroundActive1 = (gray2,white1,gray2)
 //public let TextFieldBackgroundActive2 = (white1,blue1,gray2)
 //public let TextFieldBackgroundActive3 = (white1,blue1,gray2)
 
-public let TextFieldBackgroundDontActive1 = (gray2,gray2,gray2)
+public let TextFieldBackgroundDontActive1 = (gray2,Lines,gray2)
 //public let TextFieldBackgroundDontActive2 = (white1,blue1,gray2)
 //public let TextFieldBackgroundDontActive3 = (white1,blue1,gray2)
 
-public let TextFieldTitleActive1 = (black1,black1,black1)
+public let TextFieldTitleActive1 = (black1,Text,black1)
 //public let TextFieldTitleActive2 = (blue1,gray3,gray2)
 //public let TextFieldTitleActive3 = (white1,blue1,gray2)
 
-public let TextFieldTitleDontActive1 = (black1,black1,black1)
+public let TextFieldTitleDontActive1 = (black1,Text,black1)
 //public let TextFieldTitleDontActive2 = (white1,blue1,gray2)
 //public let TextFieldTitleDontActive3 = (white1,blue1,gray2)
 
-public let ViewBackground1 = (gray3,gray3,gray3)
-public let ViewBackground2 = (gray3,gray3,gray3)   // launch View
+public let ViewBackground1 = (gray3,Background,gray3)
+public let ViewBackground2 = (gray3,Background,gray3)   // launch View
 //public let ViewBackground3 = (purple1,gray1,gray2)
 
-public let NavigationBarBackground1 = (indigo,indigo,indigo)
+public let NavigationBarBackground1 = (indigo,white1,indigo)
 //public let NavigationBarBackground2 = (orange1,gray1,gray2)
 //public let NavigationBarBackground3 = (purple1,gray1,gray2)
 
-public let NavigationBarTitle1 = (gray2,gray2,gray2)
+public let NavigationBarTitle1 = (gray2,Safari,gray2)
 //public let NavigationBarTitle2 = (purple1,purple2,gray2)
 //public let NavigationBarTitle3 = (purple1,gray1,gray2)
 

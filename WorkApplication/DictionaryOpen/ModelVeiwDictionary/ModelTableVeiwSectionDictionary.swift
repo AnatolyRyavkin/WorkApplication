@@ -78,7 +78,6 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
 
         return ModelTableVeiwSectionDictionary.SharedInvoke
 
-
     }
 
     static func Clean() {
