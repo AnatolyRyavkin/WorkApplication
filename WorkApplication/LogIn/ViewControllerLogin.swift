@@ -29,7 +29,9 @@ class ViewControllerLogin: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = myColor(arColor: ViewBackground2)
+        //self.view.backgroundColor = myColor(arColor: ViewBackground2)
+
+        setGradient(gradientView: self.view, color1: myColor(arColor: ControlBackgroundActive2), color2: myColor(arColor: ViewBackground1))
 
         self.textFieldUsername.textColor = myColor(arColor: TextFieldTitleActive1)
         self.textFieldUsername.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)

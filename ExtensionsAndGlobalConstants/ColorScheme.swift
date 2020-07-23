@@ -52,7 +52,7 @@ public let Links =     UIColor.init(hexString: "#007AFF")
 
 
 public let ControlBackgroundActive1 = (indigo,Safari,indigo)
-//public let ControlBackgroundActive2 = (orange1,purple1,orange1)
+public let ControlBackgroundActive2 = (Videos,Lines,Videos)
 //public let ControlBackgroundActive3 = (orange1,purple1,orange1)
 
 public let ControlBackgroundDontActive1 = (gray4,Lines,gray4)
@@ -113,6 +113,16 @@ public func myColor(arColor: ARColorSet) -> UIColor {
     }
 }
 
+
+func setGradient(gradientView: UIView, color1: UIColor, color2: UIColor) {
+    let gradient: CAGradientLayer = CAGradientLayer()
+    gradient.colors = [color1.cgColor, color2.cgColor]
+    gradient.locations = [0.0 , 1.0]
+    gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+    gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+    gradient.frame = gradientView.layer.frame
+    gradientView.layer.insertSublayer(gradient, at: 0)
+}
 
 
 
