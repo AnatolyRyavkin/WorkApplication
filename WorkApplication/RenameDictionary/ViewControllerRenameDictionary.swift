@@ -18,6 +18,7 @@ class ViewControllerRenameDictionary: UIViewController {
     @IBOutlet weak var labelOldName: UILabel!
     @IBOutlet weak var ladelNewLabel: UILabel!
 
+    var gradientLayer = CAGradientLayer()
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print("init ViewControllerRenameDictionary",self)
@@ -50,6 +51,12 @@ class ViewControllerRenameDictionary: UIViewController {
         self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
         self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
+        self.gradientLayer.colors = [myColor(arColor: ControlBackgroundActive2).cgColor, myColor(arColor: ViewBackground1).cgColor]
+        self.gradientLayer.locations = [0.0 , 1.0]
+        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        self.gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,4 +65,15 @@ class ViewControllerRenameDictionary: UIViewController {
         self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
         self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
     }
+
+    override func viewDidLayoutSubviews() {
+           super.viewDidLayoutSubviews()
+           gradientLayer.frame = self.view.bounds
+       }
+
+       override func viewWillLayoutSubviews() {
+           super.viewWillLayoutSubviews()
+           gradientLayer.frame = self.view.bounds
+       }
+
 }

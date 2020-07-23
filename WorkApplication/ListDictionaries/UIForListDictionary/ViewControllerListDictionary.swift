@@ -14,8 +14,8 @@ class ViewControllerListDictionary: UIViewController {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var labelCount: UILabel!
-    @IBOutlet weak var buttonAddDictionary: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var buttonAddDictionary: UIButton!
 
     var barButtonAddDictionary: UIBarButtonItem!
     var barButtonCancelProfile: UIBarButtonItem!
@@ -36,12 +36,18 @@ class ViewControllerListDictionary: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = myColor(arColor: ViewBackground1)
+
+        //setGradient(gradientView: self.view, color1: myColor(arColor: ControlBackgroundActive2), color2: myColor(arColor: ViewBackground1))
+
         self.tableView.backgroundColor = myColor(arColor: ViewBackground1)
+
         self.tableView.allowsSelectionDuringEditing = true
 
         if let navigationController = self.navigationController {
 
             self.barButtonAddDictionary = UIBarButtonItem.init(barButtonSystemItem: .add, target: nil, action: nil)
+
+
             self.barButtonCancelProfile = UIBarButtonItem.init(title: "‹Profiles", style: .done, target: nil, action: nil)
             self.barButtonEdit = UIBarButtonItem.init(title: "Edit", style: .done, target: nil, action: nil)
 
@@ -56,6 +62,7 @@ class ViewControllerListDictionary: UIViewController {
 
         }
 
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,11 +74,11 @@ class ViewControllerListDictionary: UIViewController {
         //MARK- Header TableView Custom + Button
 
         let myShadow = NSShadow()
-        myShadow.shadowBlurRadius = 2
-        myShadow.shadowOffset = CGSize(width: 2, height: 2)
+        myShadow.shadowBlurRadius = 1
+        myShadow.shadowOffset = CGSize(width: 1, height: 1)
         myShadow.shadowColor = UIColor.gray
 
-        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle2) ,
+        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
                           NSAttributedString.Key.font: FontForTable.Shared,
                           NSAttributedString.Key.shadow: myShadow,
         ]
@@ -91,7 +98,7 @@ class ViewControllerListDictionary: UIViewController {
         buttonAddDictionary.layer.cornerRadius = 18
 
         buttonAddDictionary.tintColor = myColor(arColor: ControlTitleActive1)
-        buttonAddDictionary.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+        buttonAddDictionary.backgroundColor = myColor(arColor: ControlBackgroundActive2)
 
         self.headerTableView.backgroundColor = myColor(arColor: ViewBackground1)
 

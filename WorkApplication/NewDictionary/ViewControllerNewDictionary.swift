@@ -18,6 +18,8 @@ class ViewControllerNewDictionary: UIViewController {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var ladelType: UILabel!
 
+    var gradientLayer = CAGradientLayer()
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print("init ViewControllerNewDictionary",self)
@@ -50,6 +52,12 @@ class ViewControllerNewDictionary: UIViewController {
         self.segmentTypeDictionary.selectedSegmentTintColor = myColor(arColor: ControlBackgroundActive1)
         self.segmentTypeDictionary.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
 
+        self.gradientLayer.colors = [myColor(arColor: ControlBackgroundActive2).cgColor, myColor(arColor: ViewBackground1).cgColor]
+        self.gradientLayer.locations = [0.0 , 1.0]
+        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        self.gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,5 +66,18 @@ class ViewControllerNewDictionary: UIViewController {
         self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
         self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
     }
+
+
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = self.view.bounds
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = self.view.bounds
+    }
+
     
 }

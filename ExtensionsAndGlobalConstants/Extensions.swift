@@ -182,6 +182,14 @@ public extension UISearchBar
     }
 }
 
+//extension UISearchBar {
+//    var textField: UITextField? {
+//        return subviews.map { $0.subviews.first(where: { $0 is UITextInputTraits}) as? UITextField }
+//            .compactMap { $0 }
+//            .first
+//    }
+//}
+
 //MARK- RX
 
 extension Reactive where Base == UITableView{
@@ -258,6 +266,22 @@ extension UIView{
                     return subView as? UITableViewCell
                 }else{
                     return subView.findCell()
+                }
+            }
+        }
+        return nil
+    }
+}
+
+
+extension UIView{
+    func findViewUITextField() -> UITextField? {
+        if self.subviews.count > 0{
+            for subView in self.subviews{
+                if subView is UITextField{
+                    return subView as? UITextField
+                }else{
+                    return subView.findViewUITextField()
                 }
             }
         }

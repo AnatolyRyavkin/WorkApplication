@@ -52,8 +52,8 @@ public let Links =     UIColor.init(hexString: "#007AFF")
 
 
 public let ControlBackgroundActive1 = (indigo,Safari,indigo)
-public let ControlBackgroundActive2 = (Videos,Lines,Videos)
-//public let ControlBackgroundActive3 = (orange1,purple1,orange1)
+public let ControlBackgroundActive2 = (Videos,Podcasts,Videos)
+public let ControlBackgroundActive3 = (Messages,Messages,Messages)
 
 public let ControlBackgroundDontActive1 = (gray4,Lines,gray4)
 //public let ControlBackgroundDontActive2 = (gray1,gray2,gray2)
@@ -68,12 +68,14 @@ public let ControlTitleDontActive1 = (gray3,Settings,gray3)
 //public let ControlTitleDontActive3 = (black1,gray3,gray3)
 
 public let LabelBackground1 = (gray3,white1,gray3)
-//public let LabelBackground2 = (white1,blue1,gray2)
-//public let LabelBackground3 = (white1,blue1,gray2)
+public let LabelBackground2 = (Lines,Lines,gray2)
+public let LabelBackground3 = (white1,Settings,gray2)
+public let LabelBackground4 = (white1,Background,gray2)
 
 public let LabelTitle1 = (black1,Text,black1)
-public let LabelTitle2 = (indigo2,Safari,indigo2)               // TitleLabel
-//public let LabelTitle3 = (black1,white1,gray2)
+public let LabelTitle2 = (indigo2,Podcasts,indigo2)               // TitleLabel
+public let LabelTitle3 = (black1,iBooks,gray2)
+public let LabelTitle4 = (black1,Safari,gray2)
 
 
 public let TextFieldBackgroundActive1 = (gray2,white1,gray2)
@@ -93,8 +95,9 @@ public let TextFieldTitleDontActive1 = (black1,Text,black1)
 //public let TextFieldTitleDontActive3 = (white1,blue1,gray2)
 
 public let ViewBackground1 = (gray3,Background,gray3)
-public let ViewBackground2 = (gray3,Background,gray3)   // launch View
-//public let ViewBackground3 = (purple1,gray1,gray2)
+public let ViewBackground2 = (gray3,Lines,gray3)   // launch View
+public let ViewBackground3 = (purple1,Settings,gray2)
+public let ViewBackground4 = (purple1,Noties,gray2)
 
 public let NavigationBarBackground1 = (indigo,white1,indigo)
 //public let NavigationBarBackground2 = (orange1,gray1,gray2)
@@ -114,13 +117,13 @@ public func myColor(arColor: ARColorSet) -> UIColor {
 }
 
 
-func setGradient(gradientView: UIView, color1: UIColor, color2: UIColor) {
+func setGradient(gradientView: UIView, layerFrame: CGRect, color1: UIColor, color2: UIColor) {
     let gradient: CAGradientLayer = CAGradientLayer()
     gradient.colors = [color1.cgColor, color2.cgColor]
     gradient.locations = [0.0 , 1.0]
     gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
     gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-    gradient.frame = gradientView.layer.frame
+    gradient.frame = layerFrame
     gradientView.layer.insertSublayer(gradient, at: 0)
 }
 

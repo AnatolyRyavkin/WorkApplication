@@ -36,7 +36,6 @@
 		FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */; };
 		FD81A37F24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD81A37E24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift */; };
 		FD8B871F24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */; };
-		FD8B872124B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8B872024B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift */; };
 		FD97B1F22495653900E0E28A /* CoordinatorNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F12495653900E0E28A /* CoordinatorNewDictionary.swift */; };
 		FD97B1F42495664600E0E28A /* ModelViewNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */; };
 		FD97B1F6249566D800E0E28A /* ViewControllerNewDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */; };
@@ -94,7 +93,6 @@
 		FD7B9A1524A244DF00B421DA /* HeaderForTableViewListDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderForTableViewListDictionaries.swift; sourceTree = "<group>"; };
 		FD81A37E24BA14F4000F4D6F /* ModelTableVeiwSectionDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTableVeiwSectionDictionary.swift; sourceTree = "<group>"; };
 		FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellDictionaryWord.swift; sourceTree = "<group>"; };
-		FD8B872024B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellDictionarySearch.swift; sourceTree = "<group>"; };
 		FD97B1F12495653900E0E28A /* CoordinatorNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorNewDictionary.swift; sourceTree = "<group>"; };
 		FD97B1F32495664600E0E28A /* ModelViewNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewNewDictionary.swift; sourceTree = "<group>"; };
 		FD97B1F5249566D800E0E28A /* ViewControllerNewDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerNewDictionary.swift; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 			children = (
 				FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */,
 				FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */,
-				FD8B872024B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift */,
 			);
 			path = UIForDictionary;
 			sourceTree = "<group>";
@@ -515,7 +512,6 @@
 				FDE60B02246DA27D00D0A0BB /* ViewControllerLogin.swift in Sources */,
 				FDAC4C4324707B7E008569B5 /* TableViewCellListDictionary.swift in Sources */,
 				FD7B9A1624A244DF00B421DA /* HeaderForTableViewListDictionaries.swift in Sources */,
-				FD8B872124B9E9CF00B88CC0 /* TableViewCellDictionarySearch.swift in Sources */,
 				FDE60AFC246D969E00D0A0BB /* CoordinatorListDictionary.swift in Sources */,
 				FD0E61EE24B74C9C00AAE6B1 /* WordCodableJSON.swift in Sources */,
 				FD79E7912492D61300661CCF /* ModelRealmBase.swift in Sources */,

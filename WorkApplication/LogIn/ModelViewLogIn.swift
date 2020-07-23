@@ -99,7 +99,7 @@ class ModelViewLogIn{
 //MARK- subscribe to vcLog
 
 
-        (vcLogIn as UIViewController).rx.viewDidAppear.asDriver().drive(onNext: { _ in
+        (vcLogIn as UIViewController).rx.viewWillAppear.asDriver().drive(onNext: { _ in
 
             if !self.firstLaunchVCLogInDidAppear {
                 return

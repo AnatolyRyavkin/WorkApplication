@@ -50,6 +50,8 @@ class ModelViewListDictionary : NSObject {
                 return
             }
 
+            //self.userObject.metods.emmitingBehaviorSubjectDictionaryToUser()
+
         }).disposed(by: self.disposeBag)
 
 //MARK-  subscribe at vcListDictionary viewDidAppear
@@ -73,24 +75,30 @@ class ModelViewListDictionary : NSObject {
 
             _ = self.userObject.metods.behaviorSubjectDictionaryToUser.bind(to: self.tableView.rx.items(cellIdentifier: "cellListDictionary", cellType: TableViewCellListDictionary.self)){row, dictionary, cell in
 
-                    let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
-                                      NSAttributedString.Key.font: FontForTable.Shared,
+//                    let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+//                                      NSAttributedString.Key.font: FontForTable.Shared,
+//                    ]
 
+                    let attributeButtonAdd = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                                  NSAttributedString.Key.font: FontForTable.Shared,
                     ]
 
                     var string: String = "\(dictionary.listWordObjects.count)"
-                    var attributeString = NSAttributedString(string: string, attributes: attribute)
+                    var attributeString = NSAttributedString(string: string, attributes: attributeButtonAdd)
                     cell.labelCountItem.attributedText = attributeString
 
                     string = dictionary.name
-                    attributeString = NSAttributedString(string: string, attributes: attribute)
+                    attributeString = NSAttributedString(string: string, attributes: attributeButtonAdd)
                     cell.labelNameDictionary.attributedText = attributeString
 
                     string = (dictionary.typeDictionary == TranslationDirection.EnRu.rawValue) ? TranslationDirection.EnRu.rawValue : TranslationDirection.RuEn.rawValue
-                    attributeString = NSAttributedString(string: string, attributes: attribute)
+                    attributeString = NSAttributedString(string: string, attributes: attributeButtonAdd)
                     cell.labelTypeDictionary.attributedText = attributeString
 
-                    cell.contentView.backgroundColor = myColor(arColor: ViewBackground1)
+
+                cell.backgroundColor = myColor(arColor: ViewBackground1)
+                cell.contentView.layer.cornerRadius = 15
+                cell.contentView.backgroundColor = myColor(arColor: LabelBackground2)
 
             }
 
@@ -134,8 +142,8 @@ class ModelViewListDictionary : NSObject {
 
                 })
                 .drive(onNext: { indexPath in
-                    UIView.animate(withDuration: 0.5) {
-                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: ViewBackground1)
+                    UIView.animate(withDuration: 0.1) {
+                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: LabelBackground2)
                     }
                 }).disposed(by: self.disposeBag)
 

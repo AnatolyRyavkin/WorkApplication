@@ -17,6 +17,8 @@ class ViewControllerLogin: UIViewController {
     @IBOutlet weak var labelProfileUser: UILabel!
     @IBOutlet weak var buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist: UIButton!
 
+    var gradientLayer = CAGradientLayer()
+
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -31,7 +33,6 @@ class ViewControllerLogin: UIViewController {
 
         //self.view.backgroundColor = myColor(arColor: ViewBackground2)
 
-        setGradient(gradientView: self.view, color1: myColor(arColor: ControlBackgroundActive2), color2: myColor(arColor: ViewBackground1))
 
         self.textFieldUsername.textColor = myColor(arColor: TextFieldTitleActive1)
         self.textFieldUsername.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
@@ -48,10 +49,30 @@ class ViewControllerLogin: UIViewController {
 
         self.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: LabelTitle2)
 
+        self.gradientLayer.colors = [myColor(arColor: ViewBackground2).cgColor, myColor(arColor: ViewBackground1).cgColor]
+        self.gradientLayer.locations = [0.0 , 1.0]
+        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        self.gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super .viewWillTransition(to: size, with: coordinator)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = self.view.bounds
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = self.view.bounds
     }
 
     override func viewWillDisappear(_ animated: Bool) {
