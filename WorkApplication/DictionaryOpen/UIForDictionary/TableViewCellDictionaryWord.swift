@@ -19,7 +19,7 @@ class TableViewCellDictionaryWord: UITableViewCell {
         super.layoutSubviews()
 
 //        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
-//        self.backgroundColor = myColor(arColor: ViewBackground2)
+
     }
 
     func setMeaning(dataSource: ModelTableVeiwSectionDictionary, indexPath: IndexPath, tableView: UITableView) {
@@ -28,12 +28,6 @@ class TableViewCellDictionaryWord: UITableViewCell {
 
         self.labelFirst.backgroundColor = myColor(arColor: LabelBackground1)
         self.labelSecond.backgroundColor = myColor(arColor: LabelBackground1)
-
-//        self.labelFirst.layer.cornerRadius = 10
-//        self.labelSecond.layer.cornerRadius = 10
-
-//        self.labelFirst.layer.masksToBounds = true
-//        self.labelSecond.layer.masksToBounds = true
 
         self.backgroundColor = myColor(arColor: LabelBackground1)
         self.contentView.backgroundColor = myColor(arColor: LabelBackground1)

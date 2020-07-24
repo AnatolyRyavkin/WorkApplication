@@ -1049,7 +1049,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lc-8H-Fgf">
-                                <rect key="frame" x="362" y="121" width="32" height="0.0"/>
+                                <rect key="frame" x="362" y="104" width="32" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Edit">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1067,17 +1067,17 @@
                                 </variation>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zF6-L4-5J7">
-                                <rect key="frame" x="0.0" y="131" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="148" width="414" height="74.666666666666686"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" verticalCompressionResistancePriority="249" placeholder="Input word" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kpL-Eu-CxQ">
-                                        <rect key="frame" x="18" y="0.0" width="386" height="0.0"/>
+                                    <searchBar contentMode="redraw" verticalCompressionResistancePriority="249" searchBarStyle="prominent" prompt="ninlhjblijbljlkjnlkjn;kln;lknklj;klk;klm" placeholder="Input word" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kpL-Eu-CxQ">
+                                        <rect key="frame" x="92.666666666666657" y="0.0" width="311.33333333333337" height="74.666666666666671"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits" keyboardType="webSearch" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ObI-0t-ocy">
-                                        <rect key="frame" x="8" y="0.0" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="8" y="0.0" width="74.666666666666671" height="74.666666666666671"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ObI-0t-ocy" secondAttribute="height" id="nQZ-7V-1Aj"/>
@@ -1090,14 +1090,14 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" id="06O-1Q-6d8"/>
+                                    <constraint firstAttribute="height" priority="250" id="06O-1Q-6d8"/>
                                     <constraint firstItem="kpL-Eu-CxQ" firstAttribute="centerY" secondItem="zF6-L4-5J7" secondAttribute="centerY" id="JdX-YF-oeg"/>
                                     <constraint firstItem="kpL-Eu-CxQ" firstAttribute="leading" secondItem="ObI-0t-ocy" secondAttribute="trailing" constant="10" id="Kud-YT-7Ru"/>
                                     <constraint firstItem="ObI-0t-ocy" firstAttribute="leading" secondItem="zF6-L4-5J7" secondAttribute="leading" constant="8" id="aBl-jP-LbE"/>
                                     <constraint firstAttribute="trailing" secondItem="kpL-Eu-CxQ" secondAttribute="trailing" constant="10" id="bDB-cQ-gV8"/>
                                     <constraint firstItem="ObI-0t-ocy" firstAttribute="centerY" secondItem="zF6-L4-5J7" secondAttribute="centerY" id="qEe-4U-HKu"/>
                                     <constraint firstItem="ObI-0t-ocy" firstAttribute="height" secondItem="zF6-L4-5J7" secondAttribute="height" id="r0I-YT-8eo"/>
-                                    <constraint firstItem="kpL-Eu-CxQ" firstAttribute="height" secondItem="zF6-L4-5J7" secondAttribute="height" priority="250" id="wpJ-Y6-z1J"/>
+                                    <constraint firstItem="kpL-Eu-CxQ" firstAttribute="height" secondItem="zF6-L4-5J7" secondAttribute="height" id="wpJ-Y6-z1J"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9y-J0-0c8">
@@ -1105,11 +1105,11 @@
                                 <state key="normal" image="magnifyingglass" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aib-1P-Yoz">
-                                <rect key="frame" x="0.0" y="146" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="237.66666666666666" width="414" height="29.999999999999972"/>
                                 <state key="normal" title="referenseIPIY"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="20" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7Tx-0l-fHH">
-                                <rect key="frame" x="0.0" y="181" width="414" height="632"/>
+                                <rect key="frame" x="0.0" y="272.66666666666669" width="414" height="540.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="tintColor" red="0.48725783820000002" green="0.063960321249999993" blue="0.9606522918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1192,7 +1192,7 @@
                             <constraint firstItem="QFR-IW-wre" firstAttribute="top" secondItem="JBO-ou-tn0" secondAttribute="top" constant="16" id="Ohs-0c-6Sh"/>
                             <constraint firstItem="aib-1P-Yoz" firstAttribute="top" secondItem="kpL-Eu-CxQ" secondAttribute="bottom" constant="15" id="PDT-Vm-2Gw"/>
                             <constraint firstItem="7lc-8H-Fgf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QFR-IW-wre" secondAttribute="trailing" constant="8" symbolic="YES" id="Tkx-KH-CXC"/>
-                            <constraint firstItem="zF6-L4-5J7" firstAttribute="height" secondItem="7lc-8H-Fgf" secondAttribute="height" multiplier="1.2" id="X1t-xu-zbK"/>
+                            <constraint firstItem="zF6-L4-5J7" firstAttribute="height" secondItem="7lc-8H-Fgf" secondAttribute="height" multiplier="2.2" id="X1t-xu-zbK"/>
                             <constraint firstItem="JBO-ou-tn0" firstAttribute="trailing" secondItem="7lc-8H-Fgf" secondAttribute="trailing" constant="20" id="ZCl-mX-Boc"/>
                             <constraint firstItem="aib-1P-Yoz" firstAttribute="width" secondItem="za7-vW-ocR" secondAttribute="width" id="Zlt-zI-yZ7"/>
                             <constraint firstAttribute="centerX" secondItem="7Tx-0l-fHH" secondAttribute="centerX" id="b0H-By-b3p"/>

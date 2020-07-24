@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ViewControllerDictionary: UIViewController, UITableViewDelegate {
+class ViewControllerDictionary: UIViewController {
 
     var disposeBag = DisposeBag()
 
@@ -61,8 +61,6 @@ class ViewControllerDictionary: UIViewController, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        //searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-
         self.viewForSearchBar.backgroundColor = myColor(arColor: ViewBackground2)
         searchBar.barTintColor = myColor(arColor: ViewBackground2)
         searchBar.tintColor = myColor(arColor: ViewBackground2)
@@ -96,9 +94,7 @@ class ViewControllerDictionary: UIViewController, UITableViewDelegate {
         self.view.backgroundColor = myColor(arColor: ViewBackground1)
         self.tableView.backgroundColor = myColor(arColor: ViewBackground1)
         self.tableView.allowsSelectionDuringEditing = false
-
-        //self.navigationItem.setRightBarButtonItems([ self.buttonEdit], animated: false)
-
+        
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
         self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
@@ -134,11 +130,6 @@ class ViewControllerDictionary: UIViewController, UITableViewDelegate {
         string = "Start!"
         let attributeStringMyWords = NSAttributedString(string: string, attributes: attributeMyWords)
         self.buttonLearnWords.setAttributedTitle(attributeStringMyWords, for: .normal)
-        //self.buttonLearnWords.backgroundColor = myColor(arColor: ViewBackground2)
-        //self.buttonLearnWords.layer.cornerRadius = 15
-
-        //self.buttonReferensAPIYandex = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: self.tableView.bounds.width, height: 40))
-        //self.buttonReferensAPIYandex = UIButton.init()
 
         self.buttonReferensAPIYandex.titleLabel?.font = FontForTable.Shared
         self.buttonReferensAPIYandex.titleLabel?.lineBreakMode = .byWordWrapping
@@ -148,10 +139,6 @@ class ViewControllerDictionary: UIViewController, UITableViewDelegate {
         string = "Реализовано с помощью сервиса «API «Яндекс.Словарь»"
         let attributeStringButtonReferensAPIYandex = NSAttributedString(string: string, attributes: attributeButtonReferensAPIYandex)
         self.buttonReferensAPIYandex.setAttributedTitle(attributeStringButtonReferensAPIYandex, for: .normal)
-
-        //self.tableView.tableHeaderView = self.buttonReferensAPIYandex
-
-        self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
 
     }
 
@@ -182,20 +169,5 @@ class ViewControllerDictionary: UIViewController, UITableViewDelegate {
     func hiddenSearchBarWithoutAnimation() {
         self.hiddenSearchBarWithAnimation(durationAnimation: 0)
     }
-
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-//
-//        if let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerDictionary") {
-//            return header
-//        }
-//        else {
-//            let header = UITableViewHeaderFooterView.init(reuseIdentifier: "headerDictionary")
-//            header.textLabel?.font = FontForTable.fontSistemBig
-//            header.textLabel?.adjustsFontForContentSizeCategory = true
-//            header.textLabel?.text = "lksdajh"
-//            return header
-//        }
-//    }
-
 
 }
