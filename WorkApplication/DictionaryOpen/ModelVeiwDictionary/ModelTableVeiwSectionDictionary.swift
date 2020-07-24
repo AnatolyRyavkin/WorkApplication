@@ -69,9 +69,10 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
                 }
 
                 return ModelTableVeiwSectionDictionary.init( configureCell: configurationCellWordMy,
-                                                             titleForHeaderInSection: configureHeaderSectionMy,
-                                                             sectionIndexTitles: sectionIndexTitlesMy,
-                                                             sectionForSectionIndexTitle: sectionForSectionIndexTitleMy )
+                                                             titleForHeaderInSection: configureHeaderSectionMy
+                                                             //sectionIndexTitles: sectionIndexTitlesMy,
+                                                             //sectionForSectionIndexTitle: sectionForSectionIndexTitleMy
+                )
 
             }()
         }

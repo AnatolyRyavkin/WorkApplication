@@ -7,21 +7,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ViewControllerDictionary: UIViewController {
+class ViewControllerDictionary: UIViewController, UITableViewDelegate {
+
+    var disposeBag = DisposeBag()
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var barButtonAdd: UIBarButtonItem!
+    @IBOutlet weak var buttonEdit: UIButton!
+
     @IBOutlet weak var buttonReferensAPIYandex: UIButton!
 
-    @IBOutlet weak var buttonVisual: UIButton!
-    @IBOutlet weak var buttonWrite: UIButton!
-    @IBOutlet weak var buttonVoice: UIButton!
-    @IBOutlet weak var buttonPronons: UIButton!
-    @IBOutlet weak var buttonAddWord: UIButton!
-    
-    @IBOutlet weak var barButtonEdit: UIBarButtonItem!
-    @IBOutlet weak var barButtonSearch: UIBarButtonItem!
+    @IBOutlet weak var buttonLearnWords: UIButton!
+
+
+    @IBOutlet weak var buttonSearch: UIButton!
 
     @IBOutlet weak var viewForSearchBar: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -55,33 +58,29 @@ class ViewControllerDictionary: UIViewController {
     }
 
 
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let attribute = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle2) ,
-                          NSAttributedString.Key.font: FontForTable.Shared,
-                          NSAttributedString.Key.underlineStyle : 1
-            ] as [NSAttributedString.Key : Any]
-        
-        self.buttonReferensAPIYandex.titleLabel?.font = FontForTable.Shared
-        self.buttonReferensAPIYandex.titleLabel?.lineBreakMode = .byWordWrapping
-        let attributeString = NSAttributedString(string: "Реализовано с помощью сервиса «API «Яндекс.Словарь»",
-                                                 attributes: attribute)
-        self.buttonReferensAPIYandex.setAttributedTitle(attributeString, for: .normal)
+        //searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 
         self.viewForSearchBar.backgroundColor = myColor(arColor: ViewBackground2)
         searchBar.barTintColor = myColor(arColor: ViewBackground2)
         searchBar.tintColor = myColor(arColor: ViewBackground2)
         searchBar.searchTextField.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
         searchBar.searchTextField.tintColor = myColor(arColor: TextFieldTitleActive1)
+
         self.buttonSearhVoice.backgroundColor = myColor(arColor: ViewBackground2)
-        self.buttonSearhVoice.tintColor = myColor(arColor: NavigationBarTitle1)
+        self.buttonSearhVoice.tintColor = myColor(arColor: ControlTitleActive2)
+
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
+            cancelButton.backgroundColor = myColor(arColor: ViewBackground2)
             cancelButton.setTitle("Cancel", for: .normal)
-            cancelButton.setTitleColor(myColor(arColor: NavigationBarTitle1), for: .normal)
+            cancelButton.setTitleColor(myColor(arColor: ControlTitleActive3), for: .normal)
         }
-        //self.tableView.sectionHeaderHeight = 30
+        searchBar.searchTextField.layer.cornerRadius = 15
+        self.buttonSearhVoice.setTitleColor(myColor(arColor: ControlTitleActive4), for: .normal)
+
+        self.tableView.sectionHeaderHeight = 15
 
     }
 
@@ -90,29 +89,15 @@ class ViewControllerDictionary: UIViewController {
 
         self.searchBar.returnKeyType = .search
 
-        self.tableView?.backgroundView?.backgroundColor = myColor(arColor: ViewBackground2)
-        self.view.backgroundColor = myColor(arColor: ViewBackground4)
+        self.tableView?.backgroundView?.backgroundColor = myColor(arColor: ViewBackground1)
+        self.view.backgroundColor = myColor(arColor: ViewBackground1)
 
-        self.buttonVisual.backgroundColor = myColor(arColor: ControlBackgroundActive2)
-        self.buttonVisual.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
-
-        self.buttonWrite.backgroundColor = myColor(arColor: ControlBackgroundActive2)
-        self.buttonWrite.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
-
-        self.buttonVoice.backgroundColor = myColor(arColor: ControlBackgroundActive2)
-        self.buttonVoice.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
-
-        self.buttonPronons.backgroundColor = myColor(arColor: ControlBackgroundActive2)
-        self.buttonPronons.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
-
-        self.buttonAddWord.backgroundColor = myColor(arColor: ControlBackgroundActive2)
-        self.buttonAddWord.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
         self.view.backgroundColor = myColor(arColor: ViewBackground1)
-        self.tableView.backgroundColor = myColor(arColor: ViewBackground2)
+        self.tableView.backgroundColor = myColor(arColor: ViewBackground1)
         self.tableView.allowsSelectionDuringEditing = false
 
-        self.navigationItem.setRightBarButtonItems([ self.barButtonEdit], animated: false)
+        //self.navigationItem.setRightBarButtonItems([ self.buttonEdit], animated: false)
 
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
@@ -126,7 +111,48 @@ class ViewControllerDictionary: UIViewController {
             self.labelNavigationLabel = labelNavigationLabel
         }
 
-        
+
+        let myShadow = NSShadow()
+        myShadow.shadowBlurRadius = 1
+        myShadow.shadowOffset = CGSize(width: 1, height: 1)
+        myShadow.shadowColor = UIColor.gray
+
+        let attributeEdit = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle4) ,
+                          NSAttributedString.Key.font: FontForTable.fontFuturaMidle,
+                          NSAttributedString.Key.shadow: myShadow,
+        ]
+
+        var string = "Edit"
+        let attributeStringEdit = NSAttributedString(string: string, attributes: attributeEdit)
+        self.buttonEdit.setAttributedTitle(attributeStringEdit, for: .normal)
+
+        let attributeMyWords = [ NSAttributedString.Key.foregroundColor: myColor(arColor: ControlTitleActive5) ,
+                          NSAttributedString.Key.font: FontForTable.fontFuturaBig,
+                          NSAttributedString.Key.shadow: myShadow,
+        ]
+
+        string = "Start!"
+        let attributeStringMyWords = NSAttributedString(string: string, attributes: attributeMyWords)
+        self.buttonLearnWords.setAttributedTitle(attributeStringMyWords, for: .normal)
+        //self.buttonLearnWords.backgroundColor = myColor(arColor: ViewBackground2)
+        //self.buttonLearnWords.layer.cornerRadius = 15
+
+        //self.buttonReferensAPIYandex = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: self.tableView.bounds.width, height: 40))
+        //self.buttonReferensAPIYandex = UIButton.init()
+
+        self.buttonReferensAPIYandex.titleLabel?.font = FontForTable.Shared
+        self.buttonReferensAPIYandex.titleLabel?.lineBreakMode = .byWordWrapping
+        let attributeButtonReferensAPIYandex = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle4) ,
+                          NSAttributedString.Key.font: FontForTable.fontFuturaMidle,
+        ]
+        string = "Реализовано с помощью сервиса «API «Яндекс.Словарь»"
+        let attributeStringButtonReferensAPIYandex = NSAttributedString(string: string, attributes: attributeButtonReferensAPIYandex)
+        self.buttonReferensAPIYandex.setAttributedTitle(attributeStringButtonReferensAPIYandex, for: .normal)
+
+        //self.tableView.tableHeaderView = self.buttonReferensAPIYandex
+
+        self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
+
     }
 
     //MARK- Appear disAppear SearchBar
@@ -156,4 +182,20 @@ class ViewControllerDictionary: UIViewController {
     func hiddenSearchBarWithoutAnimation() {
         self.hiddenSearchBarWithAnimation(durationAnimation: 0)
     }
+
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+//
+//        if let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerDictionary") {
+//            return header
+//        }
+//        else {
+//            let header = UITableViewHeaderFooterView.init(reuseIdentifier: "headerDictionary")
+//            header.textLabel?.font = FontForTable.fontSistemBig
+//            header.textLabel?.adjustsFontForContentSizeCategory = true
+//            header.textLabel?.text = "lksdajh"
+//            return header
+//        }
+//    }
+
+
 }

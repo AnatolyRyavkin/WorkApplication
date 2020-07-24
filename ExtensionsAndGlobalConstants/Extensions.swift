@@ -44,6 +44,8 @@ public struct FontForTable {
 
     static let fontUserCustom: UIFont? = nil
 
+    static let fontSistemLitleLit = UIFont.init(name: "Arial", size: 5)!
+
     static let fontFuturaLitle = UIFont.init(name: "Futura", size: 15)!
     static let fontFuturaMidle = UIFont.init(name: "Futura", size: 20)!
     static let fontFuturaBig = UIFont.init(name: "Futura", size: 25)!

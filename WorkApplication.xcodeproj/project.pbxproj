@@ -59,6 +59,7 @@
 		FDE60AFC246D969E00D0A0BB /* CoordinatorListDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AFB246D969E00D0A0BB /* CoordinatorListDictionary.swift */; };
 		FDE60B00246D998E00D0A0BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60AFF246D998E00D0A0BB /* Extensions.swift */; };
 		FDE60B02246DA27D00D0A0BB /* ViewControllerLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE60B01246DA27D00D0A0BB /* ViewControllerLogin.swift */; };
+		FDEB7D7B24CAD94600C44264 /* HeaderDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEB7D7A24CAD94600C44264 /* HeaderDictionary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		FDE60AFB246D969E00D0A0BB /* CoordinatorListDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorListDictionary.swift; sourceTree = "<group>"; };
 		FDE60AFF246D998E00D0A0BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FDE60B01246DA27D00D0A0BB /* ViewControllerLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLogin.swift; sourceTree = "<group>"; };
+		FDEB7D7A24CAD94600C44264 /* HeaderDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderDictionary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 			children = (
 				FD7B9A1324A2043E00B421DA /* ViewControllerDictionary.swift */,
 				FD8B871E24B9E99600B88CC0 /* TableViewCellDictionaryWord.swift */,
+				FDEB7D7A24CAD94600C44264 /* HeaderDictionary.swift */,
 			);
 			path = UIForDictionary;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				FDAC4C37246FD850008569B5 /* UserObjectRealm.swift in Sources */,
 				FD174EEB24645A8F0090A002 /* DataItems.swift in Sources */,
 				FD174EE924641AE40090A002 /* Item.swift in Sources */,
+				FDEB7D7B24CAD94600C44264 /* HeaderDictionary.swift in Sources */,
 				FD6E9CF624A9FC8C006183F1 /* RequestsAPIYandexDictionary.swift in Sources */,
 				FD174EBF2464043B0090A002 /* AppDelegate.swift in Sources */,
 				FDE60AF6246D962100D0A0BB /* CoordinatorApp.swift in Sources */,

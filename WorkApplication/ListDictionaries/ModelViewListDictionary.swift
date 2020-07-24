@@ -69,7 +69,7 @@ class ModelViewListDictionary : NSObject {
             self.tableView = self.vcListDictionary.tableView
 
             self.tableView.rx.isEdit.subscribe(onNext: { isEdit in
-                self.vcListDictionary.barButtonEdit.tintColor = (isEdit) ? UIColor.red : myColor(arColor: NavigationBarTitle1)
+                self.vcListDictionary.buttonEdit.tintColor = (isEdit) ? UIColor.red : myColor(arColor: NavigationBarTitle1)
             }).disposed(by: self.disposeBag)
 
 
@@ -96,9 +96,9 @@ class ModelViewListDictionary : NSObject {
                     cell.labelTypeDictionary.attributedText = attributeString
 
 
-                cell.backgroundColor = myColor(arColor: ViewBackground1)
-                cell.contentView.layer.cornerRadius = 15
-                cell.contentView.backgroundColor = myColor(arColor: LabelBackground2)
+                cell.backgroundColor = myColor(arColor: LabelBackground1)
+                //cell.contentView.layer.cornerRadius = 15
+                cell.contentView.backgroundColor = myColor(arColor: LabelBackground1)
 
             }
 
@@ -112,12 +112,8 @@ class ModelViewListDictionary : NSObject {
                     _ = self.coordinatorListDictionary!.launchCoordinatorMakeNewDictionary()
             }).disposed(by: self.disposeBag)
 
-            self.vcListDictionary.buttonAddDictionary.rx.tap
-                .subscribe(onNext: {
-                    _ = self.coordinatorListDictionary!.launchCoordinatorMakeNewDictionary()
-            }).disposed(by: self.disposeBag)
-
-            self.vcListDictionary.barButtonEdit.rx.tap
+           
+            self.vcListDictionary.buttonEdit.rx.tap
                 .subscribe(onNext: {
                     self.tableView.setEditing(!self.tableView.isEditing, animated: true)
                 }).disposed(by: self.disposeBag)
@@ -132,7 +128,7 @@ class ModelViewListDictionary : NSObject {
                 })
                 .do(onNext: { indexPath in
                     var dictionaryObject: DictionaryObjectRealm
-                    self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: ViewBackground1)
+//                    self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: ViewBackground1)
                     dictionaryObject = self.userObject.listDictionary[indexPath.row]
                     switch self.tableView.isEditing{
                     case true:  _ = self.coordinatorListDictionary?.launchCoordinatorChangeTitleDictionary(dictionaryObjectRename: dictionaryObject)
@@ -143,7 +139,7 @@ class ModelViewListDictionary : NSObject {
                 })
                 .drive(onNext: { indexPath in
                     UIView.animate(withDuration: 0.1) {
-                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: LabelBackground2)
+//                        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = myColor(arColor: LabelBackground2)
                     }
                 }).disposed(by: self.disposeBag)
 

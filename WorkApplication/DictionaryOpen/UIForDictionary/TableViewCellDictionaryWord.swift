@@ -18,25 +18,25 @@ class TableViewCellDictionaryWord: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
-        self.backgroundColor = myColor(arColor: ViewBackground2)
+//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+//        self.backgroundColor = myColor(arColor: ViewBackground2)
     }
 
     func setMeaning(dataSource: ModelTableVeiwSectionDictionary, indexPath: IndexPath, tableView: UITableView) {
 
         self.tableView = tableView
 
-        self.labelFirst.backgroundColor = myColor(arColor: LabelBackground4)
-        self.labelSecond.backgroundColor = myColor(arColor: LabelBackground4)
+        self.labelFirst.backgroundColor = myColor(arColor: LabelBackground1)
+        self.labelSecond.backgroundColor = myColor(arColor: LabelBackground1)
 
-        self.labelFirst.layer.cornerRadius = 10
-        self.labelSecond.layer.cornerRadius = 10
+//        self.labelFirst.layer.cornerRadius = 10
+//        self.labelSecond.layer.cornerRadius = 10
 
-        self.labelFirst.layer.masksToBounds = true
-        self.labelSecond.layer.masksToBounds = true
+//        self.labelFirst.layer.masksToBounds = true
+//        self.labelSecond.layer.masksToBounds = true
 
-        self.backgroundColor = myColor(arColor: ViewBackground1)
-        self.contentView.backgroundColor = myColor(arColor: LabelBackground2)
+        self.backgroundColor = myColor(arColor: LabelBackground1)
+        self.contentView.backgroundColor = myColor(arColor: LabelBackground1)
 
         let arrayWordObjectRealmForSection = dataSource.sectionModels
         let arrayWordObjectRealm = arrayWordObjectRealmForSection[indexPath.section].arrayWordObjectRealm
@@ -49,7 +49,7 @@ class TableViewCellDictionaryWord: UITableViewCell {
                               
                 ] as [NSAttributedString.Key : Any]
 
-            let attributeForMainMeaning = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle2) ,
+            let attributeForMainMeaning = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle4) ,
                           NSAttributedString.Key.font: FontForTable.Shared,
 
             ] as [NSAttributedString.Key : Any]

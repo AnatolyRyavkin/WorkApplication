@@ -51,7 +51,7 @@ class ViewControllerRenameDictionary: UIViewController {
         self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
         self.buttonSaveBack.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
 
-        self.gradientLayer.colors = [myColor(arColor: ControlBackgroundActive2).cgColor, myColor(arColor: ViewBackground1).cgColor]
+        self.gradientLayer.colors = [myColor(arColor: ViewBackground1).cgColor, myColor(arColor: ViewBackground1).cgColor]
         self.gradientLayer.locations = [0.0 , 1.0]
         self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
         self.gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)

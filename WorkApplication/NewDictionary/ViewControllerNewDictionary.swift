@@ -52,7 +52,7 @@ class ViewControllerNewDictionary: UIViewController {
         self.segmentTypeDictionary.selectedSegmentTintColor = myColor(arColor: ControlBackgroundActive1)
         self.segmentTypeDictionary.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
 
-        self.gradientLayer.colors = [myColor(arColor: ControlBackgroundActive2).cgColor, myColor(arColor: ViewBackground1).cgColor]
+        self.gradientLayer.colors = [myColor(arColor: ViewBackground1).cgColor, myColor(arColor: ViewBackground1).cgColor]
         self.gradientLayer.locations = [0.0 , 1.0]
         self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
         self.gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)

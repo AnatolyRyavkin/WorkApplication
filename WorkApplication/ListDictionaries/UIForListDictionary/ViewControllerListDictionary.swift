@@ -15,11 +15,12 @@ class ViewControllerListDictionary: UIViewController {
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var labelCount: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var buttonAddDictionary: UIButton!
+    @IBOutlet weak var labelMyDictionaries: UILabel!
+    @IBOutlet weak var buttonEdit: UIButton!
 
     var barButtonAddDictionary: UIBarButtonItem!
     var barButtonCancelProfile: UIBarButtonItem!
-    var barButtonEdit: UIBarButtonItem!
+
     var labelNavigationItem: UILabel!
 
     var navigationBar: UINavigationBar!
@@ -49,10 +50,9 @@ class ViewControllerListDictionary: UIViewController {
 
 
             self.barButtonCancelProfile = UIBarButtonItem.init(title: "‹Profiles", style: .done, target: nil, action: nil)
-            self.barButtonEdit = UIBarButtonItem.init(title: "Edit", style: .done, target: nil, action: nil)
 
-            self.navigationItem.setRightBarButtonItems([self.barButtonAddDictionary, self.barButtonEdit], animated: false)
-            self.navigationItem.setLeftBarButtonItems([self.barButtonCancelProfile, self.barButtonEdit], animated: false)
+            self.navigationItem.setRightBarButtonItems([self.barButtonAddDictionary], animated: false)
+            self.navigationItem.setLeftBarButtonItems([self.barButtonCancelProfile], animated: false)
             self.navigationController?.navigationBar.barTintColor = myColor(arColor: NavigationBarBackground1)
             self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarBackground1)
 
@@ -72,6 +72,8 @@ class ViewControllerListDictionary: UIViewController {
         self.navigationController?.navigationBar.tintColor = myColor(arColor: NavigationBarTitle1)
 
         //MARK- Header TableView Custom + Button
+
+
 
         let myShadow = NSShadow()
         myShadow.shadowBlurRadius = 1
@@ -95,10 +97,15 @@ class ViewControllerListDictionary: UIViewController {
         let attributeStringCount = NSAttributedString(string: string, attributes: attribute)
         labelCount.attributedText = attributeStringCount
 
-        buttonAddDictionary.layer.cornerRadius = 18
+        let attributeDict = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                          NSAttributedString.Key.font: FontForTable.fontFuturaBig,
+                          NSAttributedString.Key.shadow: myShadow,
+        ]
 
-        buttonAddDictionary.tintColor = myColor(arColor: ControlTitleActive1)
-        buttonAddDictionary.backgroundColor = myColor(arColor: ControlBackgroundActive2)
+        string = "My Dictionaries"
+        let attributeStringMyDic = NSAttributedString(string: string, attributes: attributeDict)
+        self.labelMyDictionaries.attributedText = attributeStringMyDic
+
 
         self.headerTableView.backgroundColor = myColor(arColor: ViewBackground1)
 

@@ -60,8 +60,11 @@ public let ControlBackgroundDontActive1 = (gray4,Lines,gray4)
 //public let ControlBackgroundDontActive3 = (gray1,gray2,gray2)
 
 public let ControlTitleActive1 = (gray2,white1,gray2)
-//public let ControlTitleActive2 = (gray3,blue1,gray2)
-//public let ControlTitleActive3 = (black1,white1,gray2)
+public let ControlTitleActive2 = (gray3,Safari,gray2)
+public let ControlTitleActive3 = (black1,Calendar,gray2)
+public let ControlTitleActive4 = (black1,Text,gray2)
+public let ControlTitleActive5 = (black1,Messages,gray2)
+public let ControlTitleActive6 = (black1,Podcasts,gray2)
 
 public let ControlTitleDontActive1 = (gray3,Settings,gray3)
 //public let ControlTitleDontActive2 = (black1,gray3,gray3)

@@ -63,10 +63,11 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
 
                 self.tableView = self.vcDictionary.tableView
                 self.tableView.isEditing = false
+                self.vcDictionary.labelNavigationLabel.textColor = myColor(arColor: LabelTitle1)
                 self.vcDictionary.labelNavigationLabel.text = "\(self.dictionaryObjectRealm.name) : \(self.dictionaryObjectRealm.typeDictionary)"
 
                 self.tableView.rx.isEdit.subscribe(onNext: { isEdit in
-                    self.vcDictionary.barButtonEdit.tintColor = (isEdit) ? UIColor.red : myColor(arColor: NavigationBarTitle1)
+                    self.vcDictionary.buttonEdit.tintColor = (isEdit) ? UIColor.red : myColor(arColor: NavigationBarTitle1)
                 }).disposed(by: self.disposeBag)
 
                 //MARK- binding dataSource with tableView
@@ -81,7 +82,7 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
 
                 //MARK- buttonAddWord subscribe
 
-                self.vcDictionary.buttonAddWord.rx.tap.asDriver()
+                self.vcDictionary.barButtonAdd.rx.tap.asDriver()
                     .drive(onNext: { _ in
                         self.vcDictionary.showSearchBarWithAnimation(durationAnimation: 0.3)
                     }).disposed(by: self.disposeBag)
@@ -300,7 +301,7 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
 
                 //MARK- subscribe barButtonEdit
 
-                self.vcDictionary.barButtonEdit.rx.tap
+                self.vcDictionary.buttonEdit.rx.tap
                     .subscribe(onNext: {
                         self.tableView.setEditing(!self.tableView.isEditing, animated: true)
                     }).disposed(by: self.disposeBag)

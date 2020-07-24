@@ -125,7 +125,7 @@ class ModelViewLogIn{
 
             self.vcLogIn.textFieldUsername.rx.observe(String.self, "text").asObservable().map { (string) -> Bool in
                 self.loginFromTextField = string!
-                self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+                //self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundActive1)
                 self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: ControlBackgroundActive1)
                 return true
             }
@@ -139,11 +139,11 @@ class ModelViewLogIn{
                 .map { (string) -> Bool in
                     let isThreeCharts = !(string?.count ?? 0 < 1)
                     if isThreeCharts{
-                        self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundActive1)
+                        //self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundActive1)
                         self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: ControlBackgroundActive1)
                         self.loginFromTextField = string
                     }else{
-                        self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+                        //self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
                         self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: ControlBackgroundDontActive1)
                     }
                     return isThreeCharts
@@ -175,7 +175,7 @@ class ModelViewLogIn{
                         self.vcLogIn.textFieldUsername.text = self.arrayUserName[self.vcLogIn.pickerProfiles.selectedRow(inComponent: 0)]
                     case true :  self.vcLogIn.textFieldUsername.text = ""
                         self.vcLogIn.textFieldUsername.becomeFirstResponder()
-                        self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+                        //self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
                         self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: ControlBackgroundDontActive1)
                         if self.vcLogIn.textFieldUsername.text?.count == 0 {
                             self.vcLogIn.buttonNext.isEnabled = false
@@ -235,7 +235,7 @@ class ModelViewLogIn{
                 self.vcLogIn.textFieldUsername.text = ""
                 self.vcLogIn.buttonNext.isEnabled = false
                 self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.isEnabled = false
-                self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+                //self.vcLogIn.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
                 self.vcLogIn.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: ControlBackgroundDontActive1)
             }).disposed(by: self.disposeBag)
 

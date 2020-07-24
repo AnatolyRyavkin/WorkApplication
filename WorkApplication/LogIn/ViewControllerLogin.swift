@@ -37,17 +37,17 @@ class ViewControllerLogin: UIViewController {
         self.textFieldUsername.textColor = myColor(arColor: TextFieldTitleActive1)
         self.textFieldUsername.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
 
-        self.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
+        //self.buttonNext.backgroundColor = myColor(arColor: ControlBackgroundDontActive1)
         self.buttonNext.setTitleColor(myColor(arColor: ControlTitleDontActive1), for: .disabled)
-        self.buttonNext.setTitleColor(myColor(arColor: ControlTitleActive1), for: .normal)
+        self.buttonNext.setTitleColor(myColor(arColor: ControlTitleActive2), for: .normal)
 
-        self.buttonFindProfile.setTitleColor(myColor(arColor: LabelTitle2), for: .normal)
+        self.buttonFindProfile.setTitleColor(myColor(arColor: ControlTitleActive2), for: .normal)
 
-        self.pickerProfiles.tintColor = myColor(arColor: ControlTitleActive1)
+        self.pickerProfiles.tintColor = myColor(arColor: ControlTitleActive2)
 
-        self.labelProfileUser.textColor = myColor(arColor: LabelTitle2)
+        self.labelProfileUser.textColor = myColor(arColor: ControlTitleActive2)
 
-        self.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: LabelTitle2)
+        self.buttonCleanTextFieldUserNameAndRemoveUserObjectRealmIfExist.tintColor = myColor(arColor: ControlTitleActive2)
 
         self.gradientLayer.colors = [myColor(arColor: ViewBackground2).cgColor, myColor(arColor: ViewBackground1).cgColor]
         self.gradientLayer.locations = [0.0 , 1.0]
