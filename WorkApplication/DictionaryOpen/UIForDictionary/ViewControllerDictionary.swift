@@ -28,7 +28,7 @@ class ViewControllerDictionary: UIViewController {
 
     @IBOutlet weak var viewForSearchBar: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var buttonSearhVoice: UIButton!
+    @IBOutlet weak var buttonMicrophone: UIButton!
 
     @IBOutlet weak var constraintEqualHeightButtonAddWithSearch: NSLayoutConstraint!
     @IBOutlet weak var constraintZeroHeightSearch: NSLayoutConstraint!
@@ -67,8 +67,8 @@ class ViewControllerDictionary: UIViewController {
         searchBar.searchTextField.backgroundColor = myColor(arColor: TextFieldBackgroundActive1)
         searchBar.searchTextField.tintColor = myColor(arColor: TextFieldTitleActive1)
 
-        self.buttonSearhVoice.backgroundColor = myColor(arColor: ViewBackground2)
-        self.buttonSearhVoice.tintColor = myColor(arColor: ControlTitleActive2)
+        self.buttonMicrophone.backgroundColor = myColor(arColor: ViewBackground2)
+        self.buttonMicrophone.tintColor = myColor(arColor: ControlTitleActive2)
 
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.backgroundColor = myColor(arColor: ViewBackground2)
@@ -76,7 +76,9 @@ class ViewControllerDictionary: UIViewController {
             cancelButton.setTitleColor(myColor(arColor: ControlTitleActive3), for: .normal)
         }
         searchBar.searchTextField.layer.cornerRadius = 15
-        self.buttonSearhVoice.setTitleColor(myColor(arColor: ControlTitleActive4), for: .normal)
+        self.buttonMicrophone.setTitleColor(myColor(arColor: ControlTitleActive4), for: .normal)
+
+        self.buttonSearch.tintColor = myColor(arColor: ControlTitleActive2)
 
         self.tableView.sectionHeaderHeight = 15
 
@@ -159,6 +161,7 @@ class ViewControllerDictionary: UIViewController {
 
     func hiddenSearchBarWithAnimation(durationAnimation: Float) {
         UIView.animate(withDuration: TimeInterval(durationAnimation)) {
+            self.searchBar.text = ""
             self.constraintZeroHeightSearch.priority = .required
             self.constraintEqualHeightButtonAddWithSearch.priority = .defaultLow
             self.searchBar.resignFirstResponder()

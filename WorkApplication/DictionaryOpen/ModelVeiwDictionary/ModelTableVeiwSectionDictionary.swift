@@ -45,35 +45,34 @@ class ModelTableVeiwSectionDictionary: RxTableViewSectionedAnimatedDataSource<Mo
 
                 }
 
-                let sectionIndexTitlesMy: (TableViewSectionedDataSource<ModelSectionDictionary>) -> [String]? = { dataSource in
-
-                    var alphaBettaArrayUpper = [""]
-                    switch DataSourseForTableWords.lastUseTypeDictionary! {
-                    case TranslationDirection.EnRu: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
-                    case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
-                    default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
-                    }
-                    return alphaBettaArrayUpper
-
-                }
-
-                let sectionForSectionIndexTitleMy: ModelTableVeiwSectionDictionary.SectionForSectionIndexTitle = { (dataSource, string, num) -> Int in
-                    var alphaBettaArrayUpper = [""]
-                    switch DataSourseForTableWords.lastUseTypeDictionary! {
-                    case TranslationDirection.EnRu: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
-                    case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
-                    default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
-                    }
-                    print(string,num)
-                    return alphaBettaArrayUpper.count
-                }
+//                let sectionIndexTitlesMy: (TableViewSectionedDataSource<ModelSectionDictionary>) -> [String]? = { dataSource in
+//
+//                    var alphaBettaArrayUpper = [""]
+//                    switch DataSourseForTableWords.lastUseTypeDictionary! {
+//                    case TranslationDirection.EnRu: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
+//                    case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
+//                    default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
+//                    }
+//                    return alphaBettaArrayUpper
+//
+//                }
+//
+//                let sectionForSectionIndexTitleMy: ModelTableVeiwSectionDictionary.SectionForSectionIndexTitle = { (dataSource, string, num) -> Int in
+//                    var alphaBettaArrayUpper = [""]
+//                    switch DataSourseForTableWords.lastUseTypeDictionary! {
+//                    case TranslationDirection.EnRu: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
+//                    case TranslationDirection.RuEn: alphaBettaArrayUpper = AlphaBettaArrayRusUpper
+//                    default: alphaBettaArrayUpper = AlphaBettaArrayEngUpper
+//                    }
+//                    print(string,num)
+//                    return alphaBettaArrayUpper.count
+//                }
 
                 return ModelTableVeiwSectionDictionary.init( configureCell: configurationCellWordMy,
-                                                             titleForHeaderInSection: configureHeaderSectionMy
-                                                             //sectionIndexTitles: sectionIndexTitlesMy,
-                                                             //sectionForSectionIndexTitle: sectionForSectionIndexTitleMy
+                                                             titleForHeaderInSection: configureHeaderSectionMy //,
+                                                            // sectionIndexTitles: sectionIndexTitlesMy,
+                                                            //sectionForSectionIndexTitle: sectionForSectionIndexTitleMy
                 )
-
             }()
         }
 

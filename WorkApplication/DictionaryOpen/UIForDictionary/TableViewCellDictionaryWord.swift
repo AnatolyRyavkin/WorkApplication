@@ -15,6 +15,7 @@ class TableViewCellDictionaryWord: UITableViewCell {
 
     weak var tableView: UITableView?
 
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -67,6 +68,29 @@ class TableViewCellDictionaryWord: UITableViewCell {
             self.labelSecond.text = "==="
         }
 
+    }
+
+    func setMeaning(tableView: UITableView) {
+
+        self.tableView = tableView
+        self.labelFirst.backgroundColor = myColor(arColor: LabelBackground1)
+        self.labelSecond.backgroundColor = myColor(arColor: LabelBackground1)
+        self.backgroundColor = myColor(arColor: LabelBackground1)
+        self.contentView.backgroundColor = myColor(arColor: LabelBackground1)
+        let attributeForWord = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                                 NSAttributedString.Key.font: FontForTable.Shared,
+            ] as [NSAttributedString.Key : Any]
+
+        let attributeForMainMeaning = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle4) ,
+                                        NSAttributedString.Key.font: FontForTable.Shared,
+            ] as [NSAttributedString.Key : Any]
+
+        let attributeStringWord = NSAttributedString(string: "", attributes: attributeForWord)
+        let attributeStringMainMeaning = NSAttributedString(string: "", attributes: attributeForMainMeaning)
+        labelFirst.lineBreakMode = .byCharWrapping
+        labelSecond.lineBreakMode = .byCharWrapping
+        labelFirst.attributedText = attributeStringWord
+        labelSecond.attributedText = attributeStringMainMeaning
     }
 }
 

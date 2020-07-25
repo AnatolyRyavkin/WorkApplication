@@ -34,9 +34,9 @@ class RealmUser{
         do{
             self.realmUser = try Realm(configuration: config)
 //MARK- Clean all base
-            try! realmUser.write {
-                realmUser.deleteAll()
-            }
+//            try! realmUser.write {
+//                realmUser.deleteAll()
+//            }
         } catch let error as NSError {
             print(error.localizedDescription)
             print("error = ", error)

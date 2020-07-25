@@ -12,12 +12,22 @@ import RxCocoa
 
 class ModelViewDictionary: NSObject, UIScrollViewDelegate {
 
+    enum ModeTable {
+        case SortAlphaBetta
+        case Sections
+        case None
+    }
+
+    var modeSearchBar: ModeTable = .None
+
     weak var coordinatorDictionary: CoordinatorDictionary!
     weak var vcDictionary: ViewControllerDictionary!
     var dictionaryObjectRealm: DictionaryObjectRealm!
     weak var tableView: UITableView!
 
     var dataSourse: DataSourseForTableWords!
+
+    var disposeBindDataSourceWithTableView : Disposable!
 
     var firstvcListDictionaryDidAppear = true
     var isSubscribe:Disposable!
@@ -55,7 +65,6 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
             .subscribeOn(MainScheduler.instance)
             .first()
             .subscribe({ _ in
-                
                 if self.firstvcListDictionaryDidAppear == false {
                     return
                 }
@@ -73,82 +82,112 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
                 //MARK- binding dataSource with tableView
 
                 self.dataSourse = DataSourseForTableWords.init(dictionary: self.dictionaryObjectRealm)
-                self.dataSourse.behaviorSubjectModelsSectionDictionary//.debug()
-                    .bind(to: self.tableView.rx.items(dataSource: ModelTableVeiwSectionDictionary.Shared)).disposed(by: self.disposeBag)
+                self.disposeBindDataSourceWithTableView = self.dataSourse.behaviorSubjectModelsSectionDictionary//.debug()
+                    .bind(to: self.tableView.rx.items(dataSource: ModelTableVeiwSectionDictionary.Shared))
 
                 self.tableView.rx.itemDeleted.asDriver().drive(onNext: { indexPath in
-
+                    print(indexPath)
                 }).disposed(by: self.disposeBag)
 
-                //MARK- buttonAddWord subscribe
+                //MARK- change dataSource tableView
+
+                self.vcDictionary.buttonSearch.rx.tap.asDriver()
+                    .drive(onNext: { _ in
+                        self.invocationTableAtSerch()
+                    }).disposed(by: self.disposeBag)
+
+
+                //MARK- enable searchBar subscribe
 
                 self.vcDictionary.barButtonAdd.rx.tap.asDriver()
                     .drive(onNext: { _ in
-                        self.vcDictionary.showSearchBarWithAnimation(durationAnimation: 0.3)
-                    }).disposed(by: self.disposeBag)
-
-                //MARK- search subcribe
-
-
-                self.vcDictionary.searchBar.rx.searchButtonClicked
-                    .subscribe(onNext: { _ in
-
-                        try! self.dictionaryObjectRealm.metods.createNewWordObjectRealmFromRequestOrFromRealm(requestingString: self.textFromSearchBarCurrent, type: TranslationDirection.init(rawValue: self.dictionaryObjectRealm.typeDictionary)!, observerSuccess: { wordObjectRealm in
-
-                            print("Word : \(wordObjectRealm.word)  Transclation First : \(wordObjectRealm.def[0].tr.first?.text! ?? "dont translate !!!! ")")
-
-                            let alert = UIAlertController.init(title: "Alternativies", message: "Choose from the translation variations :", preferredStyle: .alert)
-
-                            self.vcDictionary.searchBar.text = ""
-
-                            wordObjectRealm.def[0].tr.forEach {  translationMeaningString in
-                                guard let translationMeaningString = translationMeaningString.text else { return }
-
-                                let action = UIAlertAction.init(title: translationMeaningString, style:
-                                .default) { _ in
-
-                                    if self.dictionaryObjectRealm.metods.returnWordObjectRealmIfExistSameToListSelfDictionarySameMainMeaning(wordAddMainMeaning: wordObjectRealm.word + translationMeaningString) != nil { return }
-
-                                    if let wordObjectRealmFromRealm =  self.dictionaryObjectRealm.metods.returnWordObjectRealmIfExistSameToRealmSameMainMeaning(wordAddMainMeaning: wordObjectRealm.word + translationMeaningString) {
-
-                                        self.dictionaryObjectRealm.metods
-                                            .appendWordObjectRealmToDictionary(wordObjectRealm: wordObjectRealmFromRealm)
-                                        return
-                                    }
-
-                                    self.dictionaryObjectRealm.metods.appendWordObjectRealmToDictionaryAndRealmWithKeyWord(wordObjectRealm: wordObjectRealm, mainMeaning: translationMeaningString)
-
-                                }
-
-                                alert.addAction(action)
+                        switch self.modeSearchBar{
+                        case .None:
+                            self.modeSearchBar = .Sections
+                            self.vcDictionary.barButtonAdd.tintColor = myColor(arColor: ControlTitleActive3)
+                            self.vcDictionary.showSearchBarWithAnimation(durationAnimation: 0.3)
+                            self.vcDictionary.searchBar.placeholder = "Search new word"
+                        case .Sections:
+                            self.modeSearchBar = .None
+                            self.vcDictionary.barButtonAdd.tintColor = myColor(arColor: ControlTitleActive2)
+                            self.vcDictionary.hiddenSearchBarWithAnimation(durationAnimation: 0.3)
+                        case .SortAlphaBetta:
+                            self.modeSearchBar = .Sections
+                            self.disposeBindDataSourceWithTableView.dispose()
+                            self.disposeBindDataSourceWithTableView = self.dataSourse.behaviorSubjectModelsSectionDictionary
+                                .bind(to: self.tableView.rx.items(dataSource: ModelTableVeiwSectionDictionary.Shared))
+                            UIView.animate(withDuration: 0.3, animations: {
+                                self.vcDictionary.hiddenSearchBarWithAnimation(durationAnimation: 0)
+                                self.vcDictionary.buttonSearch.tintColor = myColor(arColor: ControlTitleActive2)
+                            }) { (y) in
+                                self.vcDictionary.searchBar.placeholder = "Search new word"
+                                self.vcDictionary.showSearchBarWithAnimation(durationAnimation: 0.3)
+                                self.vcDictionary.barButtonAdd.tintColor = myColor(arColor: ControlTitleActive3)
                             }
-                            self.vcDictionary.present(alert, animated: true, completion: nil)
-                        })
-                        { error in
-                            var textError: String
-                            switch error.myError() {
-                            case .ERR_DONT_PARSING_WORD_OBJECT_REALM:
-                                textError = "I couldn't find the translation, so try changing the word"
-                            case .DONT_INTERNET:
-                                textError = "no Internet connection"
-                            default :
-                                #if DEBUG
-                                textError = error.myError().discript.nameError
-                                #else
-                                textError = "The service is not available"
-                                #endif
-                            }
-                            let alert = UIAlertController.init(title: "Failure", message: textError, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction.init(title: "Ok", style: .cancel))
-                            self.vcDictionary.present(alert, animated: true)
                         }
-
                     }).disposed(by: self.disposeBag)
+
+                self.vcDictionary.buttonSearch.rx.tap.asDriver()
+                    .drive(onNext: { _ in
+                        switch self.modeSearchBar{
+                        case .None:
+                            self.modeSearchBar = .SortAlphaBetta
+                            self.vcDictionary.buttonSearch.tintColor = myColor(arColor: ControlTitleActive3)
+                            self.vcDictionary.showSearchBarWithAnimation(durationAnimation: 0.3)
+                            self.invocationTableAtSerch()
+                            self.vcDictionary.searchBar.placeholder = "Search word to \(self.dictionaryObjectRealm.name)"
+                        case .Sections:
+                            self.modeSearchBar = .SortAlphaBetta
+                            UIView.animate(withDuration: 1, animations: {
+                                self.vcDictionary.hiddenSearchBarWithAnimation(durationAnimation: 0.3)
+                                self.vcDictionary.barButtonAdd.tintColor = myColor(arColor: ControlTitleActive2)
+                                UIView.animate(withDuration: 0.3, animations: {
+                                    self.vcDictionary.searchBar.placeholder = "Search word to \(self.dictionaryObjectRealm.name)"
+                                })
+                            }) { (y) in
+                                self.vcDictionary.showSearchBarWithAnimation(durationAnimation: 0.3)
+                                self.vcDictionary.buttonSearch.tintColor = myColor(arColor: ControlTitleActive3)
+                            }
+                            self.invocationTableAtSerch()
+                        case .SortAlphaBetta:
+                            self.modeSearchBar = .None
+                            self.vcDictionary.buttonSearch.tintColor = myColor(arColor: ControlTitleActive2)
+                            self.vcDictionary.hiddenSearchBarWithAnimation(durationAnimation: 0.3)
+                            self.disposeBindDataSourceWithTableView.dispose()
+                            self.disposeBindDataSourceWithTableView = self.dataSourse.behaviorSubjectModelsSectionDictionary//.debug()
+                                .bind(to: self.tableView.rx.items(dataSource: ModelTableVeiwSectionDictionary.Shared))
+                            self.tableView.reloadData()
+                        }
+                    }).disposed(by: self.disposeBag)
+
+
 
                 self.vcDictionary.searchBar.rx.cancelButtonClicked
                     .subscribe(onNext: { _ in
-                        self.vcDictionary.searchBar.text = ""
+
+                        self.modeSearchBar = .None
                         self.vcDictionary.hiddenSearchBarWithAnimation(durationAnimation: 0.3)
+                        self.vcDictionary.buttonSearch.tintColor = myColor(arColor: ControlTitleActive2)
+                        self.vcDictionary.buttonSearch.tintColor = myColor(arColor: ControlTitleActive2)
+                        if self.modeSearchBar == .SortAlphaBetta {
+                            self.disposeBindDataSourceWithTableView.dispose()
+                            self.disposeBindDataSourceWithTableView = self.dataSourse.behaviorSubjectModelsSectionDictionary
+                        }
+                    }).disposed(by: self.disposeBag)
+
+
+                //MARK- search subcribe
+
+                self.vcDictionary.searchBar.rx.searchButtonClicked
+                    .subscribe(onNext: { _ in
+                        switch self.modeSearchBar {
+                        case .Sections:
+                            self.searchNewWord()
+                        case .SortAlphaBetta:
+                            self.dictionaryObjectRealm.metods.emmitingBehaviorSubjectWordToAlphaBetta(text: self.textFromSearchBarCurrent)
+                        default: break
+                        }
+
                     }).disposed(by: self.disposeBag)
 
 
@@ -179,15 +218,14 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
                     })
                     .subscribe(onNext: { text in
                         self.textFromSearchBarCurrent = text
+                        if self.modeSearchBar == .SortAlphaBetta {
+                            self.dictionaryObjectRealm.metods.emmitingBehaviorSubjectWordToAlphaBetta(text: self.textFromSearchBarCurrent)
+                        }
                     }).disposed(by: self.disposeBag)
-
 
                 //MARK- subscribe barButtonEdit
 
-                self.vcDictionary.buttonEdit.rx.tap
-                    .subscribe(onNext: {
-                        self.tableView.setEditing(!self.tableView.isEditing, animated: true)
-                    }).disposed(by: self.disposeBag)
+                self.vcDictionary.buttonEdit.rx.tap.bind(to: self.vcDictionary.tableView.rx.edit).disposed(by: self.disposeBag)
 
                 (self.vcDictionary as UIViewController).rx.viewWillDisappear.asDriver().drive(onNext: { _ in
                     self.nc?.viewControllers.removeAll{
@@ -208,6 +246,89 @@ class ModelViewDictionary: NSObject, UIScrollViewDelegate {
 
             }).disposed(by: self.disposeBag)
 
+    }
+
+    func invocationTableAtSerch() {
+
+        self.disposeBindDataSourceWithTableView.dispose()
+        self.dictionaryObjectRealm.metods.emmitingBehaviorSubjectWordToAlphaBetta(text: "")
+        self.disposeBindDataSourceWithTableView =
+            self.dictionaryObjectRealm.metods.behaviorSubjectWordToAlphaBetta
+                .bind(to: self.tableView.rx.items(cellIdentifier: "TableViewCellDictionaryWord", cellType: TableViewCellDictionaryWord.self)){row, word, cell in
+                    cell.setMeaning(tableView: self.tableView)
+                    let attributeLabelFirst = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle1) ,
+                                                NSAttributedString.Key.font: FontForTable.Shared,
+                    ]
+                    let attributeLabelSecond = [ NSAttributedString.Key.foregroundColor: myColor(arColor: LabelTitle4) ,
+                                                 NSAttributedString.Key.font: FontForTable.Shared,
+                    ]
+
+                    var string = word.word
+                    var attributeString = NSAttributedString(string: string, attributes: attributeLabelFirst)
+                    cell.labelFirst.attributedText = attributeString
+
+                    string = word.mainMeaning
+                    attributeString = NSAttributedString(string: string, attributes: attributeLabelSecond)
+                    cell.labelSecond.attributedText = attributeString
+
+                    cell.backgroundColor = myColor(arColor: LabelBackground1)
+                    cell.contentView.backgroundColor = myColor(arColor: LabelBackground1)
+        }
+    }
+
+
+    func searchNewWord() {
+        try! self.dictionaryObjectRealm.metods.createNewWordObjectRealmFromRequestOrFromRealm(requestingString: self.textFromSearchBarCurrent, type: TranslationDirection.init(rawValue: self.dictionaryObjectRealm.typeDictionary)!, observerSuccess: { wordObjectRealm in
+
+            print("Word : \(wordObjectRealm.word)  Transclation First : \(wordObjectRealm.def[0].tr.first?.text! ?? "dont translate !!!! ")")
+
+            let alert = UIAlertController.init(title: "Alternativies", message: "Choose from the translation variations :", preferredStyle: .alert)
+
+            self.vcDictionary.searchBar.text = ""
+
+            wordObjectRealm.def[0].tr.forEach {  translationMeaningString in
+                guard let translationMeaningString = translationMeaningString.text else { return }
+
+                let action = UIAlertAction.init(title: translationMeaningString, style:
+                .default) { action in
+                    if self.dictionaryObjectRealm.metods.returnWordObjectRealmIfExistSameToListSelfDictionarySameMainMeaning(wordAddMainMeaning: wordObjectRealm.word + translationMeaningString) != nil { return }
+                    if let wordObjectRealmFromRealm =  self.dictionaryObjectRealm.metods.returnWordObjectRealmIfExistSameToRealmSameMainMeaning(wordAddMainMeaning: wordObjectRealm.word + translationMeaningString) {
+                        self.dictionaryObjectRealm.metods.appendWordObjectRealmToDictionary(wordObjectRealm: wordObjectRealmFromRealm)
+                        return
+                    }
+                    self.dictionaryObjectRealm.metods.appendWordObjectRealmToDictionaryAndRealmWithKeyWord(wordObjectRealm: wordObjectRealm, mainMeaning: translationMeaningString)
+                }
+                alert.addAction(action)
+            }
+            self.vcDictionary.present(alert, animated: true, completion: nil)
+        })
+        { error in
+            var textError: String
+            switch error.myError() {
+            case .ERR_DONT_PARSING_WORD_OBJECT_REALM:
+                textError = "I couldn't find the translation, so try changing the word"
+            case .DONT_INTERNET:
+                textError = "no Internet connection"
+            default :
+                #if DEBUG
+                textError = error.myError().discript.nameError
+                #else
+                textError = "The service is not available"
+                #endif
+            }
+            let alert = UIAlertController.init(title: "Failure", message: textError, preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "Ok", style: .cancel))
+            self.vcDictionary.present(alert, animated: true)
+            Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
+                alert.dismiss(animated: true)
+            }
+        }
+    }
+
+    //MARK- delegate TableView
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle{
+        return  .delete 
     }
 
 }

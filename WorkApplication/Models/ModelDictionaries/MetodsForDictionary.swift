@@ -16,6 +16,8 @@ class MetodsForDictionary {
 
     var behaviorSubjectWordsToDictionary: BehaviorSubject<Array<Array<WordObjectRealm>>>!
 
+    var behaviorSubjectWordToAlphaBetta: BehaviorSubject<Array<WordObjectRealm>>!
+
     weak var dictionary: DictionaryObjectRealm!
 
     var disposeBag: DisposeBag! = DisposeBag()
@@ -81,9 +83,19 @@ class MetodsForDictionary {
         self.disposeBag = nil
     }
 
-
     func emmitingBehaviorSubjectWordsToDictionary() {
         self.behaviorSubjectWordsToDictionary.onNext(self.arrayArraysWordsAtAlphaBetta)
+    }
+
+    func emmitingBehaviorSubjectWordToAlphaBetta(text: String) {
+        let result = self.dictionary.listWordObjects.sorted(byKeyPath: "word")
+        let arrayWordToAlphaBetta = (text.count == 0) ? Array<WordObjectRealm>(result) :
+            Array<WordObjectRealm>(result.filter(NSPredicate(format: "word contains[c] %@", text)))
+        if let behaviorSubjectWordToAlphaBetta = self.behaviorSubjectWordToAlphaBetta {
+            behaviorSubjectWordToAlphaBetta.onNext(arrayWordToAlphaBetta)
+        } else {
+            self.behaviorSubjectWordToAlphaBetta = BehaviorSubject.init(value: arrayWordToAlphaBetta)
+        }
     }
 
     func returnDictionaryObjectRealmIfExistToBaseSameUser(dictionaryObjectRealm: DictionaryObjectRealm) -> DictionaryObjectRealm? {
@@ -92,7 +104,6 @@ class MetodsForDictionary {
        let predicate = NSPredicate(format:"SUBQUERY(owner, $o, $o.userName = %@) .@count > 0", ownerUserName!)
        return  Array<DictionaryObjectRealm>(resultDictionaries.filter(predicate)).first
     }
-
 
     func deleteWordObjectRealmAtRowToTableViewRowFromDictionary(numberWordInTable: Int) {
         do{

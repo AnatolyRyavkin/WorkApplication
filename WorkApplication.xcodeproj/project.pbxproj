@@ -361,10 +361,10 @@
 		FD911BF124C3032600E63A1C /* DictionaryOpen */ = {
 			isa = PBXGroup;
 			children = (
+				FD81A37D24BA14A5000F4D6F /* ModelVeiwDictionary */,
 				FD8B871D24B9E92E00B88CC0 /* UIForDictionary */,
 				FDBAB72824A53EDB008748D0 /* CoordinatorDictionary.swift */,
 				FD40C92C24BB7FCB00DE019A /* DataSourseForTableWords.swift */,
-				FD81A37D24BA14A5000F4D6F /* ModelVeiwDictionary */,
 			);
 			path = DictionaryOpen;
 			sourceTree = "<group>";
